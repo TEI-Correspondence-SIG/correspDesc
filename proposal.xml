@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:rng="http://relaxng.org/ns/structure/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Proposed Module for Correspondence</title>
+                <author>TEI Correspondence SIG</author>
+            </titleStmt>
+            <publicationStmt>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Born digital; loosely based on DALF and WeGA customizations</p>
+            </sourceDesc>
+        </fileDesc>
+        <revisionDesc>
+            <change when="2012-11-09" who="#sbauman.emt">started @ SIG mtg</change>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div>
+            </div>
+            <div type="specification">
+                <schemaSpec ident="correspondence" start="TEI sourceDesc" status="unstable">
+                    <moduleSpec ident="correspondence" mode="add" >
+                        <desc>Module for correspondence, including letters, telegrams, postcards, e-mail</desc>
+                    </moduleSpec>
+                    <moduleRef key="tei"/>
+                    <moduleRef key="textstructure"/>
+                    <moduleRef key="core"/>
+                    <moduleRef key="header"/>
+                    <moduleRef key="msdescription"/>
+                    <moduleRef key="namesdates"/>
+                    <moduleRef key="linking"/>
+                    
+                    <elementSpec ident="correspDesc" module="correspondence" mode="add"
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        <gloss>correspondence description</gloss>
+                        <desc>a wrapper element for metadata pertaining to correspondence</desc>
+                        <classes mode="replace">
+                            <memberOf key="model.sourceDescPart"/>
+                            <!-- need some mechanism to permit different <correspDesc> information-->
+                            <!-- for different <div>s or whathaveyou; perhaps <msDesc> and-->
+                            <!-- <correspDesc> should be members of model.divTop (indirectly)-->
+                            <memberOf key="att.declarable"/>
+                        </classes>
+                        <content>
+                            <rng:oneOrMore>
+                                <rng:ref name="model.correspDescPart"/>
+                            </rng:oneOrMore>
+                            <rng:zeroOrMore>
+                                <rng:choice>
+                                    <rng:ref name="model.noteLike"/>
+                                    <rng:ref name="model.pLike"/>
+                                </rng:choice>
+                            </rng:zeroOrMore>
+                        </content>
+                    </elementSpec>
+                    
+                    <classSpec ident="model.correspDescPart" mode="add" type="model">
+                        <desc>groups together metadata elements for describing correspondence</desc>
+                    </classSpec>
+                    
+                    <elementSpec ident="context" mode="add" module="correspondence">
+                        <!-- we'd like a different name than <context> -->
+                        <gloss xml:lang="en">context</gloss>
+                        <gloss xml:lang="de">korrespondenzstelle</gloss>
+                        <desc xml:lang="en">provides references to preceding or following
+                            correspondence related to this piece of correspondence</desc>
+                        <classes mode="replace">
+                            <memberOf key="model.correspDescPart"/>
+                        </classes>
+                        <content>
+                            <rng:zeroOrMore>
+                                <rng:choice>
+                                    <rng:ref name="model.ptrLike"/>
+                                    <rng:ref name="model.noteLike"/>
+                                    <rng:ref name="model.pLike"/>
+                                </rng:choice>
+                            </rng:zeroOrMore>
+                        </content>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <context>
+                                    <ptr type="next" target="http://some.uri"/>
+                                    <ptr type="prev" target="http://some.other.uri"/>
+                                </context>
+                            </egXML>
+                        </exemplum>
+                    </elementSpec>
+                    
+                    <macroSpec ident="macro.correspStuff" mode="add" module="correspondence">
+                        <desc>the content for all our little correspondence event thingies</desc>
+                        <content>
+                            <rng:oneOrMore>
+                                <rng:choice>
+                                    <rng:ref name="model.nameLike.agent"/>
+                                    <rng:ref name="model.dateLike"/>
+                                    <rng:ref name="placeName"/>
+                                    <rng:ref name="model.pLike"/>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:choice>
+                            </rng:oneOrMore>
+                        </content>
+                    </macroSpec>	    
+                    
+                    <elementSpec ident="sender" module="correspondence" mode="add"
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        <desc>groups together information about the sender and sending of a piece of correspondence</desc>
+                        <classes mode="replace">
+                            <memberOf key="model.correspDescPart"/>
+                        </classes>
+                        <content>
+                            <rng:ref name="macro.correspStuff"/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="addressee" module="correspondence" mode="add"
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        <desc>groups together metadata about the addressee of a
+                            correspondence</desc>
+                        <classes mode="replace">
+                            <memberOf key="model.correspDescPart"/>
+                        </classes>
+                        <content>
+                            <rng:oneOrMore>
+                                <rng:choice>
+                                    <rng:ref name="macro.correspStuff"/>
+                                    <rng:ref name="model.addressLike"/>
+                                </rng:choice>
+                            </rng:oneOrMore>
+                        </content>
+                        <remarks>
+                            <p>the intended recipient, which may or
+                                may not be the actual recipient</p>
+                        </remarks>
+                    </elementSpec>
+                    
+                    <elementSpec ident="correspondenceItem" module="correspondence" mode="add"
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        <gloss></gloss>
+                        <desc></desc>
+                        <classes mode="replace">
+                            <memberOf key="model.correspDescPart"/>
+                        </classes>
+                        <content>
+                            <rng:ref name="macro.correspStuff"/>
+                        </content>
+                        <attList>
+                            <attDef ident="type" usage="req">
+                                <datatype minOccurs="1" maxOccurs="1">
+                                    <rng:ref name="data.enumerated"/>
+                                </datatype>
+                                <valList type="semi">
+                                    <valItem ident="scribe"/>
+                                    <valItem ident="courier"/>
+                                    <valItem ident="translator"/>
+                                    <valItem ident="censor"/>
+                                    <valItem ident="redactor"/>
+                                    <valItem ident="transmitter"/>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
+                    
+                </schemaSpec>
+            </div>
+        </body>
+    </text>
+</TEI>
