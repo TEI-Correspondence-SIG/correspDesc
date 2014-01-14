@@ -4,10 +4,11 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>Proposed Module for Correspondence</title>
+                <title>Proposal for a TEI Module for Correspondence</title>
                 <author>TEI Correspondence SIG</author>
             </titleStmt>
             <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
                 <availability>
                     <licence>
                         <p>CC+BY and BSD-2 licences</p>
@@ -29,20 +30,96 @@
         </revisionDesc>
     </teiHeader>
     <text>
+        <front>
+            <divGen type="toc"/>
+            <pb/>
+            <div>
+                <head>About this document</head>
+                <p>
+                    This document proposes the addition of a TEI module for correspondence. 
+                    It is the product of a Correspondence SIG task force (Sabine Seifert, Marcel Illetschko, Peter Stadler) 
+                    with valuable input from various people.
+                </p>
+                <p>
+                    The aim of the proposal is to define a common set of correspondence specific meta data,
+                    brought together at one place in the TEI header.
+                    
+                    The lack of special Guidelines for encoding letters, postcards, etc. with TEI P5
+                    has been a recurring topic since the formation of the Correspondence SIG in 2008.
+                    Additionally, there is a growing demand of correspondence projects for linked data facilities.
+                    
+                    For this, we suggest two encoding approaches within this set:
+                    <list type="simple">
+                        <item>an elaborate structure for detailed data capture,</item>
+                        <item>a basic structure for easy data interchange.</item>
+                    </list>
+                    
+                    A guiding idea has been to only tentatively modify the TEI standard by adding just a few elements, 
+                    wrapping them in a special purpose element <gi>ct:correspDesc</gi> and injecting the latter into <gi>sourceDesc</gi>.
+                    
+                    This is supposed to be just a first step in the Correspondence SIG's strive for a complete model of encoding correspondence material.
+                    
+                    <!--While some of this information can already be encoded in various sections of the TEI header we believe it to be of greater value 
+                    for projects dealing with correspondence material to have this information in one place.-->
+                    
+                </p>
+                
+                <div>
+                    <head>Conventions used</head>
+                    <p>
+                        As required for TEI conformance, non-TEI elements are defined in a distinct non-TEI namespace. 
+                        In the usage examples and throughout this document that namespace is mapped to the prefix <hi rend="bold">ct:</hi> (= correspondence taskforce), 
+                        while TEI elements are not marked by any namespace prefix.
+                    </p>
+                </div>
+                
+            </div>
+        </front>
         <body>
             <div>
-                <head>Introduction</head>
-                <p>some prose to be written</p>
+                <head>Preceding work</head>
+                <!--<p>The work on <gi>correspDesc</gi> was initially inspired by …</p>-->
             </div>
+            <div>
+                <head>Theoretical Considerations</head>
+                <p> scope of "correspondence": emails?
+                    Adressatenbezug! (Marcel)
+                </p>
+                <p>what is letter *specific*?</p>
+                <p>what is left out? --> everything from tei:text (postscript, opener, closer, signed, signature, …)
+                    address belongs to text, not meta data!
+                    --> msDesc ((postage) stamps, seal, water mark, form fields, letter heads, incipit, …)
+                </p>
+                <p> sender and author </p>
+            </div>
+            <div>
+                <head>Implementation</head>
+                <p>direct child elements of correspDesc are repeatable, other descendant elements are not! (except correspType and context)  </p>
+                <p>group by people, places, dates, context, transmission, correspType?!</p>
+                <!-- sender@sameAs author -->
+            </div>
+            <div>
+                <head>Correspondence Interchange Format (CIF)</head>
+                <p></p>
+            </div>
+            <div>
+                <head>Future Work</head>
+                <p>restructuring correspondence related transcriptional elements </p>
+                <p>best practice recommendations</p>
+            </div>
+            
             <!-- To be discussed: -->
-            <!-- scope of "correspondence": emails? -->
             <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
-            <!-- direct child elements of correspDesc are repeatable, other descendant elements are not! (except correspType and context) -->
             <!-- dual use policy for explicit encoding and minimal exchange format -->
             <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
+            
         </body>
         <back>
-            <div type="specification">
+            <div>
+                <head>Bibliography</head>
+            </div>
+            <div>
+                <head>Formal Specification</head>
                 <schemaSpec ident="correspondence" start="TEI sourceDesc" status="unstable">
                     <moduleRef key="tei"/>
                     <moduleRef key="textstructure"/>
@@ -269,7 +346,7 @@
                             </rng:zeroOrMore>
                         </content>
                         <attList>
-                            <attDef ident="scheme" mode="add">
+                            <attDef ident="scheme" usage="opt" mode="add">
                                 <desc>identifies the controlled vocabulary within which the set of keywords concerned is defined.</desc>
                                 <datatype>
                                     <rng:ref name="data.pointer"/>
