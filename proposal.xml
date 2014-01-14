@@ -36,7 +36,10 @@
             </div>
             <!-- To be discussed: -->
             <!-- scope of "correspondence": emails? -->
-            <!-- Presence/absence of an envelope -->
+            <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
+            <!-- direct child elements of correspDesc are repeatable, other descendant elements are not! (except correspType and context) -->
+            <!-- dual use policy for explicit encoding and minimal exchange format -->
+            <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
         </body>
         <back>
             <div type="specification">
@@ -90,16 +93,21 @@
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
                             <memberOf key="att.responsibility"/>
+                            <memberOf key="att.personal"/>
                             <!-- maybe att.editLike? -->
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:choice>
-                                <rng:ref name="model.nameLike.agent"/>
-                                <rng:ref name="model.pLike"/>
-                            </rng:choice>
                             <rng:optional>
-                                <rng:ref name="model.noteLike"/>
+                                <rng:choice>
+                                    <rng:ref name="model.nameLike.agent"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
                             </rng:optional>
                         </content>
                     </elementSpec>
@@ -111,17 +119,22 @@
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
                             <memberOf key="att.responsibility"/>
+                            <memberOf key="att.personal"/>
                             <!-- maybe att.editLike? -->
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:choice>
-                                <!-- what about model.addressLike? -->
-                                <rng:ref name="model.nameLike.agent"/>
-                                <rng:ref name="model.pLike"/>
-                            </rng:choice>
                             <rng:optional>
-                                <rng:ref name="model.noteLike"/>
+                                <rng:choice>
+                                    <!-- what about model.addressLike? -->
+                                    <rng:ref name="model.nameLike.agent"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
                             </rng:optional>
                         </content>
                         <remarks>
@@ -138,15 +151,20 @@
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
                             <memberOf key="att.responsibility"/>
+                            <memberOf key="att.personal"/>
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:choice>
-                                <rng:ref name="model.placeNamePart"/>
-                                <rng:ref name="model.pLike"/>
-                            </rng:choice>
                             <rng:optional>
-                                <rng:ref name="model.noteLike"/>
+                                <rng:choice>
+                                    <rng:ref name="model.placeNamePart"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
                             </rng:optional>
                         </content>
                     </elementSpec>
@@ -161,15 +179,20 @@
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
                             <memberOf key="att.responsibility"/>
+                            <memberOf key="att.personal"/>
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:choice>
-                                <rng:ref name="model.placeNamePart"/>
-                                <rng:ref name="model.pLike"/>
-                            </rng:choice>
                             <rng:optional>
-                                <rng:ref name="model.noteLike"/>
+                                <rng:choice>
+                                    <rng:ref name="model.placeNamePart"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
                             </rng:optional>
                         </content>
                     </elementSpec>
@@ -183,15 +206,20 @@
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
                             <memberOf key="att.responsibility"/>
+                            <memberOf key="att.datable"/>
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:choice>
-                                <rng:ref name="model.dateLike"/>
-                                <rng:ref name="model.pLike"/>
-                            </rng:choice>
                             <rng:optional>
-                                <rng:ref name="model.noteLike"/>
+                                <rng:choice>
+                                    <rng:ref name="model.dateLike"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
                             </rng:optional>
                         </content>
                     </elementSpec>
@@ -205,19 +233,25 @@
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
                             <memberOf key="att.responsibility"/>
+                            <memberOf key="att.datable"/>
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:choice>
-                                <rng:ref name="model.dateLike"/>
-                                <rng:ref name="model.pLike"/>
-                            </rng:choice>
                             <rng:optional>
-                                <rng:ref name="model.noteLike"/>
+                                <rng:choice>
+                                    <rng:ref name="model.dateLike"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
                             </rng:optional>
                         </content>
                     </elementSpec>
                     
+                    <!-- neither accMat nor additions nor bindingDesc do fully qualify for our purposes -->
                     <elementSpec ident="correspType" module="correspondence" mode="add"
                         ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
                         <!-- modeled after keywords -->
@@ -230,9 +264,9 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:oneOrMore>
+                            <rng:zeroOrMore>
                                 <rng:ref name="term"/>
-                            </rng:oneOrMore>
+                            </rng:zeroOrMore>
                         </content>
                         <attList>
                             <attDef ident="scheme" mode="add">
@@ -252,8 +286,46 @@
                                 </correspType>
                             </egXML>
                         </exemplum>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <correspType type="letter"/>
+                            </egXML>
+                        </exemplum>
                         <remarks>
                             <p>Information about the presence of an envelope may be captured here.</p>
+                            <p><gi>correspType</gi> can both be used as an empty element with according <att>type</att> (and <att>subtype</att>) attributes 
+                                or in a more elaborate way with several <gi>term</gi> child elements.</p>
+                        </remarks>
+                    </elementSpec>
+                    
+                    <!-- we'd like a different name?! -->
+                    <!-- respStmt is not able to cover the *method* of transmission without assigning responsibility to a person or organisation -->
+                    <elementSpec ident="transmission" module="correspondence" mode="add"
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        <desc versionDate="2014-01-13" xml:lang="en">describes the method and transmitter of the piece of correspondence</desc>
+                        <classes>
+                            <memberOf key="att.global"/>
+                            <memberOf key="att.typed"/>
+                            <memberOf key="att.responsibility"/>
+                            <memberOf key="model.correspDescPart"/>
+                        </classes>
+                        <content>
+                            <!-- Still somehow unhappy with this content model :-( -->
+                            <rng:optional>
+                                <rng:choice>
+                                    <rng:ref name="model.nameLike.agent"/>
+                                    <rng:oneOrMore>
+                                        <rng:ref name="model.pLike"/>
+                                    </rng:oneOrMore>
+                                </rng:choice>
+                                <rng:optional>
+                                    <rng:ref name="model.noteLike"/>
+                                </rng:optional>
+                            </rng:optional>
+                        </content>
+                        <remarks>
+                            <p><gi>transmission</gi> can both be used as an empty element with according <att>type</att> (and <att>subtype</att>) attributes 
+                                or in a more verbose way with child element.</p>
                         </remarks>
                     </elementSpec>
                     
