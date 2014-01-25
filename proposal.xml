@@ -20,6 +20,10 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2014-01-25">
+                <persName>Peter Stadler</persName>
+                <desc>Changed proposal namespace and added <gi>rng:text</gi> as an option to several elements for our <soCalled>CIF</soCalled>-standard</desc>
+            </change>
             <change when="2014-01-13">
                 <persName>Sabine Seifert</persName>
                 <persName>Marcel Illetschko</persName>
@@ -112,6 +116,8 @@
             <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
             <!-- dual use policy for explicit encoding and minimal exchange format -->
             <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
+            <!-- CIF = lightweight interchange format -->
+            <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
             
         </body>
         <back>
@@ -138,7 +144,7 @@
                     </classSpec>
                     
                     <elementSpec ident="correspDesc" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <gloss versionDate="2014-01-13" xml:lang="en">correspondence description</gloss>
                         <desc versionDate="2014-01-13" xml:lang="en">a wrapper element for metadata pertaining to correspondence</desc>
                         <classes>
@@ -164,7 +170,7 @@
                     
                     <!-- make sender and addressee declarable to allow for linking with separate places and/or dates? -->
                     <elementSpec ident="sender" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <desc versionDate="2014-01-13" xml:lang="en">contains the name or some other description of the sender of a piece of correspondence</desc>
                         <classes>
                             <memberOf key="att.global"/>
@@ -175,22 +181,29 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:optional>
-                                <rng:choice>
-                                    <rng:ref name="model.nameLike.agent"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
+                            <rng:choice>
+                                <!-- CIF standard -->
                                 <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
+                                    <rng:text/>
                                 </rng:optional>
-                            </rng:optional>
+                                <!-- Full fledged standard -->
+                                <rng:group>
+                                    <rng:choice>
+                                        <rng:ref name="model.nameLike.agent"/>
+                                        <rng:oneOrMore>
+                                            <rng:ref name="model.pLike"/>
+                                        </rng:oneOrMore>
+                                    </rng:choice>
+                                    <rng:optional>
+                                        <rng:ref name="model.noteLike"/>
+                                    </rng:optional>
+                                </rng:group>
+                            </rng:choice>
                         </content>
                     </elementSpec>
                     
                     <elementSpec ident="addressee" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <desc versionDate="2014-01-13" xml:lang="en">contains the name or some other description of the addressee of a piece of correspondence</desc>
                         <classes>
                             <memberOf key="att.global"/>
@@ -201,18 +214,25 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:optional>
-                                <rng:choice>
-                                    <!-- what about model.addressLike? -->
-                                    <rng:ref name="model.nameLike.agent"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
+                            <rng:choice>
+                                <!-- CIF standard -->
                                 <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
+                                    <rng:text/>
                                 </rng:optional>
-                            </rng:optional>
+                                <!-- Full fledged standard -->
+                                <rng:group>
+                                    <rng:choice>
+                                        <!-- what about model.addressLike? -->
+                                        <rng:ref name="model.nameLike.agent"/>
+                                        <rng:oneOrMore>
+                                            <rng:ref name="model.pLike"/>
+                                        </rng:oneOrMore>
+                                    </rng:choice>
+                                    <rng:optional>
+                                        <rng:ref name="model.noteLike"/>
+                                    </rng:optional>
+                                </rng:group>
+                            </rng:choice>
                         </content>
                         <remarks>
                             <p>the intended recipient, which may or
@@ -221,7 +241,7 @@
                     </elementSpec>
                     
                     <elementSpec ident="placeSender" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <gloss versionDate="2014-01-13" xml:lang="en">place of sender</gloss>
                         <desc versionDate="2014-01-13" xml:lang="en">contains the place where the piece of correspondence was written or sent</desc>
                         <classes>
@@ -232,22 +252,29 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:optional>
-                                <rng:choice>
-                                    <rng:ref name="model.placeNamePart"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
+                            <rng:choice>
+                                <!-- CIF standard -->
                                 <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
+                                    <rng:text/>
                                 </rng:optional>
-                            </rng:optional>
+                                <!-- Full fledged standard -->
+                                <rng:group>
+                                    <rng:choice>
+                                        <rng:ref name="model.placeNamePart"/>
+                                        <rng:oneOrMore>
+                                            <rng:ref name="model.pLike"/>
+                                        </rng:oneOrMore>
+                                    </rng:choice>
+                                    <rng:optional>
+                                        <rng:ref name="model.noteLike"/>
+                                    </rng:optional>
+                                </rng:group>
+                            </rng:choice>
                         </content>
                     </elementSpec>
                     
                     <elementSpec ident="placeAddressee" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <gloss versionDate="2014-01-13" xml:lang="en">place of addressee</gloss>
                         <!-- ask a native -->
                         <!-- we want it to subsume all sorts of addresses -->
@@ -260,22 +287,29 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:optional>
-                                <rng:choice>
-                                    <rng:ref name="model.placeNamePart"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
+                            <rng:choice>
+                                <!-- CIF standard -->
                                 <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
+                                    <rng:text/>
                                 </rng:optional>
-                            </rng:optional>
+                                <!-- Full fledged standard -->
+                                <rng:group>
+                                    <rng:choice>
+                                        <rng:ref name="model.placeNamePart"/>
+                                        <rng:oneOrMore>
+                                            <rng:ref name="model.pLike"/>
+                                        </rng:oneOrMore>
+                                    </rng:choice>
+                                    <rng:optional>
+                                        <rng:ref name="model.noteLike"/>
+                                    </rng:optional>
+                                </rng:group>
+                            </rng:choice>
                         </content>
                     </elementSpec>
                     
                     <elementSpec ident="dateSender" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <gloss versionDate="2014-01-13" xml:lang="en">date of writing/sending</gloss>
                         <!-- if more than one (writing, sending, whateveryouhave) date shall be encoded, use several dateSender elements! -->
                         <desc versionDate="2014-01-13" xml:lang="en">contains the date of writing or sending a piece of correspondence</desc>
@@ -287,6 +321,7 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
+                            <!-- Do we need <rng:text/> here as option, as well? -->
                             <rng:optional>
                                 <rng:choice>
                                     <rng:ref name="model.dateLike"/>
@@ -302,7 +337,7 @@
                     </elementSpec>
                     
                     <elementSpec ident="dateAddressee" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <gloss versionDate="2014-01-13" xml:lang="en">delivery date</gloss>
                         <!-- if more than one (receiving, reading, whateveryouhave) date shall be encoded, use several dateAddressee elements! -->
                         <desc versionDate="2014-01-13" xml:lang="en">contains the date of receiving or reading a piece of correspondence</desc>
@@ -314,6 +349,7 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
+                            <!-- Do we need <rng:text/> here as option, as well? -->
                             <rng:optional>
                                 <rng:choice>
                                     <rng:ref name="model.dateLike"/>
@@ -330,10 +366,10 @@
                     
                     <!-- neither accMat nor additions nor bindingDesc do fully qualify for our purposes -->
                     <elementSpec ident="correspType" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <!-- modeled after keywords -->
                         <gloss versionDate="2014-01-13" xml:lang="en">type of correspondence</gloss>
-                        <desc versionDate="2014-01-13" xml:lang="en">describes the piece of correspondence according to some (external) classification scheme, e.g. letter, postcard, email</desc>
+                        <desc versionDate="2014-01-13" xml:lang="en">describes the piece of correspondence (e.g. letter, postcard, email), if possible according to some (external) classification scheme</desc>
                         <classes>
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed"/>
@@ -341,9 +377,14 @@
                             <memberOf key="model.correspDescPart"/>
                         </classes>
                         <content>
-                            <rng:zeroOrMore>
-                                <rng:ref name="term"/>
-                            </rng:zeroOrMore>
+                            <rng:choice>
+                                <!-- CIF standard -->
+                                <rng:text/>
+                                <!-- Full fledged standard -->
+                                <rng:zeroOrMore>
+                                    <rng:ref name="term"/>
+                                </rng:zeroOrMore>
+                            </rng:choice>
                         </content>
                         <attList>
                             <attDef ident="scheme" usage="opt" mode="add">
@@ -378,7 +419,7 @@
                     <!-- we'd like a different name?! -->
                     <!-- respStmt is not able to cover the *method* of transmission without assigning responsibility to a person or organisation -->
                     <elementSpec ident="transmission" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <desc versionDate="2014-01-13" xml:lang="en">describes the method and transmitter of the piece of correspondence</desc>
                         <classes>
                             <memberOf key="att.global"/>
@@ -407,7 +448,7 @@
                     </elementSpec>
                     
                     <elementSpec ident="context" mode="add" module="correspondence"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/proposal">
+                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <!-- we'd like a different name than <context> -->
                         <gloss xml:lang="en"  versionDate="2014-01-13">context</gloss>
                         <gloss xml:lang="de" versionDate="2014-01-13">Korrespondenzstelle</gloss>
