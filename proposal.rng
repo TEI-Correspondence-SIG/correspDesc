@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-01-25T14:12:23Z. 
+Schema generated from ODD source 2014-01-29T09:19:38Z. 
 Edition: 2.5.0. Last updated on
 	26th July 2013.
 Edition Location: http://www.tei-c.org/Vault/P5/2.5.0/
@@ -1956,6 +1956,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="listBibl"/>
          <ref name="biblFull"/>
          <ref name="msDesc"/>
+         <ref name="correspDesc"/>
       </choice>
    </define>
    <define name="model.biblLike_alternation">
@@ -1965,6 +1966,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="listBibl"/>
          <ref name="biblFull"/>
          <ref name="msDesc"/>
+         <ref name="correspDesc"/>
       </choice>
    </define>
    <define name="model.biblLike_sequence">
@@ -1973,6 +1975,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <ref name="listBibl"/>
       <ref name="biblFull"/>
       <ref name="msDesc"/>
+      <ref name="correspDesc"/>
    </define>
    <define name="model.biblLike_sequenceOptional">
       <optional>
@@ -1989,6 +1992,9 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </optional>
       <optional>
          <ref name="msDesc"/>
+      </optional>
+      <optional>
+         <ref name="correspDesc"/>
       </optional>
    </define>
    <define name="model.biblLike_sequenceOptionalRepeatable">
@@ -2007,6 +2013,9 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <zeroOrMore>
          <ref name="msDesc"/>
       </zeroOrMore>
+      <zeroOrMore>
+         <ref name="correspDesc"/>
+      </zeroOrMore>
    </define>
    <define name="model.biblLike_sequenceRepeatable">
       <oneOrMore>
@@ -2023,6 +2032,9 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </oneOrMore>
       <oneOrMore>
          <ref name="msDesc"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="correspDesc"/>
       </oneOrMore>
    </define>
    <define name="model.headLike">
@@ -3124,9 +3136,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </choice>
    </define>
    <define name="model.sourceDescPart">
-      <choice>
-         <ref name="correspDesc"/>
-      </choice>
+      <notAllowed/>
    </define>
    <define name="model.encodingDescPart">
       <choice>
@@ -10075,6 +10085,9 @@ You must supply at least two values for @target on <name/>
                <ref name="model.pLike"/>
             </oneOrMore>
          </choice>
+         <optional>
+            <ref name="model.noteLike"/>
+         </optional>
          <ref name="att.declarable.attributes"/>
          <empty/>
       </element>

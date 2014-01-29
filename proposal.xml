@@ -119,6 +119,10 @@
             <!-- CIF = lightweight interchange format -->
             <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
             
+            <!-- note in correspDesc -->
+            <!-- @n, @xml:id (etc.) an correspDesc: att.global  -->
+            <!-- listCorrespDesc?!? -->
+            
         </body>
         <back>
             <div>
@@ -148,7 +152,7 @@
                         <gloss versionDate="2014-01-13" xml:lang="en">correspondence description</gloss>
                         <desc versionDate="2014-01-13" xml:lang="en">a wrapper element for metadata pertaining to correspondence</desc>
                         <classes>
-                            <memberOf key="model.sourceDescPart"/>
+                            <memberOf key="model.biblLike"/>
                             <!-- need some mechanism to permit different <correspDesc> information-->
                             <!-- for different <div>s or whathaveyou; perhaps <msDesc> and-->
                             <!-- <correspDesc> should be members of model.divTop (indirectly)-->
@@ -157,6 +161,7 @@
                         </classes>
                         <content>
                             <!-- modeled after publicationStmt -->
+                            <!-- with the addition of noteLike -->
                             <rng:choice>
                                 <rng:oneOrMore>
                                     <rng:ref name="model.correspDescPart"/>
@@ -165,6 +170,9 @@
                                     <rng:ref name="model.pLike"/>
                                 </rng:oneOrMore>
                             </rng:choice>
+                            <rng:optional>
+                                <rng:ref name="model.noteLike"/>
+                            </rng:optional>
                         </content>
                     </elementSpec>
                     
