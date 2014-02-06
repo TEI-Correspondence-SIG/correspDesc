@@ -119,8 +119,7 @@
             <!-- CIF = lightweight interchange format -->
             <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
             
-            <!-- note in correspDesc -->
-            <!-- @n, @xml:id (etc.) an correspDesc: att.global  -->
+            <!-- @ref hinzufügen? -->
             <!-- listCorrespDesc?!? -->
             
         </body>
@@ -158,6 +157,7 @@
                             <!-- <correspDesc> should be members of model.divTop (indirectly)-->
                             <!-- or even listCorrespDesc ?! -->
                             <memberOf key="att.declarable"/>
+                            <memberOf key="att.global"/>
                         </classes>
                         <content>
                             <!-- modeled after publicationStmt -->
@@ -372,6 +372,7 @@
                         </content>
                     </elementSpec>
                     
+                    <!-- need another name?!? -->
                     <!-- neither accMat nor additions nor bindingDesc do fully qualify for our purposes -->
                     <elementSpec ident="correspType" module="correspondence" mode="add"
                         ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
