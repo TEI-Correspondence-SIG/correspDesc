@@ -378,7 +378,7 @@
                     <elementSpec ident="correspClass" module="correspondence" mode="add"
                         ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <!-- modeled after keywords -->
-                        <gloss versionDate="2014-01-13" xml:lang="en">type of correspondence</gloss>
+                        <gloss versionDate="2014-02-14" xml:lang="en">correspondence classification</gloss>
                         <desc versionDate="2014-01-13" xml:lang="en">describes the piece of correspondence (e.g. letter, postcard, email), if possible according to some (external) classification scheme</desc>
                         <classes>
                             <memberOf key="att.global"/>
