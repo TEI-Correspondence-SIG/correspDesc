@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.github.com/TEI-Correspondence-SIG/correspDesc/master/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="COBEC_00014"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>The COBEC Sampler Corpus: The Corups of Business English Correspondence</title>
+                <title type="sub">Example TEI document with the inclusion of the proposed ct:correspDesc element for the encoding of correspondence specific meta data</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Emma Moreton</name>
+                    <name>José Camacho Collados</name>
+                    <name>Luis Espinosa Anke</name>
+                </respStmt>                
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <!-- The proposed ct:correspDesc element starts here -->
+                <ct:correspDesc xml:id="correspDesc-cobec">
+                    <!-- names are made anonymous in this corpus due to privacy protection -->
+                    <ct:sender>
+                        <persName key="PN0001">PN0001</persName>
+                    </ct:sender>
+                    <!-- addressees are categorized (to, cc, bcc) via @type attribute -->
+                    <ct:addressee type="to">
+                        <persName key="PN0002">PN0002</persName>
+                    </ct:addressee>
+                    <ct:addressee type="to">
+                        <persName key="PN0003">PN0003</persName>
+                    </ct:addressee>
+                    <ct:addressee type="cc">
+                        <persName key="PN0004">PN0004</persName>
+                    </ct:addressee>
+                    <ct:addressee type="cc">
+                        <persName key="PN0005">PN0005</persName>
+                    </ct:addressee>
+                    <ct:dateSender>
+                        <date when="1999-06-02">Wed, 02 Jun 1999</date>
+                    </ct:dateSender>
+                    <ct:correspClass>
+                        <term>email</term>
+                        <!-- What follows are three categories we need to include in the header: 
+                            1) whether or not there is an attachment to the email 
+                            2) whether or not the 'forwarding' function has been used  -->
+                        <term>forwarded</term>
+                        <term>attachement</term>
+                    </ct:correspClass>
+                    <ct:context>
+                        <!--3) where in the chain the email belongs.-->
+                        <p>1 of 1</p>
+                    </ct:context>
+                </ct:correspDesc>
+                <!-- The proposed ct:correspDesc element ends here -->
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p/>
+        </body>
+    </text>
+</TEI>

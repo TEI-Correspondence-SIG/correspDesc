@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.github.com/TEI-Correspondence-SIG/correspDesc/master/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Letter from Adelbert von Chamisso to Louis de La Foye</title>
+                <title type="sub">Example TEI document with the inclusion of the proposed ct:correspDesc element for the encoding of correspondence specific meta data</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Sabine Seifert</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl><ref target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief024ChamissoandeLaFoye">Letter from Adelbert von Chamisso to Louis de La Foye  (Vertus, 29 January 1807) [Digital Edition]</ref></bibl>
+                <!-- The proposed ct:correspDesc element starts here -->
+                <ct:correspDesc xml:id="correspDesc-chamisso">
+                    <ct:sender>
+                        <persName ref="http://d-nb.info/gnd/118520040">Adelbert von Chamisso</persName>
+                    </ct:sender>
+                    <ct:addressee>
+                        <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
+                    </ct:addressee>
+                    <ct:placeSender>
+                        <placeName ref="http://d-nb.info/gnd/4835139-8">Vertus</placeName>
+                    </ct:placeSender>
+                    <ct:placeAddressee>
+                        <placeName ref="http://www.geonames.org/3029241">Caen</placeName>
+                    </ct:placeAddressee>
+                    <ct:dateSender>
+                        <date when="1807-01-29">29 January 1807</date>
+                    </ct:dateSender>
+                    <ct:dateAddressee>
+                        <!-- for an unknown date the entire ct:dateAddressee could simply be skipped, alternatively -->
+                        <date>unknown</date>
+                    </ct:dateAddressee>
+                    <ct:correspClass>
+                        <term>letter</term>
+                        <term>signed personally</term>
+                    </ct:correspClass>
+                    <ct:context>
+                        <ref type="prev"
+                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief023ChamissoandeLaFoye"
+                            >Previous letter of Adelbert von Chamisso to Louis de La Foye: 16
+                            January 1807</ref>
+                        <ref type="next"
+                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief025ChamissoandeLaFoye"
+                            >Next letter of Adelbert von Chamisso to Louis de La Foye: 07 May
+                            1810</ref>
+                    </ct:context>
+                    <ct:transmission>
+                        <p>Post</p>
+                    </ct:transmission>
+                </ct:correspDesc>
+                <!-- The proposed ct:correspDesc element ends here -->
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p/>
+        </body>
+    </text>
+</TEI>
