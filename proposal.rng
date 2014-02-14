@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-02-06T11:29:57Z. 
+Schema generated from ODD source 2014-02-14T09:37:11Z. 
 Edition: Version 2.6.0. Last updated on
 	20th January 2014, revision 12802
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
@@ -10016,7 +10016,7 @@ You must supply at least two values for @target on <name/>
          <ref name="placeAddressee"/>
          <ref name="dateSender"/>
          <ref name="dateAddressee"/>
-         <ref name="correspType"/>
+         <ref name="correspClass"/>
          <ref name="transmission"/>
          <ref name="context"/>
       </choice>
@@ -10193,8 +10193,8 @@ You must supply at least two values for @target on <name/>
          <empty/>
       </element>
    </define>
-   <define name="correspType">
-      <element name="correspType"
+   <define name="correspClass">
+      <element name="correspClass"
                ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(type of correspondence) describes the piece of correspondence (e.g. letter, postcard, email), if possible according to some (external) classification scheme</a:documentation>
          <choice>

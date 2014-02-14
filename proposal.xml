@@ -121,6 +121,7 @@
             
             <!-- @ref hinzufügen? -->
             <!-- listCorrespDesc?!? -->
+            <!-- correspDesc is *not* intended to and can *not* replace the whole TEI header! -->
             
         </body>
         <back>
@@ -373,8 +374,8 @@
                     </elementSpec>
                     
                     <!-- need another name?!? -->
-                    <!-- neither accMat nor additions nor bindingDesc do fully qualify for our purposes -->
-                    <elementSpec ident="correspType" module="correspondence" mode="add"
+                    <!-- neither accMat nor additions nor bindingDesc nor textClass do fully qualify for our purposes -->
+                    <elementSpec ident="correspClass" module="correspondence" mode="add"
                         ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
                         <!-- modeled after keywords -->
                         <gloss versionDate="2014-01-13" xml:lang="en">type of correspondence</gloss>
