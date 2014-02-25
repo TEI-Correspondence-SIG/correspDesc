@@ -98,8 +98,8 @@
             </div>
             <div>
                 <head>Implementation</head>
-                <p>direct child elements of correspDesc are repeatable, other descendant elements are not! (except correspType and context)  </p>
-                <p>group by people, places, dates, context, transmission, correspType?!</p>
+                <p>direct child elements of correspDesc are repeatable, other descendant elements are not! (except correspClass and context)  </p>
+                <p>group by people, places, dates, context, transmission, correspClass?!</p>
                 <!-- sender@sameAs author -->
             </div>
             <div>
@@ -406,22 +406,22 @@
                         </attList>
                         <exemplum xml:lang="de">
                             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <correspType>
+                                <correspClass>
                                     <term>Brief</term>
                                     <term>eigenhändig</term>
                                     <term>mit Unterschrift</term>
                                     <term>ohne Umschlag</term>
-                                </correspType>
+                                </correspClass>
                             </egXML>
                         </exemplum>
                         <exemplum xml:lang="en">
                             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <correspType type="letter"/>
+                                <correspClass type="letter"/>
                             </egXML>
                         </exemplum>
                         <remarks>
                             <p>Information about the presence of an envelope may be captured here.</p>
-                            <p><gi>correspType</gi> can both be used as an empty element with according <att>type</att> (and <att>subtype</att>) attributes 
+                            <p><gi>correspClass</gi> can both be used as an empty element with according <att>type</att> (and <att>subtype</att>) attributes 
                                 or in a more elaborate way with several <gi>term</gi> child elements.</p>
                         </remarks>
                     </elementSpec>
