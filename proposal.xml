@@ -95,6 +95,7 @@
                     --> msDesc ((postage) stamps, seal, water mark, form fields, letter heads, incipit, …)
                 </p>
                 <p> sender and author </p>
+                <!-- kommunikation vs. Text -->
             </div>
             <div>
                 <head>Implementation</head>
@@ -122,6 +123,7 @@
             <!-- @ref hinzufügen? -->
             <!-- listCorrespDesc?!? -->
             <!-- correspDesc is *not* intended to and can *not* replace the whole TEI header! -->
+            <!-- copy/draft etc go into correspClass, c.f. http://www.constance-de-salm.de/fud_docs/DHIParis:2-34CdS-b1-00vt -->
             
         </body>
         <back>
@@ -394,6 +396,7 @@
                                 <rng:zeroOrMore>
                                     <rng:ref name="term"/>
                                 </rng:zeroOrMore>
+                                <!-- model.pLike hinzufügen -->
                             </rng:choice>
                         </content>
                         <attList>
