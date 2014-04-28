@@ -100,15 +100,34 @@
             </div>
             <div>
                 <head>Theoretical Considerations</head>
-                <p> scope of "correspondence": emails?
+                <!--<p> scope of "correspondence": emails?
                     Adressatenbezug! (Marcel)
+                </p>-->
+                <p>In this document <emph>correspondence</emph> is regarded as an <emph>act of communication</emph>, 
+                    in which the message of a sender reaches—mediated and time-delayed—an addressee at a different place. 
+                    Such an act of communication becomes manifest in a <emph>piece of correspondence</emph>, 
+                    that may be a tangible “object”, characterised by its, the communication co-determining, “materiality” and generally related to a medium or process of delivery.
+                    Hence, correspondence has a hybrid nature between <emph>event</emph> and <emph>object</emph>. 
                 </p>
-                <p>what is letter *specific*?</p>
-                <p>what is left out? --> everything from tei:text (postscript, opener, closer, signed, signature, …)
+                
+                <div>
+                    <head>What is—in terms of the TEI—correspondence specific information?</head>
+                    <p>An act of communication has a <emph>sender</emph> of a message (<gi>ct:sender</gi>), who's not necessarily identical to the author of the text of the message.</p>
+                    <p>An act of communication generally has no unknown audience/unspecified recipient but one or more (intended, maybe even fictional) <emph>addresses</emph> (<gi>ct:addressee</gi>), “spoken” to by the piece of correspondence.</p>
+                    <p>A piece of correspondence generally has a certain <emph>time or period of writing</emph> and a definable time of sending—even though it may be unknown or indeterminate (<gi>ct:dateSender</gi>). 
+                        Similary is true for the <emph>place of writing/sending</emph> (<gi>ct:placeSender</gi>). 
+                        Both very often is evident in addresslines, postmarks, electronically generated sending information etc.</p>
+                    <p>A piece of correspondence generally has a <emph>process/a medium of transfer</emph> (messenger, carrier, postman, carriage, fax, internet etc.) (<gi>ct:transmission</gi>)</p>
+                    <p>Very often a particular message is sent in order to trigger an answer (in form of one or more pieces of correspondence); 
+                        a single piece of correspondence therefore is normally not a secluded entity but a (written) act of communication in a communcation continuum<ptr target="#bohnenkamp2013"/><!--(Bohnenkamp/Richter 2013, p.4)-->, in which it is defined by its relative position between messages sent “before” and “after” (<gi>ct:context</gi>).</p>
+                    <p>Finally, correspondence may be <emph>categorized</emph> in terms of its object- and/or eventlike nature, requiring a separate element <gi>ct:correspClass</gi>.</p>
+                </div>
+                
+                <!--<p>what is left out? -\-> everything from tei:text (postscript, opener, closer, signed, signature, …)
                     address belongs to text, not meta data!
-                    --> msDesc ((postage) stamps, seal, water mark, form fields, letter heads, incipit, …)
-                </p>
-                <p> sender and author </p>
+                    -\-> msDesc ((postage) stamps, seal, water mark, form fields, letter heads, incipit, …)
+                </p>-->
+                <!--<p> sender and author </p>-->
                 <!-- kommunikation vs. Text -->
             </div>
             <div>
@@ -147,6 +166,7 @@
                     <bibl xml:id="dalf-guidelines"><ref target="http://ctb.kantl.be/project/dalf/dalfdoc/index.html">DALF guidelines for the description and encoding of modern correspondence material, version 1.0</ref></bibl>
                     <bibl xml:id="vanhoutte2009">Edward Vanhoutte, Ron Van den Branden: Describing, transcribing, encoding and editing modern correspondence material: a textbase approach. In: Literary and Linguistic Computing 24,1 (2009), pp. 77-98.</bibl>
                     <bibl xml:id="wega-guidelines"><ref target="http://www.weber-gesamtausgabe.de/de/Editionsrichtlinien">Editionsrichtlinien zur Ausgabe der Briefe, Tagebücher und Dokumente Webers</ref></bibl>
+                    <bibl xml:id="bohnenkamp2013">Anne Bohnenkamp, Elke Richter (Ed): Brief-Edition im digitalen Zeitalter. Berlin:DeGruyter 2009</bibl>
                 </listBibl>
             </div>
             <div>
