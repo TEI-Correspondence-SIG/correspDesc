@@ -82,7 +82,21 @@
         <body>
             <div>
                 <head>Preceding work</head>
-                <!--<p>The work on <gi>correspDesc</gi> was initially inspired by …</p>-->
+                <p>The development of <gi>ct:correspDesc</gi> was inspired mostly but not exclusively by the work of <ref target="http://www.kantl.be/ctb/project/dalf/">DALF</ref> as well as the <ref target="http://www.weber-gesamtausgabe.de">WeGA</ref>.</p>
+                <p>The DALF project, the <emph>Digital Archive of Letters by Flemish Authors and Composers from the 19th &amp; 20th century</emph>, 
+                    was launched by the Belgian Centre for Scholarly Editing and Document Studies (Centrum voor Teksteditie en Bronnenstudie) and is one of the best documented projects in the area of correspondence encoding. 
+                    In 2003, specific DTDs and guidelines for the description and encoding of modern correspondence material, both for TEI P4, were published.<ptr target="#dalf-guidelines"/> 
+                    The practical realization as well as the main features for encoding meta data are discussed in <ptr target="#vanhoutte2009"/>.
+                    The DALF guidelines have been reworked for the new requirements in TEI P5 as a “<ref target="http://ctb.kantl.be/project/dalf/P5/DALF_P5-p0.1.zip">Preliminary P5 Proposal</ref>” in August 2013 which is an important inspiration for this proposal.</p>
+                <p>Before DALF updated its customization from P4 to P5, the <emph>Carl-Maria-von-Weber-Gesamtausgabe</emph> (WeGA) had developed project-specific guidelines for encoding correspondence material in TEI P5<ptr target="#wega-guidelines"/> and published <ref target="http://wiki.tei-c.org/index.php/File:CorrespondenceProposal.zip">recommendations</ref> in June 2011.</p>
+                <p>Both projects define a special wrapper element for correspondence meta data while the depth of its structure and its child elements differ slightly. 
+                    This wrapper element (<gi>DALF:letDesc</gi> and <gi>WEGA:correspDesc</gi>, respectively) is part of the <gi>sourceDesc</gi> element. 
+                    Dalf introduces two child elements: first, <gi>DALF:letHeading</gi> in which they encode the author and addressee of the letter as well as place and date when it was written, and second, 
+                    <gi>DALF:letDesc</gi> which contains additional information, e.g. formal classification of the letter, presence of an envelope or illustrations. 
+                    The WEGA, however, groups these information directly within the wrapper element: sender<note place="bottom">In regard to the person who wrote the letter or other piece of correspondence, there is a conceptual difference. Thus, it is <emph>author</emph> in DALF and <emph>sender</emph> in WeGA.</note> 
+                    and addressee, place and date where and when the letter was not only written but also received, incipit and position within the thread of correspondence (“Korrespondenzstelle”). 
+                    Both projects decided to put all other information on providence, physical appearance, history, etc. in <gi>msDesc</gi>. </p>
+                <p>In this proposal, we mainly considered the overlapping of these two projects’ encoding guidelines and merged them into one.</p>
             </div>
             <div>
                 <head>Theoretical Considerations</head>
@@ -129,6 +143,11 @@
         <back>
             <div>
                 <head>Bibliography</head>
+                <listBibl>
+                    <bibl xml:id="dalf-guidelines"><ref target="http://ctb.kantl.be/project/dalf/dalfdoc/index.html">DALF guidelines for the description and encoding of modern correspondence material, version 1.0</ref></bibl>
+                    <bibl xml:id="vanhoutte2009">Edward Vanhoutte, Ron Van den Branden: Describing, transcribing, encoding and editing modern correspondence material: a textbase approach. In: Literary and Linguistic Computing 24,1 (2009), pp. 77-98.</bibl>
+                    <bibl xml:id="wega-guidelines"><ref target="http://www.weber-gesamtausgabe.de/de/Editionsrichtlinien">Editionsrichtlinien zur Ausgabe der Briefe, Tagebücher und Dokumente Webers</ref></bibl>
+                </listBibl>
             </div>
             <div>
                 <head>Formal Specification</head>
