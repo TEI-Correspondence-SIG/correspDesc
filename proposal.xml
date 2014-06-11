@@ -19,16 +19,20 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2014-06-11">
+                <persName>Sabine Seifert</persName>
+                <desc>Reworking and adding of prose description.</desc>
+            </change>
             <change when="2014-01-25">
                 <persName>Peter Stadler</persName>
                 <desc>Changed proposal namespace and added <gi>rng:text</gi> as an option to several
-                    elements for our <soCalled>CIF</soCalled>-standard</desc>
+                    elements for our <soCalled>CIF</soCalled>-standard.</desc>
             </change>
             <change when="2014-01-13">
                 <persName>Sabine Seifert</persName>
                 <persName>Marcel Illetschko</persName>
                 <persName>Peter Stadler</persName>
-                <desc>Redefined some elements during Berlin bootcamp</desc>
+                <desc>Redefined some elements during Berlin bootcamp.</desc>
             </change>
             <change when="2012-11-09" who="#sbauman.emt">started @ SIG mtg</change>
         </revisionDesc>
@@ -39,12 +43,12 @@
             <pb/>
             <div>
                 <head>About this document</head>
-                <p> This document proposes the addition of a TEI module for correspondence. It is
-                    the product of a Correspondence SIG task force (Sabine Seifert, Marcel
-                    Illetschko, Peter Stadler<!-- Sabine: Reihenfolge?! -->) with valuable input
-                    from various people. </p>
-                <p> The aim of the proposal is to define a common set of correspondence specific
-                    meta data, brought together at one place in the TEI header. The lack of special
+                <p>This document proposes the addition of a TEI module for correspondence. It is the
+                    product of a Correspondence SIG task force (Sabine Seifert, Marcel Illetschko,
+                    Peter Stadler<!-- Sabine: Reihenfolge?! -->) with valuable input from various
+                    people.</p>
+                <p>The aim of the proposal is to define a common set of correspondence-specific meta
+                    data, brought together at one place in the TEI header. The lack of special
                     guidelines for encoding letters, postcards, etc. with TEI P5 has been a
                     recurring topic since the formation of the Correspondence SIG in 2008.
                     Additionally, there is a growing demand of correspondence projects for linked
@@ -58,20 +62,17 @@
                     </list> A guiding idea has been to only tentatively modify the TEI standard by
                     merely adding a few elements, wrapping them in a special purpose element
                         <gi>ct:correspDesc</gi> and injecting the latter into <gi>sourceDesc</gi>.
-                    This is supposed to be just a first step in the Correspondence SIG's strive for
-                    a complete model of encoding correspondence material.
-                    <!--While some of this information can already be encoded in various sections of the TEI header 
-                        we believe it to be of greater value for projects dealing with correspondence material to 
-                        have this information in one place.-->
-                </p>
-
-                <div>
-                    <head>Conventions used</head>
-                    <p> As required for TEI conformance, non-TEI elements are defined in a distinct
-                        non-TEI namespace. In the usage examples and throughout this document that
-                        namespace is mapped to the prefix <hi rend="bold">ct:</hi> (= correspondence
-                        task force), while TEI elements are not marked by any namespace prefix. </p>
-                </div>
+                    Please note that <gi>ct:correspDesc</gi> is <emph>not</emph> intended to and can
+                        <emph>not</emph> replace the whole TEI header.</p>
+                <p>These efforts are supposed to be just a first step in the Correspondence SIG's
+                    strive for a complete model of encoding correspondence material.</p>
+            </div>
+            <div>
+                <head>Conventions used</head>
+                <p>As required for TEI conformance, non-TEI elements are defined in a distinct
+                    non-TEI namespace. In the usage examples and throughout this document that
+                    namespace is mapped to the prefix <hi rend="bold">ct:</hi> (= correspondence
+                    task force), while TEI elements are not marked by any namespace prefix.</p>
             </div>
         </front>
         <body>
@@ -123,41 +124,47 @@
             </div>
             <div>
                 <head>Theoretical Considerations</head>
-                <!--<p> scope of "correspondence": emails?
-                    Adressatenbezug! (Marcel)
-                </p>-->
                 <p>In this document <emph>correspondence</emph> is regarded as an <emph>act of
                         communication</emph>, in which the message of a sender reaches—mediated and
                     time-delayed—an addressee at a different place. Such an act of communication
                     becomes manifest in a <emph>piece of correspondence</emph>, that may be a
-                    tangible “object”, characterised by its, the communication co-determining,
-                    “materiality” and generally related to a medium or process of delivery. Hence,
-                    correspondence has a hybrid nature between <emph>event</emph> and
-                        <emph>object</emph>. </p>
+                    tangible “object”, characterised by its “materiality” and co-determining the
+                    communication, and that is generally related to a medium or process of delivery.
+                    Hence, correspondence has a hybrid nature between <emph>event</emph> and
+                        <emph>object</emph>.</p>
+                <p>As an act of communication is directed at someone, each piece of correspondence
+                    has one or more addressees, who may or may not be individually identifiable.
+                    Therefore, the scope of "correspondence" in this proposal covers not only
+                    letters, postcards, telegrams, and similar "material" pieces of correspondence
+                    but also electronic communications, e.g. e-mails and text
+                    messages.<!-- =Satz zu Adressatenbezug und scope of correspondence --></p>
+
                 <div>
-                    <head>What is—in terms of the TEI—correspondence specific information?</head>
+                    <head>What is—in terms of the TEI—correspondence-specific information?</head>
                     <p>An act of communication has a <emph>sender</emph> of a message
                             (<gi>ct:sender</gi>), who is not necessarily identical to the author of
-                        the text of the message.</p>
+                        the text of the
+                        message.<!-- Sabine: Was würde man in solch einem Fall eigentlich machen? <author> in <correspDesc> neben <sender> erlauben? --></p>
                     <p>An act of communication generally has no unknown audience/unspecified
                         recipient but one or more (intended, maybe even fictional)
-                            <emph>addresses</emph> (<gi>ct:addressee</gi>), “spoken” to by the piece
-                        of correspondence.</p>
+                            <emph>addressees</emph> (<gi>ct:addressee</gi>), “spoken” to by the
+                        piece of correspondence.</p>
                     <p>A piece of correspondence generally has a certain <emph>time or period of
                             writing</emph> and a definable time of sending—even though it may be
                         unknown or indeterminate
-                        (<gi>ct:dateSender</gi>)<!-- Sabine: Hier nennen wir 2 Sachen (Schreiben und Abschicken) für 1 Element. 
-                            Könnte das verwirren? Außerdem ist "writing" in <emph> und nicht "sending"-wäre letzteres nicht besser? -->.
+                        (<gi>ct:dateSender</gi>)<!-- Sabine: Hier nennen wir 2 Sachen (Schreiben und Abschicken) für 1 Element, gehen aber 
+                            nicht weiter darauf ein. Könnte das verwirren und Nachfragen hervorrufen, was man machte, wenn man beides identifizieren und 
+                            einzeln kodieren möchte? Wenn wir das ignorieren: "writing" ist in <emph> und nicht "sending", wobei letzteres aber besser wäre.-->.
                         Similar is true for the <emph>place of writing/sending</emph>
-                            (<gi>ct:placeSender</gi>). Both very often is evident in addresslines,
-                        postmarks, electronically generated sending information etc.</p>
+                            (<gi>ct:placeSender</gi>). Both very often is evident in address lines,
+                        postmarks, electronically generated sending information, etc.</p>
                     <p>A piece of correspondence generally has a <emph>process/a medium of
                             transfer</emph> (messenger,
                         carrier<!-- Sabine: What's the difference between messenger and carrier? -->,
-                        postman, carriage, fax machine, internet etc.)
-                        (<gi>ct:transmission</gi>)</p>
+                        postman, carriage, fax machine, internet, etc.)
+                        (<gi>ct:transmission</gi>).</p>
                     <p>Very often a particular message is sent in order to trigger an answer (in
-                        form of one or more pieces of correspondence); a single piece of
+                        form of one or more pieces of correspondence). A single piece of
                         correspondence therefore is normally not a secluded entity but a (written)
                         act of communication in a communication continuum<ptr
                             target="#bohnenkamp2013"/><!--(Bohnenkamp/Richter 2013, p.4)-->, in
@@ -165,44 +172,61 @@
                         and “after” (<gi>ct:context</gi>).</p>
                     <p>Finally, correspondence may be <emph>categorized</emph> in terms of its
                         object- and/or eventlike nature (e.g. letter, signed personally; telegram;
-                        postcard) requiring a separate element <gi>ct:correspClass</gi>.</p>
+                        copy; draft) requiring a separate element <gi>ct:correspClass</gi>.</p>
+                    <!-- copy/draft etc go into correspClass, c.f. http://www.constance-de-salm.de/fud_docs/DHIParis:2-34CdS-b1-00vt -->
                 </div>
-
-                <!--<p>what is left out? -\-> everything from tei:text (postscript, opener, closer, signed, signature, …)
-                    address belongs to text, not meta data!
-                    -\-> msDesc ((postage) stamps, seal, water mark, form fields, letter heads, incipit, …)
-                </p>-->
-                <!--<p> sender and author </p>-->
-                <!-- kommunikation vs. Text -->
+                <div>
+                    <head>And what is left out?</head>
+                    <p>Information concerning the manuscript description, e.g. (postage) stamps,
+                        seals, water marks, form fields, letter heads, or incipits, are not
+                        considered part of the proposed correspondence description. These aspects
+                        are not necessarily correspondence-specific but rather characteristic for
+                        manuscripts in general and are thus best encoded within <gi>msDesc</gi>.</p>
+                    <p>As this proposal deals with the <emph>meta data</emph> of correspondence,
+                        aspects relating to correspondence-specific transcriptional encoding within
+                            <gi>text</gi>, e.g. with <gi>postscript</gi>, <gi>opener</gi>,
+                            <gi>closer</gi>, or <gi>signed</gi>, are not considered.</p>
+                    <!--<p> sender and author </p>-->
+                    <!-- kommunikation vs. Text -->
+                </div>
             </div>
             <div>
                 <head>Implementation</head>
-                <p>direct child elements of correspDesc are repeatable, other descendant elements
-                    are not! (except correspClass and context) </p>
+                <p>Direct child elements of <gi>ct:correspDesc</gi> are repeatable, other descendant
+                    elements are not (except for <gi>ct:correspClass</gi> and
+                    <gi>ct:context</gi>).</p>
                 <p>group by people, places, dates, context, transmission, correspClass?!</p>
                 <!-- sender@sameAs author -->
             </div>
             <div>
                 <head>Correspondence Interchange Format (CIF)</head>
-                <p/>
+                <p>Next to encoding with an elaborate structure for detailed data capture, there is
+                    the possibility to use the basic structure of the <soCalled>Correspondence
+                        Interchange Format (CIF)</soCalled>. It is designed to enable easy data
+                    interchange between digital editions and projects and is used in combination
+                    with established standards, e.g. authorial files for persons and places,
+                    ISO-codes for dates, etc.<!-- auch correspSearch erwähnen? --></p>
             </div>
             <div>
                 <head>Future Work</head>
-                <p>restructuring correspondence related transcriptional elements </p>
-                <p>best practice recommendations</p>
+                <p>After dealing with correspondence-specific meta data, the next steps are: <list
+                        type="simple">
+                        <item>restructuring correspondence-related transcriptional elements, as
+                            there are several problems with elements like <gi>postscript</gi>,
+                                <gi>opener</gi>, <gi>closer</gi>, etc.</item>
+                        <item>developing best practice recommendations, with examples, for the
+                            encoding of correspondence material.</item>
+                    </list></p>
             </div>
 
             <!-- To be discussed: -->
             <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
             <!-- dual use policy for explicit encoding and minimal exchange format -->
             <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
-            <!-- CIF = lightweight interchange format -->
             <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
 
             <!-- @ref hinzufügen? -->
             <!-- listCorrespDesc?!? -->
-            <!-- correspDesc is *not* intended to and can *not* replace the whole TEI header! -->
-            <!-- copy/draft etc go into correspClass, c.f. http://www.constance-de-salm.de/fud_docs/DHIParis:2-34CdS-b1-00vt -->
 
         </body>
         <back>
