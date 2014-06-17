@@ -19,6 +19,10 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2014-06-17">
+                <persName>Marcel Illetschko</persName>
+                <desc>Adding of bibliographic references.</desc>
+            </change>
             <change when="2014-06-11">
                 <persName>Sabine Seifert</persName>
                 <desc>Reworking and adding of prose description.</desc>
@@ -247,6 +251,12 @@
                             Webers</ref></bibl>
                     <bibl xml:id="bohnenkamp2013">Anne Bohnenkamp, Elke Richter (Ed): Brief-Edition
                         im digitalen Zeitalter. Berlin:DeGruyter 2009</bibl>
+                    <bibl>Klaus Hurlebusch: Divergenzen des Schreibens vom Lesen. Besonderheiten der Tagebuch- 
+                    und Briefedition. In: editio 9 (1995), pp.18-36.</bibl>
+                    <bibl>Hans-Gert Roloff (Ed.): Wissenschaftliche Briefeditionen und ihre Probleme. 
+                    Berlin: Weidler 1998</bibl>
+                    <bibl>Winfried Woesler: Vorschläge für eine Normierung von Briefeditionen. 
+                    In: editio 2 (1988), pp. 8-18.</bibl>
                 </listBibl>
             </div>
             <div>
