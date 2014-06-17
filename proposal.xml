@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -19,6 +20,12 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2014-06-17">
+                <persName>Sabine Seifert</persName>
+                <persName>Marcel Illetschko</persName>
+                <persName>Peter Stadler</persName>
+                <desc>Reworking and adding of prose description at face to face meeting.</desc>
+            </change>
             <change when="2014-06-17">
                 <persName>Marcel Illetschko</persName>
                 <desc>Adding of bibliographic references.</desc>
@@ -147,8 +154,8 @@
                     <head>What is—in terms of the TEI—correspondence-specific information?</head>
                     <p>An act of communication has a <emph>sender</emph> of a message
                             (<gi>ct:sender</gi>), who is not necessarily identical to the author of
-                        the text of the
-                        message.<!-- Sabine: Was würde man in solch einem Fall eigentlich machen? <author> in <correspDesc> neben <sender> erlauben? --></p>
+                        the text of the message.
+                        <!--<p> sender and author </p>--></p>
                     <p>An act of communication generally has no unknown audience/unspecified
                         recipient but one or more (intended, maybe even fictional)
                             <emph>addressees</emph> (<gi>ct:addressee</gi>), “spoken” to by the
@@ -190,17 +197,140 @@
                         aspects relating to correspondence-specific transcriptional encoding within
                             <gi>text</gi>, e.g. with <gi>postscript</gi>, <gi>opener</gi>,
                             <gi>closer</gi>, or <gi>signed</gi>, are not considered.</p>
-                    <!--<p> sender and author </p>-->
-                    <!-- kommunikation vs. Text -->
                 </div>
             </div>
             <div>
-                <head>Implementation</head>
-                <p>Direct child elements of <gi>ct:correspDesc</gi> are repeatable, other descendant
-                    elements are not (except for <gi>ct:correspClass</gi> and
-                    <gi>ct:context</gi>).</p>
-                <p>group by people, places, dates, context, transmission, correspClass?!</p>
+                <head>Implementation of the correspondence description</head>
+                <p>The <gi>correspDesc</gi> element provides a detailed description of
+                    correspondence-specific metadata. The <gi>correspDesc</gi> element focuses on
+                    the communicative function of correspondence, i.e. sender, addressee,
+                    transmission. It is provided as a supplement to the physical description of a
+                    correspondence object which is to be encoded within the <gi>sourceDesc</gi>. The
+                    description is organized by the following elements 
+                    <specList>
+                        <specDesc key="sender"/>
+                        <specDesc key="addressee"/>
+                        <specDesc key="placeSender"/>
+                        <specDesc key="placeAddressee"/>
+                        <specDesc key="dateSender"/>
+                        <specDesc key="dateAddressee"/>
+                        <specDesc key="correspClass"/>
+                        <specDesc key="transmission"/>
+                        <specDesc key="context"/>
+                    </specList>
+                </p>
+                <p>These elements are all members of a model class called model.correspDescPart;
+                    additional features may be defined by defining new elements and adding them to 
+                    that class.</p>
+                <!-- angegebene daten sind generell normierte herausgeberangaben -->
+                <!-- bei correspClass bezug zu schlagwortnormdateien oder sowas -->
+                <p>A simple example might be encoded as follows: <!-- einfaches beispiel, wo alles einmal vorkommt -->
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples"><ct:correspDesc>
+                            <ct:sender>
+                                <persName>Adelbert von Chamisso</persName>
+                            </ct:sender>
+                            <ct:addressee>
+                                <persName>Louis de La Foye</persName>
+                            </ct:addressee>
+                            <ct:placeSender>
+                                <placeName>Vertus</placeName>
+                            </ct:placeSender>
+                            <ct:placeAddressee>
+                                <placeName>Caen</placeName>
+                            </ct:placeAddressee>
+                            <ct:dateSender>
+                                <date when="1807-01-29">29 January 1807</date>
+                            </ct:dateSender>
+                            <ct:correspClass>
+                                <term>lettersheet</term>
+                                <term>signed personally</term>
+                            </ct:correspClass>
+                            <ct:context>
+                                <ref type="prev"
+                                    target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye#1"
+                                    >Previous letter of Adelbert von Chamisso to Louis de La Foye:
+                                    16 January 1807</ref>
+                                <ref type="next"
+                                    target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye#1"
+                                    >Next letter of Adelbert von Chamisso to Louis de La Foye: 07
+                                    May 1810</ref>
+                            </ct:context>
+                            <ct:transmission>
+                                <p>Post</p>
+                            </ct:transmission>
+                        </ct:correspDesc></egXML></p>
+                <p>By default, order and number of the above elements are not constraint
+                    facilitating the encoding of several entities of each feature provided that they
+                    all belong to the same communication process. For example, the postcard of the gathered philologists in Prague to their colleague Seuffert in Graz on the occasion of the first informal <soCalled>Germanistenabend</soCalled> would feature several <gi>sender</gi> elements with one entry each:
+                <!-- beispiel mit mehreren senders -->
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <ct:correspDesc>
+                            <ct:sender>
+                                <persName>Adolf Hauffen</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>Hans Lambel</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>Hans Meyer</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>Richard Rosenbaum</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>August Sauer</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>Hans Tschinkel</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>Franz Werner</persName>
+                            </ct:sender>
+                            <ct:sender>
+                                <persName>Spiridion Wukadinović</persName>
+                            </ct:sender>
+                            <ct:addressee>
+                                <persName>Bernhard Seuffert</persName>
+                            </ct:addressee>
+                            <ct:placeSender>
+                                <placeName>Prag</placeName>
+                            </ct:placeSender>
+                            <ct:placeAddressee>
+                                <placeName>Graz</placeName>
+                            </ct:placeAddressee>
+                            <ct:dateSender>
+                                <date when="1898-01-22">22.01.1898</date>
+                            </ct:dateSender>
+                        </ct:correspDesc>
+                    </egXML>
+                </p>
+                <p>Usually, the sender and the author of a message are identical. To reduce the redundancy of markup and error-proneness, <ref target="www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAIE">standard linking mechanisms</ref> can be applied to connect the <gi>author</gi> element within <gi>titleStmt</gi> with the appropriate <gi>sender</gi> element.
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <ct:sender sameAs="#author"/>
+                    </egXML>
+                    <!-- beispiel -->
+                    Given that the above is an example of collaborative authorship, there might as well be the case of a clear distinction of the intellectual author of the text and the sender of the message, be it in disguise or frankly. Examples include pre-formulated greeting cards, forced dictated messages, or copied love letters. In such cases, the genuine author is encoded as <gi>author</gi> within <gi>titleStmt</gi> 
+                     
+                    <!-- Marcel sucht ein Beispiel -->
+                  
+                    <!-- beispiel für unterschied author und sender -->
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        
+                    </egXML>
+                    
+                    <!-- Sabine: Was würde man in solch einem Fall eigentlich machen? <author> in <correspDesc> neben <sender> erlauben? -->
+                    
+                    
+                    possibility that the sender need not be the author which can be encoded with a shortened mark up.</p>
                 <!-- sender@sameAs author -->
+                <p>intendierter empfangsort/empfänger, mit @type</p>
+                <p>correspClass erklären, Überschneidung zur msDesc, aber dennoch gute Gründe für Infos hier</p>
+                
+                    
+                <!-- <p>group by people, places, dates, context, transmission, correspClass?!</p>-->
+                
+                <!-- wohin unterscheidung, ob manuscript oder printed edition? -->
+                <!-- in correspClass Abschrift/copy? -->
             </div>
             <div>
                 <head>Correspondence Interchange Format (CIF)</head>
@@ -211,6 +341,7 @@
                     with established standards, e.g. authorial files for persons and places,
                     ISO-codes for dates, etc.<!-- auch correspSearch erwähnen? --></p>
             </div>
+            <!-- "ct:" rauslöschen aus beispielen und im text?! -->
             <div>
                 <head>Future Work</head>
                 <p>After dealing with correspondence-specific meta data, the next steps are: <list
@@ -228,7 +359,7 @@
             <!-- dual use policy for explicit encoding and minimal exchange format -->
             <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
             <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
-
+            <!-- bei <transmission> <channel> diskutieren -->
             <!-- @ref hinzufügen? -->
             <!-- listCorrespDesc?!? -->
 
@@ -251,12 +382,12 @@
                             Webers</ref></bibl>
                     <bibl xml:id="bohnenkamp2013">Anne Bohnenkamp, Elke Richter (Ed): Brief-Edition
                         im digitalen Zeitalter. Berlin:DeGruyter 2009</bibl>
-                    <bibl>Klaus Hurlebusch: Divergenzen des Schreibens vom Lesen. Besonderheiten der Tagebuch- 
-                    und Briefedition. In: editio 9 (1995), pp.18-36.</bibl>
-                    <bibl>Hans-Gert Roloff (Ed.): Wissenschaftliche Briefeditionen und ihre Probleme. 
-                    Berlin: Weidler 1998</bibl>
-                    <bibl>Winfried Woesler: Vorschläge für eine Normierung von Briefeditionen. 
-                    In: editio 2 (1988), pp. 8-18.</bibl>
+                    <bibl>Klaus Hurlebusch: Divergenzen des Schreibens vom Lesen. Besonderheiten der
+                        Tagebuch- und Briefedition. In: editio 9 (1995), pp.18-36.</bibl>
+                    <bibl>Hans-Gert Roloff (Ed.): Wissenschaftliche Briefeditionen und ihre
+                        Probleme. Berlin: Weidler 1998</bibl>
+                    <bibl>Winfried Woesler: Vorschläge für eine Normierung von Briefeditionen. In:
+                        editio 2 (1988), pp. 8-18.</bibl>
                 </listBibl>
             </div>
             <div>
@@ -293,6 +424,7 @@
                             <!-- <correspDesc> should be members of model.divTop (indirectly)-->
                             <!-- or even listCorrespDesc ?! -->
                             <memberOf key="att.declarable"/>
+                            <memberOf key="att.canonical"/>
                             <memberOf key="att.global"/>
                         </classes>
                         <content>
@@ -310,6 +442,42 @@
                                 <rng:ref name="model.noteLike"/>
                             </rng:optional>
                         </content>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples"><ct:correspDesc>
+                                    <ct:sender>
+                                        <persName>Adelbert von Chamisso</persName>
+                                    </ct:sender>
+                                    <ct:addressee>
+                                        <persName>Louis de La Foye</persName>
+                                    </ct:addressee>
+                                    <ct:placeSender>
+                                        <placeName>Vertus</placeName>
+                                    </ct:placeSender>
+                                    <ct:placeAddressee>
+                                        <placeName>Caen</placeName>
+                                    </ct:placeAddressee>
+                                    <ct:dateSender>
+                                        <date when="1807-01-29">29 January 1807</date>
+                                    </ct:dateSender>
+                                    <ct:correspClass>
+                                        <term>lettersheet</term>
+                                        <term>signed personally</term>
+                                    </ct:correspClass>
+                                    <ct:context>
+                                        <ref type="prev"
+                                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye#1"
+                                            >Previous letter of Adelbert von Chamisso to Louis de La
+                                            Foye: 16 January 1807</ref>
+                                        <ref type="next"
+                                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye#1"
+                                            >Next letter of Adelbert von Chamisso to Louis de La
+                                            Foye: 07 May 1810</ref>
+                                    </ct:context>
+                                    <ct:transmission>
+                                        <p>Post</p>
+                                    </ct:transmission>
+                                </ct:correspDesc></egXML>
+                        </exemplum>
                     </elementSpec>
 
                     <!-- make sender and addressee declarable to allow for linking with separate places and/or dates? -->
@@ -345,6 +513,18 @@
                                 </rng:group>
                             </rng:choice>
                         </content>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples"><ct:sender>
+                                    <persName ref="http://d-nb.info/gnd/118520040">Adelbert von
+                                        Chamisso</persName>
+                                </ct:sender></egXML>
+                        </exemplum>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <sender>
+                                    <persName key="A002068">Weber, Carl Maria von</persName>
+                                </sender></egXML>
+                        </exemplum>
                     </elementSpec>
 
                     <elementSpec ident="addressee" module="correspondence" mode="add"
@@ -380,6 +560,20 @@
                                 </rng:group>
                             </rng:choice>
                         </content>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <addressee>
+                                    <persName key="A000046">Arnim, Achim von</persName>
+                                </addressee>
+                            </egXML>
+                        </exemplum>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <addressee>
+                                    <persName>unknown</persName><!-- richtig so? -->
+                                </addressee>
+                            </egXML>
+                        </exemplum>
                         <remarks>
                             <p>the intended recipient, which may or may not be the actual
                                 recipient</p>
@@ -418,6 +612,16 @@
                                 </rng:group>
                             </rng:choice>
                         </content>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples"><placeSender>
+                                    <placeName>Nürnberg</placeName>
+                                </placeSender></egXML>
+                        </exemplum>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples"><placeSender>
+                                    <placeName ref="#l1103">Berlin</placeName>
+                                </placeSender></egXML>
+                        </exemplum>
                     </elementSpec>
 
                     <elementSpec ident="placeAddressee" module="correspondence" mode="add"
@@ -455,6 +659,11 @@
                                 </rng:group>
                             </rng:choice>
                         </content>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <placeAddressee>
+                                    <placeName>Prag</placeName></placeAddressee></egXML>
+                        </exemplum>
                     </elementSpec>
 
                     <elementSpec ident="dateSender" module="correspondence" mode="add"
@@ -564,6 +773,14 @@
                         </exemplum>
                         <exemplum xml:lang="en">
                             <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <ct:correspClass>
+                                    <term>picture postcard</term>
+                                    <term>signed personally</term>
+                                </ct:correspClass>
+                            </egXML>
+                        </exemplum>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
                                 <correspClass type="letter"/>
                             </egXML>
                         </exemplum>
@@ -637,8 +854,21 @@
                         <exemplum xml:lang="en">
                             <egXML xmlns="http://www.tei-c.org/ns/Examples">
                                 <context>
-                                    <ptr type="next" target="http://uri.of.next.letter">Next letter
-                                        of the author to the same addressee</ptr>
+                                                               
+                                    <ct:context>
+                                        <ref type="prev">Previous letter of
+                                            August Sauer to Bernhard Seuffert: 30. December 1897</ref> 
+                                        <ref type="next">Next letter of August Sauer to Bernhard
+                                            Seuffert: 01. February
+                                            1898</ref>
+                                    </ct:context>
+                                </context>
+                            </egXML>
+                        </exemplum>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                                <context>
+                                    <ptr type="next" target="http://uri.of.next.letter"/>
                                     <ptr type="prev" target="http://uri.of.previous.letter"/>
                                 </context>
                             </egXML>

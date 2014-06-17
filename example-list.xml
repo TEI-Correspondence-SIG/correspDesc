@@ -24,7 +24,7 @@
     <text>
         <body>
             <listBibl>
-                <ct:correspDesc corresp="example-cobec.xml#correspDesc-cobec">
+                <ct:correspDesc ref="example-cobec.xml#correspDesc-cobec">
                     <!-- Please compare the complete correspDesc of example-cobec.xml  -->
                     <ct:sender>PN0001</ct:sender>
                     <ct:addressee>PN0002</ct:addressee>
@@ -33,7 +33,7 @@
                     <ct:addressee>PN0005</ct:addressee>
                     <ct:dateSender when="1999-06-02"/>
                 </ct:correspDesc>
-                <ct:correspDesc corresp="example-chamisso.xml#correspDesc-chamisso">
+                <ct:correspDesc ref="example-chamisso.xml#correspDesc-chamisso">
                     <!-- Please compare the complete correspDesc of example-chamisso.xml  -->
                     <ct:sender ref="http://d-nb.info/gnd/118520040"/>
                     <ct:addressee ref="http://d-nb.info/gnd/116057203"/>
