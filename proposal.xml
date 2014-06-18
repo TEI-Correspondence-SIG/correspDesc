@@ -372,31 +372,34 @@
                         </context>
                     </egXML>
                 </p>
-                <p>Although questions of <soCalled>materiality</soCalled> can already be encoded
-                    within the <gi>sourceDesc</gi> (i.e. in most cases within the <gi>msDesc</gi>)
-                    pieces of correspondence may be <emph>categorized</emph> in terms of their
+                <p>
+                    The cassification of correspondence (according to external or project specific schemes) can be achieved by employing the standard mechanisms of text classification as described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD43">2.4.3 The Text Classification</ref>. 
+                    However, it might be desirable to capture the object- and/or eventlike nature of correspondence in situ and to merge the textual and contextual information with data about the physical appearance.
+                    For this purpose the <gi>correspClass</gi> element provides a simple means to collect these features:
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+                        <ct:correspClass>
+                            <term>picture postcard</term>
+                            <term>signed personally</term>
+                            <term>without envelope</term>
+                        </ct:correspClass>
+                    </egXML>
+                    The proper place for the detailed description of the <soCalled>materiality</soCalled> of the correspondence object(s) and possible attachments is still the <gi>sourceDesc</gi> element (and probably <gi>msDesc</gi>), nevertheless it is possible to extract simple oppositions to facilitate processing of this information (e.g. 'without envelope'). These subject terms can either be according to a private scheme or by reference to some external classification system as used in library and documentation work in which case the <att>scheme</att> attribute should identify the according system by its URI. 
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
+                        <correspClass scheme="http://d-nb.info/standards/elementset/gnd#SubjectHeadingSensoStricto">
+                            <term ref="http://d-nb.info/gnd/4008240-4">Brief</term>
+                            <term ref="http://d-nb.info/gnd/4140367-8">Unterschrift</term>
+                        </correspClass>
+                    </egXML>
+                    
+                    <!--pieces of correspondence may be <emph>categorized</emph> in terms of their
                     object- and/or eventlike nature (e.g. letter, signed personally; telegram;
                     picture postcard; copy; draft) within the <gi>correspDesc</gi> element. Therefore, the
                         <gi>correspClass</gi> element may be used by reference to a (external)
-                    classification scheme <!--  cf. textClass-Geschichte -->as used in library and documentation work (@scheme)<!-- bei textClass gucken -->. By the use of the <gi>term</gi> element
+                    classification scheme <!-\-  cf. textClass-Geschichte -\->as used in library and documentation work (@scheme)<!-\- bei textClass gucken -\->. By the use of the <gi>term</gi> element
                     different categories can be implemented as child elements within the
-                        <gi>correspClass</gi> element. <!--"oder nach projekt-internen Klassifikationen"? --><!-- term element soll klassifikation aufnehmen, eigene/fremde -->
+                        <gi>correspClass</gi> element. -->
+                    <!--"oder nach projekt-internen Klassifikationen"? --><!-- term element soll klassifikation aufnehmen, eigene/fremde -->
                     <!-- In den Beispielen fehlt @scheme --></p>
-                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
-                    <correspClass>
-                        <term>Brief</term>
-                        <term>eigenhändig</term>
-                        <term>mit Unterschrift</term>
-                        <term>ohne Umschlag</term>
-                    </correspClass>
-                </egXML>
-                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <ct:correspClass>
-                        <term>picture postcard</term>
-                        <term>signed personally</term>
-                    </ct:correspClass>
-                </egXML>
-                <!-- Beispiel mit GND einbauen -->
                
                 
                 <!-- <p>group by people, places, dates, context, transmission, correspClass?!</p>-->
