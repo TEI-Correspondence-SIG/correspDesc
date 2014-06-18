@@ -214,9 +214,9 @@
                         <specDesc key="placeAddressee"/>
                         <specDesc key="dateSender"/>
                         <specDesc key="dateAddressee"/>
-                        <specDesc key="correspClass"/>
                         <specDesc key="transmission"/>
                         <specDesc key="context"/>
+                        <specDesc key="correspClass"/>
                     </specList>
                 </p>
                 <p>These elements are all members of a model class called model.correspDescPart;
@@ -261,7 +261,8 @@
                         </ct:correspDesc></egXML></p>
                 <p>By default, order and number of the above elements are not constraint
                     facilitating the encoding of several entities of each feature provided that they
-                    all belong to the same communication process. For example, the postcard of the gathered philologists in Prague to their colleague Seuffert in Graz on the occasion of the first informal <soCalled>Germanistenabend</soCalled> would feature several <gi>sender</gi> elements with one entry each:
+                    all belong to the same communication process. Hence, it is possible to differentiate between the intended and the actual (place of) addressee with the <att>type</att> attribute. 
+                    In other cases, the respective elements are simply repeated. See for example the postcard of the gathered philologists in Prague to their colleague Seuffert in Graz on the occasion of the first informal <soCalled>Germanistenabend</soCalled> which features several <gi>sender</gi> elements with one entry each:
                 <!-- beispiel mit mehreren senders -->
                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
                         <ct:correspDesc>
@@ -304,6 +305,7 @@
                         </ct:correspDesc>
                     </egXML>
                 </p>
+                <!-- Names, actors, places and dates of correspondence -->
                 <p>Usually, the sender and the author of a message are identical. To reduce the redundancy of markup and error-proneness, <ref target="www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAIE">standard linking mechanisms</ref> can be applied to connect the <gi>author</gi> element within <gi>titleStmt</gi> to the appropriate <gi>sender</gi> element.
                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
                         <ct:sender sameAs="#author"/>
@@ -312,13 +314,9 @@
                     In other cases (cf. the example of collaborative authorship above), there might as well be a clear distinction of the intellectual author of the text and the sender of the message, be it in disguise or frankly. Examples include pre-formulated greeting cards, forced dictated messages, or copied love letters. In such cases, the genuine author is encoded as <gi>author</gi> within <gi>titleStmt</gi>, as usual.
                     <!-- Marcel sucht ein Beispiel für unterschied author und sender -->
                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        
                     </egXML>
-                    
-                    <!-- Sabine: Was würde man in solch einem Fall eigentlich machen? <author> in <correspDesc> neben <sender> erlauben? -->
-                    
-                    
-                    possibility that the sender need not be the author which can be encoded with a shortened mark up.</p>
-                
+                </p>
                 <p>
                     The <gi>placeSender</gi> and <gi>placeAddressee</gi> elements are provided to capture the names of spatial locations of sender and addressee respectivly. It is possible to differentiate those places further with the <att>type</att> attribute, e.g. to distinguish the intended place of the addressee (as noted on the address) from the actual place of reception; or to capture several places of writing when the letter was produced over several days at several places. 
                     Where applicable, these names can be encoded in more detail with elements provided by the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref>. If an (external) placeography is present or authority files are available it is also highly recommended to identify those places via unique URIs. 
@@ -334,7 +332,6 @@
                             <!-- … -->
                         </ct:correspDesc>
                     </egXML>
-                    <!-- vs. Adresse -->
                 </p>
                 <p>
                     As with other information compiled within <gi>correspDesc</gi>, the spatial information is supposed to be editorial, normalised data, not necessarily the exact reproduction of the original address which should rather be encoded within <gi>text</gi>. However, it is possible to provide more address-like detail:
@@ -355,23 +352,37 @@
                         </ct:correspDesc>
                     </egXML>
                 </p>
-                    
-                <!-- sender@sameAs author -->
-                <p>intendierter empfangsort/empfänger, mit @type</p>
-                <p>orte</p>
+                <!-- transmission -->
+                
+                <!-- context and classification of correspondence -->
+                <p>A piece of correspondence can often be positioned within a communication continuum with a preceding and following message which is encoded within <gi>ct:context</gi>. The conception of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects in relation to the respective understanding of the extent of the correspondence, e.g. all known letters between person A and B in several repositories vs. just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following piece of correspondences, <gi>ref</gi> or <gi>ptr</gi> elements may be used with attributes, as follows:
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <context>
+                            <ref type="prev">Previous letter of
+                                August Sauer to Bernhard Seuffert: 30. December 1897</ref> 
+                            <ref type="next">Next letter of August Sauer to Bernhard
+                                Seuffert: 01. February
+                                1898</ref>
+                        </context>
+                    </egXML>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <context>
+                            <ptr type="next" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
+                            <ptr type="prev" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
+                        </context>
+                    </egXML>
+                </p>
                 <p>Although questions of <soCalled>materiality</soCalled> can already be encoded
                     within the <gi>sourceDesc</gi> (i.e. in most cases within the <gi>msDesc</gi>)
                     pieces of correspondence may be <emph>categorized</emph> in terms of their
                     object- and/or eventlike nature (e.g. letter, signed personally; telegram;
-                    picure postcard; copy; draft) within the <gi>corresDesc</gi>. Therefor the
-                        <gi>corresClass</gi> element may be used by reference to a (external)
-                    classification scheme such as the Ressource Description an Access, the MARC 21
-                    formats, the Library of Congress Classification, or any other system widely used
-                    in library and documentation work (@scheme, @type). By the use of <gi>term</gi>
-                    different categories can be implemented as child elemts within the
-                        <gi>correspClass</gi> element. <!--"oder nach projekt-internen Klassifikationen"? -->
+                    picture postcard; copy; draft) within the <gi>correspDesc</gi> element. Therefore, the
+                        <gi>correspClass</gi> element may be used by reference to a (external)
+                    classification scheme <!--  cf. textClass-Geschichte -->as used in library and documentation work (@scheme)<!-- bei textClass gucken -->. By the use of the <gi>term</gi> element
+                    different categories can be implemented as child elements within the
+                        <gi>correspClass</gi> element. <!--"oder nach projekt-internen Klassifikationen"? --><!-- term element soll klassifikation aufnehmen, eigene/fremde -->
                     <!-- In den Beispielen fehlt @scheme --></p>
-                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
                     <correspClass>
                         <term>Brief</term>
                         <term>eigenhändig</term>
@@ -385,29 +396,9 @@
                         <term>signed personally</term>
                     </ct:correspClass>
                 </egXML>
-                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <correspClass type="letter"/>
-                </egXML>
-                <p>A piece of correspondence can often be positioned within a communication continuum with a preceding and following message which is encoded within <gi>ct:context</gi>. The conception of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects in relation to the respective understanding of the extent of the correspondence, e.g. all known letters between person A and B in several repositories vs. just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following piece of correspondences, <gi>ref</gi> or <gi>ptr</gi> elements may be used with attributes, as follows:
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                        <context>
-                                <ref type="prev">Previous letter of
-                                    August Sauer to Bernhard Seuffert: 30. December 1897</ref> 
-                                <ref type="next">Next letter of August Sauer to Bernhard
-                                    Seuffert: 01. February
-                                    1898</ref>
-                        </context>
-                    </egXML>
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                        <context>
-                            <ptr type="next" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
-                            <ptr type="prev" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
-                        </context>
-                    </egXML>
-                </p>
+                <!-- Beispiel mit GND einbauen -->
+               
                 
-                
-                    
                 <!-- <p>group by people, places, dates, context, transmission, correspClass?!</p>-->
                 
                 <!-- wohin unterscheidung, ob manuscript oder printed edition? -->
@@ -858,11 +849,6 @@
                                     <term>picture postcard</term>
                                     <term>signed personally</term>
                                 </ct:correspClass>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <correspClass type="letter"/>
                             </egXML>
                         </exemplum>
                         <remarks>
