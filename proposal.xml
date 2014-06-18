@@ -362,8 +362,44 @@
                 </div>
                 <div>
                     <head>transmission</head>
-                    <!-- bei <transmission> <channel> diskutieren -->
-                </div>
+<div>
+                <p> Because a piece of correspondence generally has a <emph>process/a medium of
+                        transfer</emph> the <gi>transmission</gi> element allows to clearly identify
+                    e.g. messenger (Pheidippides who orally delivers the news of the victory against
+                    the Persians from Marathon to Athens), carrier (person who takes Goethe's
+                    letters to Charlotte Schiller), postman (official letter carrier), carriage, fax
+                    machine etc. The <gi>transmission</gi> element therefor in some respect is
+                    related to <ref
+                        target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/ref-channel.html"
+                        >channel</ref> in the <ref
+                        target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/CC.html#CCAHTD">
+                        15.2.1 Text Description</ref> (for example regarding the technical channel
+                        <soCalled>internet</soCalled> for emails), but it may also refer to persons
+                    involved in the process of communcation/transmission as well as to the method of
+                    transmission without assigning responsibility to a person, organisation etc.
+                        <gi>Transmission</gi> can both be used as an empty element with according
+                        <att>type</att> (and <att>subtype</att>) attributes or in a more verbose way
+                    with child element.</p>
+
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <ct:transmission>
+                        <p>Post</p>
+                    </ct:transmission>
+                </egXML>
+
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <ct:transmission>
+                        <persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
+                    </ct:transmission>
+                </egXML>
+                
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <ct:transmission type="channel">
+                        <p>internet</p>
+                    </ct:transmission>
+                </egXML>
+
+            </div>
                 <div>
                     <head>Context and classification of correspondence</head>
                     <p>The exact position of a piece of correspondence as an act of communication within a communication continuum is a defining feature. This position between a preceding and a following message is encoded within <gi>ct:context</gi>. The conception of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects in relation to the respective understanding of the extent of the correspondence, e.g. all known letters between person A and B in several repositories vs. just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following piece of correspondences, <gi>ref</gi> or <gi>ptr</gi> elements may be used with attributes or <gi>p</gi> for a general description, as follows:
