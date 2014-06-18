@@ -20,6 +20,12 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2014-06-18">
+                <persName>Sabine Seifert</persName>
+                <persName>Marcel Illetschko</persName>
+                <persName>Peter Stadler</persName>
+                <desc>Reworking and adding of prose description at face to face meeting.</desc>
+            </change>
             <change when="2014-06-17">
                 <persName>Sabine Seifert</persName>
                 <persName>Marcel Illetschko</persName>
@@ -171,7 +177,7 @@
                         postmarks, electronically generated sending information, etc.</p>
                     <p>A piece of correspondence generally has a <emph>process/a medium of
                             transfer</emph> (messenger,
-                        carrier<!-- Sabine: What's the difference between messenger and carrier? -->,
+                        carrier,
                         postman, carriage, fax machine, internet, etc.)
                         (<gi>ct:transmission</gi>).</p>
                     <p>Very often a particular message is sent in order to trigger an answer (in
@@ -224,7 +230,8 @@
                     that class.</p>
                 <!-- angegebene daten sind generell normierte herausgeberangaben -->
                 <!-- bei correspClass bezug zu schlagwortnormdateien oder sowas -->
-                <p>A simple example might be encoded as follows: <!-- einfaches beispiel, wo alles einmal vorkommt -->
+                <p>A simple example might be encoded as follows: 
+                    <!-- einfaches beispiel, wo alles einmal vorkommt -->
                     <egXML xmlns="http://www.tei-c.org/ns/Examples"><ct:correspDesc>
                             <ct:sender>
                                 <persName>Adelbert von Chamisso</persName>
@@ -305,21 +312,21 @@
                         </ct:correspDesc>
                     </egXML>
                 </p>
-                <!-- Names, actors, places and dates of correspondence -->
+                <div>
+                    <head>Names, actors, places and dates of correspondence</head>
                 <p>Usually, the sender and the author of a message are identical. To reduce the redundancy of markup and error-proneness, <ref target="www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAIE">standard linking mechanisms</ref> can be applied to connect the <gi>author</gi> element within <gi>titleStmt</gi> to the appropriate <gi>sender</gi> element.
                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
                         <ct:sender sameAs="#author"/>
                     </egXML>
                     <!-- beispiel -->
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <ct:sender></ct:sender>
+                    </egXML>
                     In other cases (cf. the example of collaborative authorship above), there might as well be a clear distinction of the intellectual author of the text and the sender of the message, be it in disguise or frankly. Examples include pre-formulated greeting cards, forced dictated messages, or copied love letters. In such cases, the genuine author is encoded as <gi>author</gi> within <gi>titleStmt</gi>, as usual.
                     <!-- Marcel sucht ein Beispiel für unterschied author und sender -->
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                        
-                    </egXML>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples"></egXML>
                 </p>
-                <p>
-                    The <gi>placeSender</gi> and <gi>placeAddressee</gi> elements are provided to capture the names of spatial locations of sender and addressee respectivly. It is possible to differentiate those places further with the <att>type</att> attribute, e.g. to distinguish the intended place of the addressee (as noted on the address) from the actual place of reception; or to capture several places of writing when the letter was produced over several days at several places. 
-                    Where applicable, these names can be encoded in more detail with elements provided by the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref>. If an (external) placeography is present or authority files are available it is also highly recommended to identify those places via unique URIs. 
+                <p>The <gi>placeSender</gi> and <gi>placeAddressee</gi> elements are provided to capture the names of spatial locations of sender and addressee respectivly. It is possible to differentiate those places further with the <att>type</att> attribute, e.g. to distinguish the intended place of the addressee (as noted on the address) from the actual place of reception; or to capture several places of writing when the letter was produced over several days at several places. Where applicable, these names can be encoded in more detail with elements provided by the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref>. If an (external) placeography is present or authority files are available it is also highly recommended to identify those places via unique URIs. 
                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
                         <ct:correspDesc>
                             <!-- … -->
@@ -352,10 +359,14 @@
                         </ct:correspDesc>
                     </egXML>
                 </p>
-                <!-- transmission -->
-                
-                <!-- context and classification of correspondence -->
-                <p>A piece of correspondence can often be positioned within a communication continuum with a preceding and following message which is encoded within <gi>ct:context</gi>. The conception of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects in relation to the respective understanding of the extent of the correspondence, e.g. all known letters between person A and B in several repositories vs. just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following piece of correspondences, <gi>ref</gi> or <gi>ptr</gi> elements may be used with attributes, as follows:
+                </div>
+                <div>
+                    <head>transmission</head>
+                    <!-- bei <transmission> <channel> diskutieren -->
+                </div>
+                <div>
+                    <head>Context and classification of correspondence</head>
+                    <p>The exact position of a piece of correspondence as an act of communication within a communication continuum is a defining feature. This position between a preceding and a following message is encoded within <gi>ct:context</gi>. The conception of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects in relation to the respective understanding of the extent of the correspondence, e.g. all known letters between person A and B in several repositories vs. just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following piece of correspondences, <gi>ref</gi> or <gi>ptr</gi> elements may be used with attributes or <gi>p</gi> for a general description, as follows:
                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
                         <context>
                             <ref type="prev">Previous letter of
@@ -369,6 +380,11 @@
                         <context>
                             <ptr type="next" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
                             <ptr type="prev" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
+                        </context>
+                    </egXML>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <context>
+                            <p><!-- beispiel mit <p> ? --></p>
                         </context>
                     </egXML>
                 </p>
@@ -397,7 +413,7 @@
                     </ct:correspClass>
                 </egXML>
                 <!-- Beispiel mit GND einbauen -->
-               
+                </div>
                 
                 <!-- <p>group by people, places, dates, context, transmission, correspClass?!</p>-->
                 
@@ -431,8 +447,7 @@
             <!-- dual use policy for explicit encoding and minimal exchange format -->
             <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
             <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
-            <!-- bei <transmission> <channel> diskutieren -->
-            <!-- @ref hinzufügen? -->
+           <!-- @ref hinzufügen? -->
             <!-- listCorrespDesc?!? -->
 
         </body>
@@ -475,7 +490,7 @@
 
                     <moduleSpec ident="correspondence" mode="add">
                         <desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
-                            including letters, telegrams, postcards, e-mail</desc>
+                            including letters, telegrams, postcards, e-mail etc.</desc>
                     </moduleSpec>
 
                     <classSpec ident="model.correspDescPart" mode="add" type="model">
@@ -921,27 +936,24 @@
                         <exemplum xml:lang="en">
                             <egXML xmlns="http://www.tei-c.org/ns/Examples">
                                 <context>
-                                                               
-                                    <ct:context>
-                                        <ref type="prev">Previous letter of
-                                            August Sauer to Bernhard Seuffert: 30. December 1897</ref> 
-                                        <ref type="next">Next letter of August Sauer to Bernhard
+                                    <ref type="prev">Previous letter of
+                                            August Sauer to Bernhard Seuffert: 30. December 1897</ref>
+                                    <ref type="next">Next letter of August Sauer to Bernhard
                                             Seuffert: 01. February
                                             1898</ref>
-                                    </ct:context>
                                 </context>
                             </egXML>
                         </exemplum>
                         <exemplum xml:lang="en">
                             <egXML xmlns="http://www.tei-c.org/ns/Examples">
                                 <context>
-                                    <ptr type="next" target="http://uri.of.next.letter"/>
-                                    <ptr type="prev" target="http://uri.of.previous.letter"/>
+                                    <ptr type="next" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye"/>
+                                    <ptr type="prev" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye"/>
                                 </context>
                             </egXML>
                         </exemplum>
                     </elementSpec>
-
+                   
                 </schemaSpec>
             </div>
         </back>
