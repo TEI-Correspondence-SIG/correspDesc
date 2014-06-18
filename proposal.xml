@@ -322,6 +322,44 @@
                     
                     
                     possibility that the sender need not be the author which can be encoded with a shortened mark up.</p>
+                
+                <p>
+                    The <gi>placeSender</gi> and <gi>placeAddressee</gi> elements are provided to capture the names of spatial locations of sender and addressee respectivly. It is possible to differentiate those places further with the <att>type</att> attribute, e.g. to distinguish the intended place of the addressee (as noted on the address) from the actual place of reception; or to capture several places of writing when the letter was produced over several days at several places. 
+                    Where applicable, these names can be encoded in more detail with elements provided by the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref>. If an (external) placeography is present or authority files are available it is also highly recommended to identify those places via unique URIs. 
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <ct:correspDesc>
+                            <!-- … -->
+                            <ct:placeSender ref="http://www.geonames.org/3067696">
+                                <settlement>Prag</settlement>
+                            </ct:placeSender>
+                            <ct:placeAddressee ref="http://www.geonames.org/2778067">
+                                <settlement>Graz</settlement>
+                            </ct:placeAddressee>
+                            <!-- … -->
+                        </ct:correspDesc>
+                    </egXML>
+                    <!-- vs. Adresse -->
+                </p>
+                <p>
+                    As with other information compiled within <gi>correspDesc</gi>, the spatial information is supposed to be editorial, normalised data, not necessarily the exact reproduction of the original address which should rather be encoded within <gi>text</gi>. However, it is possible to provide more address-like detail:
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <ct:correspDesc>
+                            <!-- … -->
+                            <ct:placeAddressee>
+                                <ab>
+                                    <address>
+                                        <orgName type="Company">SubMarine Telegraph Company</orgName>
+                                        <street>58 Threadneedle Street</street>
+                                        <settlement>London</settlement>
+                                        <postCode>EC</postCode>
+                                     </address>
+                                </ab>
+                            </ct:placeAddressee>
+                            <!-- … -->
+                        </ct:correspDesc>
+                    </egXML>
+                </p>
+                    
                 <!-- sender@sameAs author -->
                 <p>intendierter empfangsort/empfänger, mit @type</p>
                 <p>correspClass erklären, Überschneidung zur msDesc, aber dennoch gute Gründe für Infos hier</p>
