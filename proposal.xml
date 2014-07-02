@@ -490,7 +490,7 @@
                             including letters, telegrams, postcards, e-mail etc.</desc>
                     </moduleSpec>
 
-                    <classSpec ident="model.correspDescPart" mode="add" type="model">
+                    <classSpec ident="model.correspDescPart" mode="add" type="model" module="correspondence">
                         <desc versionDate="2014-01-13" xml:lang="en">groups together metadata
                             elements for describing correspondence</desc>
                     </classSpec>
