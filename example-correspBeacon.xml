@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.github.com/TEI-Correspondence-SIG/correspDesc/master/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="https://raw.github.com/TEI-Correspondence-SIG/correspDesc/master/cif-customization.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="COBEC_00014"
     xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>List of ct:corresDesc elements providing a minimal set of elements and attributes (for easy data interchange)</title>
-                <title type="sub">Example TEI document with the inclusion of the proposed ct:correspDesc element for the encoding of correspondence specific meta data</title>
+                <title>correspBeacon example, providing a minimal set of elements and attributes for easy data interchange of correspondence information</title>
+                <editor>TEI Correspondence SIG</editor>
             </titleStmt>
             <publicationStmt>
-                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <publisher>TEI Correspondence SIG, correspDesc task force</publisher>
+                <date when="2014-07-02T17:15:49.11+01:00"/>
                 <availability>
-                    <licence>
-                        <p>CC+BY and BSD-2 licences</p>
-                    </licence>
+                    <licence target="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</licence>
+                    <licence target="http://opensource.org/licenses/BSD-2-Clause">BSD-2</licence>
                 </availability>
             </publicationStmt>
             <sourceDesc>
-                <p>Born digital</p>
+                <bibl>bibliographic information about the correspondence project</bibl>
             </sourceDesc>
         </fileDesc>
     </teiHeader>
