@@ -1,1003 +1,1072 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-    <teiHeader>
-        <fileDesc>
-            <titleStmt>
-                <title>Proposal for a TEI Module for Correspondence</title>
-                <author>TEI Correspondence SIG</author>
-            </titleStmt>
-            <publicationStmt>
-                <authority>TEI Correspondence SIG, correspDesc task force</authority>
-                <availability>
-                    <licence>
-                        <p>CC+BY and BSD-2 licences</p>
-                    </licence>
-                </availability>
-            </publicationStmt>
-            <sourceDesc>
-                <p>Born digital; loosely based on DALF and WeGA customizations</p>
-            </sourceDesc>
-        </fileDesc>
-        <revisionDesc>
-            <change when="2014-06-18">
-                <persName>Sabine Seifert</persName>
-                <persName>Marcel Illetschko</persName>
-                <persName>Peter Stadler</persName>
-                <desc>Reworking and adding of prose description at face to face meeting.</desc>
-            </change>
-            <change when="2014-06-17">
-                <persName>Sabine Seifert</persName>
-                <persName>Marcel Illetschko</persName>
-                <persName>Peter Stadler</persName>
-                <desc>Reworking and adding of prose description at face to face meeting.</desc>
-            </change>
-            <change when="2014-06-17">
-                <persName>Marcel Illetschko</persName>
-                <desc>Adding of bibliographic references.</desc>
-            </change>
-            <change when="2014-06-11">
-                <persName>Sabine Seifert</persName>
-                <desc>Reworking and adding of prose description.</desc>
-            </change>
-            <change when="2014-01-25">
-                <persName>Peter Stadler</persName>
-                <desc>Changed proposal namespace and added <gi>rng:text</gi> as an option to several
-                    elements for our <soCalled>CIF</soCalled>-standard.</desc>
-            </change>
-            <change when="2014-01-13">
-                <persName>Sabine Seifert</persName>
-                <persName>Marcel Illetschko</persName>
-                <persName>Peter Stadler</persName>
-                <desc>Redefined some elements during Berlin bootcamp.</desc>
-            </change>
-            <change when="2012-11-09" who="#sbauman.emt">started @ SIG mtg</change>
-        </revisionDesc>
-    </teiHeader>
-    <text>
-        <front>
-            <divGen type="toc"/>
-            <pb/>
-            <div>
-                <head>About this document</head>
-                <p>This document proposes the addition of a TEI module for correspondence. It is the
-                    product of a Correspondence SIG task force (Sabine Seifert, Marcel Illetschko,
-                    Peter Stadler<!-- Sabine: Reihenfolge?! -->) with valuable input from various
-                    people.</p>
-                <p>The aim of the proposal is to define a common set of correspondence-specific meta
-                    data, brought together at one place in the TEI header. The lack of special
-                    guidelines for encoding letters, postcards, etc. with TEI P5 has been a
-                    recurring topic since the formation of the Correspondence SIG in 2008.
-                    Additionally, there is a growing demand of correspondence projects for linked
-                    data facilities. While some of this correspondence-specific information can
-                    already be encoded in various sections of the TEI header we believe it to be of
-                    greater value for projects dealing with correspondence material to have this
-                    information in one place. For the encoding, we suggest two approaches within
-                    this set: <list type="simple">
-                        <item>an elaborate structure for detailed data capture,</item>
-                        <item>a basic structure for easy data interchange (CIF).</item>
-                    </list> A guiding idea has been to only tentatively modify the TEI standard by
-                    merely adding a few elements, wrapping them in a special purpose element
-                        <gi>ct:correspDesc</gi> and injecting the latter into <gi>sourceDesc</gi>.
-                    Please note that <gi>ct:correspDesc</gi> is <emph>not</emph> intended to and can
-                        <emph>not</emph> replace the whole TEI header.</p>
-                <p>These efforts are supposed to be just a first step in the Correspondence SIG's
-                    strive for a complete model of encoding correspondence material.</p>
-            </div>
-            <div>
-                <head>Conventions used</head>
-                <p>As required for TEI conformance, non-TEI elements are defined in a distinct
-                    non-TEI namespace. In the usage examples and throughout this document that
-                    namespace is mapped to the prefix <hi rend="bold">ct:</hi> (= correspondence
-                    task force), while TEI elements are not marked by any namespace prefix.</p>
-            </div>
-        </front>
-        <body>
-            <div>
-                <head>Preceding work</head>
-                <p>The development of <gi>ct:correspDesc</gi> was inspired mostly but not
-                    exclusively by the work of <ref target="http://www.kantl.be/ctb/project/dalf/"
-                        >DALF</ref> as well as the <ref target="http://www.weber-gesamtausgabe.de"
-                        >WeGA</ref>.</p>
-                <p>The DALF project, the <emph>Digital Archive of Letters by Flemish Authors and
-                        Composers from the 19th &amp; 20th century</emph>, was launched by the
-                    Belgian Centre for Scholarly Editing and Document Studies (Centrum voor
-                    Teksteditie en Bronnenstudie) and is one of the best documented projects in the
-                    area of correspondence encoding. In 2003, specific DTDs and guidelines for the
-                    description and encoding of modern correspondence material, both for TEI P4,
-                    were published.<ptr target="#dalf-guidelines"/> The practical realization as
-                    well as the main features for encoding meta data are discussed in <ptr
-                        target="#vanhoutte2009"/>. The DALF guidelines have been reworked for the
-                    new requirements in TEI P5 as a “<ref
-                        target="http://ctb.kantl.be/project/dalf/P5/DALF_P5-p0.1.zip">Preliminary P5
-                        Proposal</ref>” in August 2013 which is an important inspiration for this
-                    proposal.</p>
-                <p>Before DALF updated its customization from P4 to P5, the
-                        <emph>Carl-Maria-von-Weber-Gesamtausgabe</emph> (WeGA, Carl Maria von Weber
-                    – Collected Works) had developed project-specific guidelines for encoding
-                    correspondence material in TEI P5<ptr target="#wega-guidelines"/> and published
-                        <ref
-                        target="http://wiki.tei-c.org/index.php/File:CorrespondenceProposal.zip"
-                        >recommendations</ref> in June 2011.</p>
-                <p>Both projects define a special wrapper element for correspondence meta data while
-                    the depth of its structure and its child elements differ slightly. This wrapper
-                    element (<gi>DALF:letDesc</gi> and <gi>WEGA:correspDesc</gi>, respectively) is
-                    part of the <gi>sourceDesc</gi> element. Dalf introduces two child elements:
-                    first, <gi>DALF:letHeading</gi> in which they encode the author and addressee of
-                    the letter as well as place and date when it was written, and second,
-                        <gi>DALF:letDesc</gi> which contains additional information, e.g. formal
-                    classification of the letter, presence of an envelope or illustrations. The
-                    WEGA, however, groups these information directly within the wrapper element:
-                        sender<note place="bottom">In regard to the person who wrote the letter or
-                        other piece of correspondence, there is a conceptual difference. Thus, it is
-                            <emph>author</emph> in DALF and <emph>sender</emph> in WeGA.</note> and
-                    addressee, place and date where and when the letter was not only written but
-                    also received, incipit and position within the thread of correspondence
-                    (“Korrespondenzstelle”). Both projects decided to leave all other information on
-                    providence, physical appearance, history, etc. in <gi>msDesc</gi> where there
-                    already are sufficient elements to encode them with. </p>
-                <p>In this proposal, we mainly considered the overlapping of these two projects’
-                    encoding guidelines and merged them into one.</p>
-            </div>
-            <div>
-                <head>Theoretical Considerations</head>
-                <p>In this document <emph>correspondence</emph> is regarded as an <emph>act of
-                        communication</emph>, in which the message of a sender reaches—mediated and
-                    time-delayed—an addressee at a different place. Such an act of communication
-                    becomes manifest in a <emph>piece of correspondence</emph>, that may be a
-                    tangible “object”, characterised by its “materiality” and co-determining the
-                    communication, and that is generally related to a medium or process of delivery.
-                    Hence, correspondence has a hybrid nature between <emph>event</emph> and
-                        <emph>object</emph>.</p>
-                <p>As an act of communication is directed at someone, each piece of correspondence
-                    has one or more addressees, who may or may not be individually identifiable.
-                    Therefore, the scope of "correspondence" in this proposal covers not only
-                    letters, postcards, telegrams, and similar "material" pieces of correspondence
-                    but also electronic communications, e.g. e-mails and text
-                    messages.<!-- =Satz zu Adressatenbezug und scope of correspondence --></p>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+     xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"
+     xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+	<title>Proposal for a TEI Module for Correspondence</title>
+	<author>TEI Correspondence SIG</author>
+      </titleStmt>
+      <publicationStmt>
+	<authority>TEI Correspondence SIG, correspDesc task force</authority>
+	<availability>
+	  <licence>
+	    <p>CC+BY and BSD-2 licences</p>
+	  </licence>
+	</availability>
+      </publicationStmt>
+      <sourceDesc>
+	<p>Born digital; loosely based on DALF and WeGA customizations</p>
+      </sourceDesc>
+    </fileDesc>
+    <revisionDesc>
+      <change when="2014-07-16">
+	<persName>Syd Bauman</persName>
+	<desc>Various editing tweaks, mostly to prose for adherence to
+	English norms, but including the following schema changes
+	discussed on conference call w/ task force 2014-07-15:
+	<list>
+	  <item>in content of <gi>addressee</gi>, removed redundant optionality of <ident>text</ident></item>
+	  <item>also in content of <gi>addressee</gi>, made <name
+	  type="class">model.noteLike</name> repeatable (still
+	  optional)</item>
+	</list>
+	</desc>
+      </change>
+      <change when="2014-06-18">
+	<persName>Sabine Seifert</persName>
+	<persName>Marcel Illetschko</persName>
+	<persName>Peter Stadler</persName>
+	<desc>Reworking and adding of prose description at face to
+	face meeting.</desc>
+      </change>
+      <change when="2014-06-17">
+	<persName>Sabine Seifert</persName>
+	<persName>Marcel Illetschko</persName>
+	<persName>Peter Stadler</persName>
+	<desc>Reworking and adding of prose description at face to
+	face meeting.</desc>
+      </change>
+      <change when="2014-06-17">
+	<persName>Marcel Illetschko</persName>
+	<desc>Adding of bibliographic references.</desc>
+      </change>
+      <change when="2014-06-11">
+	<persName>Sabine Seifert</persName>
+	<desc>Reworking and adding of prose description.</desc>
+      </change>
+      <change when="2014-01-25">
+	<persName>Peter Stadler</persName>
+	<desc>Changed proposal namespace and added <gi>rng:text</gi>
+	as an option to several elements for our
+	<soCalled>CIF</soCalled>-standard.</desc>
+      </change>
+      <change when="2014-01-13">
+	<persName>Sabine Seifert</persName>
+	<persName>Marcel Illetschko</persName>
+	<persName>Peter Stadler</persName>
+	<desc>Redefined some elements during Berlin bootcamp.</desc>
+      </change>
+      <change when="2012-11-09">
+	<persName>Syd Bauman</persName>
+	<desc>started @ SIG mtg</desc>
+      </change>
+    </revisionDesc>
+  </teiHeader>
+  <text>
+    <front>
+      <divGen type="toc"/>
+      <div>
+	<head>About this document</head>
+	<p>This document proposes the addition of a TEI module for
+	correspondence. It is the product of a Correspondence SIG task
+	force (Sabine Seifert, Marcel Illetschko, Peter Stadler<!--
+	Sabine: Reihenfolge?! -->) with valuable input from various
+	people.</p>
+	<p>The aim of the proposal is to define a common set of
+	correspondence-specific meta data, brought together at one
+	place in the TEI header. The lack of special guidelines for
+	encoding letters, postcards, etc. with TEI P5 has been a
+	recurring topic since well before the formation of
+	the Correspondence SIG in 2008. Additionally, there is a
+	growing demand of correspondence projects for linked data
+	facilities. While some of this correspondence-specific
+	information can already be encoded in various sections of the
+	TEI header we believe it to be of greater value for projects
+	dealing with correspondence material to have this information
+	in one place. For the encoding, we suggest two approaches
+	within this set:
+	<list type="simple">
+	<item>an elaborate structure for detailed data capture,</item>
+	<item>a basic structure for easy data interchange (CIF).</item>
+	</list>
+	A guiding idea has been to only tentatively modify the TEI
+	standard by merely adding a few elements, wrapping them in a
+	special purpose element <gi>ct:correspDesc</gi> and injecting
+	the latter into <gi>sourceDesc</gi>. Please note that
+	<gi>ct:correspDesc</gi> is <emph>not</emph> intended to and
+	can <emph>not</emph> replace the whole TEI header.</p>
+	<p>These efforts are supposed to be just a first step in the
+	Correspondence SIG's strive for a complete model of encoding
+	correspondence material.</p>
+      </div>
+      <div>
+	<head>Conventions used</head>
+	<p>As required for TEI conformance, non-TEI elements are
+	defined in a distinct non-TEI namespace. In the usage examples
+	and throughout this document that namespace is mapped to the
+	prefix <hi rend="bold">ct:</hi> (for <q>correspondence task
+	force</q>), while TEI elements are not marked by any namespace
+	prefix.</p>
+      </div>
+    </front>
+    <body>
+      <div>
+	<head>Preceding work</head>
+	<p>The development of <gi>ct:correspDesc</gi> was inspired
+	mostly but not exclusively by the work of <ref
+	target="http://www.kantl.be/ctb/project/dalf/" >DALF</ref> as
+	well as the <ref target="http://www.weber-gesamtausgabe.de"
+	>WeGA</ref>.</p>
+	<p>The DALF project, the <emph>Digital Archive of Letters by
+	Flemish Authors and Composers from the 19th &amp; 20th
+	century</emph>, was launched by the Belgian Centre for
+	Scholarly Editing and Document Studies (Centrum voor
+	Teksteditie en Bronnenstudie) and is one of the best
+	documented projects in the area of correspondence encoding. In
+	2003, specific DTDs and guidelines for the description and
+	encoding of modern correspondence material, both intended for
+	use with TEI P4, were published.<ptr
+	target="#dalf-guidelines"/> The practical realization as well
+	as the main features for encoding meta data are discussed in
+	<ptr target="#vanhoutte2009"/>. In August 2013 the DALF
+	guidelines were reworked for the new requirements in TEI P5 as
+	a <soCalled><ref
+	target="http://ctb.kantl.be/project/dalf/P5/DALF_P5-p0.1.zip">Preliminary
+	P5 Proposal</ref></soCalled>; that version served as an
+	important inspiration for this proposal.</p>
+	<p>Before DALF updated its customization from P4 to P5, the
+	<name>Carl-Maria-von-Weber-Gesamtausgabe</name> (WeGA, Carl
+	Maria von Weber – Collected Works) had developed
+	project-specific guidelines for encoding correspondence
+	material in TEI P5<ptr target="#wega-guidelines"/> and
+	published <ref
+	target="http://wiki.tei-c.org/index.php/File:CorrespondenceProposal.zip"
+	>recommendations</ref> in June 2011.</p>
+	<p>Both projects define a special wrapper element for
+	correspondence meta data while the depth of its structure and
+	its child elements differ slightly. In each case this wrapper
+	element (<gi>dalf:letDesc</gi> and <gi>wega:correspDesc</gi>,
+	respectively) is part of the <gi>sourceDesc</gi> element. DALF
+	introduces two child elements: first, <gi>dalf:letHeading</gi>
+	in which they encode the author and addressee of the letter as
+	well as place and date when it was written; and second,
+	<gi>dalf:letDesc</gi> which contains additional information,
+	e.g. the formal classification of the letter, or an indication
+	of the presence of an envelope or illustrations. The WEGA,
+	however, groups this information directly within the wrapper
+	element: sender<note place="bottom">In regard to the person
+	who wrote the letter or other piece of correspondence, there
+	is a conceptual difference. Thus, it is <emph>author</emph> in
+	DALF and <emph>sender</emph> in WeGA.</note> and addressee,
+	the place where and the date when the letter was not only
+	written but also received, incipit and position within the
+	thread of correspondence (<term
+	xml:lang="de">korrespondenzstelle</term>). Both projects
+	decided to leave all other information on providence, physical
+	appearance, history, etc. in <gi>msDesc</gi> where there are
+	already sufficient TEI elements with which to encode them.</p>
+	<p>In this proposal, we mainly considered the overlapping of
+	these two projects’ encoding guidelines and merged them into
+	one.</p>
+      </div>
+      <div>
+	<head>Theoretical Considerations</head>
+	<p>In this document <term>correspondence</term> is regarded as
+	an <gloss>act of communication</gloss>, in which the message of
+	a sender reaches—mediated and time-delayed—an addressee at a
+	different place. Such an act of communication becomes manifest
+	in a <term>piece of correspondence</term>, that may be 
+	tangible “object”, characterised by its “materiality” and
+	co-determining the communication, and that is generally
+	related to a medium or process of delivery. Hence,
+	correspondence has a hybrid nature between <emph>event</emph>
+	and <emph>object</emph>.</p>
+	<p>As an act of communication is directed at someone, each
+	piece of correspondence has one or more addressees, who may or
+	may not be individually identifiable. Therefore, the scope of
+	“correspondence” in this proposal covers not only letters,
+	postcards, telegrams, and similar “material” pieces of
+	correspondence but also electronic communications, e.g.
+	e-mails and text messages.<!-- =Satz zu Adressatenbezug und
+	scope of correspondence --></p>
+	<div>
+	  <head>What is correspondence-specific information (in terms
+	  of the TEI)?</head>
+	  <p>An act of communication has a <emph>sender</emph> of a
+	  message (<gi>ct:sender</gi>), who is not necessarily
+	  identical to the author of the text of the message. <!--<p>
+	  sender and author </p>--></p>
+	  <p>An act of communication generally has no unknown
+	  audience/unspecified recipient but one or more (intended,
+	  perhaps fictional) <emph>addressees</emph>
+	  (<gi>ct:addressee</gi>), “spoken” to by the piece of
+	  correspondence.</p>
+	  <p>A piece of correspondence generally has a certain
+	  <emph>time or period of writing</emph> and a definable time
+	  of sending—even though it may be unknown or indeterminate
+	  (<gi>ct:dateSender</gi>)<!-- Sabine: Hier nennen wir 2
+	  Sachen (Schreiben und Abschicken) für 1 Element, gehen aber
+	  nicht weiter darauf ein. Könnte das verwirren und Nachfragen
+	  hervorrufen, was man machte, wenn man beides identifizieren
+	  und einzeln kodieren möchte? Wenn wir das ignorieren:
+	  “writing” ist in <emph> und nicht “sending”, wobei letzteres
+	  aber besser wäre.-->. Similarly, a piece of correspondence
+	  was generally written at a particular location(s) (the
+	  <emph>place of writing</emph>), although that location may
+	  be unknown; and was most often sent from a particular
+	  location (the <emph>place from which sent</emph>), which may
+	  or may not be the same as the place of writing. Very often
+	  these bits of information are evident in an address line,
+	  postmark, electronically generated sending metadata, etc. In
+	  any case, they may be recorded in the
+	  <gi>ct:placeSencer</gi>.</p>
+	  <p>A piece of correspondence generally has a
+	  <emph>process</emph> or a <emph>medium of transfer</emph>
+	  (messenger, carrier, postman, carriage, fax machine,
+	  internet, etc.) (<gi>ct:transmission</gi>).</p>
+	  <p>Very often a particular message is sent in order to
+	  trigger an answer (in form of one or more pieces of
+	  correspondence). A single piece of correspondence therefore
+	  is normally not a secluded entity but a (written) act of
+	  communication in a communication continuum<ptr
+	  target="#bohnenkamp2013"/><!--(Bohnenkamp/Richter 2013,
+	  p.4)-->, in which it is defined by its relative position
+	  between messages sent “before” and “after”
+	  (<gi>ct:context</gi>).</p>
+	  <p>Finally, correspondence may be <emph>categorized</emph>
+	  in terms of its object- and/or eventlike nature (e.g.
+	  letter, signed personally; telegram; copy; draft) requiring
+	  a separate element <gi>ct:correspClass</gi>.</p>
+	  <!-- copy/draft etc go into correspClass, c.f. http://www.constance-de-salm.de/fud_docs/DHIParis:2-34CdS-b1-00vt -->
+	</div>
+	<div>
+	  <head>And what is left out?</head>
+	  <p>Information concerning the manuscript description, e.g.
+	  (postage) stamps, seals, water marks, form fields, letter
+	  heads, and incipits, are not considered part of the proposed
+	  correspondence description. These aspects are not
+	  necessarily correspondence-specific but rather
+	  characteristic for manuscripts in general and are thus best
+	  encoded within <gi>msDesc</gi>.</p>
+	  <p>As this proposal deals with the <emph>meta data</emph> of
+	  correspondence, aspects relating to correspondence-specific
+	  transcriptional encoding within <gi>text</gi>, e.g. with
+	  <gi>postscript</gi>, <gi>opener</gi>, <gi>closer</gi>, or
+	  <gi>signed</gi>, are not considered.</p>
+	</div>
+      </div>
+      <div>
+	<head>Implementation of the correspondence description</head>
+	<p>The <gi>ct:correspDesc</gi> element provides a detailed
+	description of correspondence-specific metadata. The
+	<gi>ct:correspDesc</gi> element focuses on the communicative
+	function of correspondence, i.e. sender, addressee, and
+	transmission. It is provided as a supplement to the physical
+	description of a correspondence object which is to be encoded
+	within the <gi>sourceDesc</gi>. The description is organized
+	by the following elements
+	<specList>
+	  <specDesc key="sender"/>
+	  <specDesc key="addressee"/>
+	  <specDesc key="placeSender"/>
+	  <specDesc key="placeAddressee"/>
+	  <specDesc key="dateSender"/>
+	  <specDesc key="dateAddressee"/>
+	  <specDesc key="transmission"/>
+	  <specDesc key="context"/>
+	  <specDesc key="correspClass" atts="scheme"/>
+	</specList>
+	</p>
+	<p>These elements are all members of a model class called
+	model.correspDescPart; additional features may be defined by
+	defining new elements and adding them to that class.</p>
+	<p>A simple example might be encoded as follows: 
+	<egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	  <ct:correspDesc>
+	    <ct:sender>Adelbert von Chamisso</ct:sender>
+	    <ct:addressee>Louis de La Foye</ct:addressee>
+	    <ct:placeSender>Vertus</ct:placeSender>
+	    <ct:placeAddressee>Caen</ct:placeAddressee>
+	    <ct:dateSender when="1807-01-29">29 January 1807</ct:dateSender>
+	    <ct:correspClass>
+	      <term>lettersheet</term>
+	      <term>signed personally</term>
+	    </ct:correspClass>
+	    <ct:context>
+	      <ref type="prev"
+		   target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye#1"
+		   >Previous letter of Adelbert von Chamisso to Louis de La Foye:
+	      16 January 1807</ref>
+	      <ref type="next"
+		   target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye#1"
+		   >Next letter of Adelbert von Chamisso to Louis de La Foye: 07
+	      May 1810</ref>
+	    </ct:context>
+	    <ct:transmission>
+	      <p>Post</p>
+	    </ct:transmission>
+	  </ct:correspDesc>
+	</egXML>
+	</p>
+	<p>By default, order and number of the above elements are not constraint
+	facilitating the encoding of several entities of each feature provided that they
+	all belong to the same communication process. Hence, it is possible to differentiate between the intended and the actual (place of) addressee with the <att>type</att> attribute. 
+	In other cases, the respective elements are simply repeated. See for example the postcard of the gathered philologists in Prague to their colleague Seuffert in Graz on the occasion of the first informal <soCalled>Germanistenabend</soCalled> which features several <gi>ct:sender</gi> elements with one entry each:
+	<!-- beispiel mit mehreren senders -->
+	<egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
+	  <ct:correspDesc>
+	    <ct:sender>Adolf Hauffen</ct:sender>
+	    <ct:sender>Hans Lambel</ct:sender>
+	    <ct:sender>Hans Meyer</ct:sender>
+	    <ct:sender>Richard Rosenbaum</ct:sender>
+	    <!-- … -->
+	    <ct:addressee>Bernhard Seuffert</ct:addressee>
+	    <ct:placeSender>Prag</ct:placeSender>
+	    <ct:placeAddressee>Graz</ct:placeAddressee>
+	    <ct:dateSender when="1898-01-22">22.01.1898</ct:dateSender>
+	  </ct:correspDesc>
+	</egXML>
+	</p>
+	<div>
+	  <head>Actors, places and dates of correspondence</head>
+	  <p>The very basic information about correspondence consists of the participating actors, their respective locations and dates (of writing/sending and reception). While there is a semantice difference between the sender of a message and the author of the corresponding text, in most cases those two will be identical. To reduce the redundancy of markup and error-proneness, <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAIE">standard linking mechanisms</ref> can be applied to connect the <gi>author</gi> element within <gi>titleStmt</gi> to the appropriate <gi>ct:sender</gi> element.
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	    <fileDesc>
+	      <titleStmt>
+		<title>Letter of Weber to his wife. Dresden, January 1, 1817</title>
+		<author xml:id="author1">Carl Maria von Weber</author>
+	      </titleStmt>
+	      <!-- … -->
+	      <sourceDesc>
+		<ct:correspDesc>
+		  <ct:sender sameAs="#author1"/>
+		  <!-- … -->
+		</ct:correspDesc>
+	      </sourceDesc>
+	    </fileDesc>
+	  </egXML>
+	  
+	  In other cases (cf. the example of collaborative authorship above), there might as well be a clear distinction of the intellectual author of the text and the sender of the message, be it in disguise or frankly. Examples include pre-formulated greeting cards, forced dictated messages, or copied love letters. <!--In such cases, the genuine author is encoded as <gi>author</gi> within <gi>titleStmt</gi>, as usual.-->
+	  <!-- Marcel sucht ein Beispiel für unterschied author und sender -->
+	  <!--<egXML xmlns="http://www.tei-c.org/ns/Examples"></egXML>-->
+	  </p>
+	  <p>The <gi>ct:placeSender</gi> and <gi>ct:placeAddressee</gi> elements are provided to capture the names of spatial locations of sender and addressee respectivly. It is possible to differentiate those places further with the <att>type</att> attribute, e.g. to distinguish the intended place of the addressee (as noted on the address) from the actual place of reception; or to capture several places of writing when the letter was produced over several days at several places. Where applicable, these names can be encoded in more detail with elements provided by the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref>. If an (external) placeography is present or authority files are available it is also highly recommended to identify those places via unique URIs. 
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
+	    <ct:correspDesc>
+	      <!-- … -->
+	      <ct:placeSender ref="http://www.geonames.org/3067696">
+		<settlement>Prag</settlement>
+	      </ct:placeSender>
+	      <ct:placeAddressee ref="http://www.geonames.org/2778067">
+		<settlement>Graz</settlement>
+	      </ct:placeAddressee>
+	      <!-- … -->
+	    </ct:correspDesc>
+	  </egXML>
+	  </p>
+	  <p>
+	    As with other information compiled within <gi>ct:correspDesc</gi>, the spatial information is supposed to be editorial, normalised data, not necessarily the exact reproduction of the original address which should rather be encoded within <gi>text</gi>. However, it is possible to provide more address-like detail:
+	    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	      <ct:correspDesc>
+		<!-- … -->
+		<ct:placeAddressee>
+		  <ab>
+		    <address>
+		      <orgName type="Company">SubMarine Telegraph Company</orgName>
+		      <street>58 Threadneedle Street</street>
+		      <settlement>London</settlement>
+		      <postCode>EC</postCode>
+		    </address>
+		  </ab>
+		</ct:placeAddressee>
+		<!-- … -->
+	      </ct:correspDesc>
+	    </egXML>
+	  </p>
+	</div>
+	<div>
+	  <head>Transmission of correspondence</head>
+	  <p> Because a piece of correspondence generally has a
+	  <emph>process/a medium of transfer</emph> the
+	  <gi>ct:transmission</gi> element allows to clearly identify
+	  e.g. messenger (Pheidippides who orally delivers the news of
+	  the victory against the Persians from Marathon to Athens),
+	  carrier (person who takes Goethe's letters to Charlotte
+	  Schiller), postman (official letter carrier), carriage, fax
+	  machine etc. The <gi>ct:transmission</gi> element therefor
+	  in some respect is related to <ref
+	  target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/ref-channel.html"
+	  >channel</ref> in the <ref
+	  target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/CC.html#CCAHTD">
+	  15.2.1 Text Description</ref> (for example regarding the
+	  technical channel <soCalled>internet</soCalled> for emails),
+	  but it may also refer to persons involved in the process of
+	  communication/transmission as well as to the method of
+	  transmission without assigning responsibility to a person,
+	  organisation etc. <gi>ct:transmission</gi> can both be used
+	  as an empty element with according <att>type</att> (and
+	  <att>subtype</att>)<note resp="#sbauman.emt">I'd prefer an
+	  attribute for the purpose, rather than
+	  <att>type</att>.</note> attributes or in a more verbose way
+	  with child element(s).</p>
+	  
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
+	    <ct:transmission>
+	      <p>Übermittelt per Post auf dem Landweg</p>
+	    </ct:transmission>
+	  </egXML>
+	  
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	    <ct:transmission>
+	      <persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
+	    </ct:transmission>
+	  </egXML>
+	  
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	    <ct:transmission type="internet"/>
+	  </egXML>
+	  
+	</div>
+	<div>
+	  <head>Context and classification of correspondence</head>
+	  <p>The exact position of a piece of correspondence as an act of communication within a communication continuum is a defining feature. This position between a preceding and a following message is encoded within <gi>ct:context</gi>. The evalution of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects due to constraints of (un)available material or different concepts, e.g. all known letters between person A and B across several repositories vs just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following pieces of correspondence, <gi>ref</gi> or <gi>ptr</gi> elements may be used with pointing attributes or <gi>p</gi> for a more general description, as follows:
+	  
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	    <ct:context>
+	      <ptr type="next" subtype="toAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
+	      <ptr type="prev" subtype="fromAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
+	    </ct:context>
+	  </egXML>
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	    <ct:context>
+	      <ref target="http://weber-gesamtausgabe.de/A040962">Previous letter of Carl Maria von Weber to Caroline Brandt: December 30, 1816</ref> 
+	      <ref target="http://weber-gesamtausgabe.de/A041003">Next letter of Carl Maria von Weber to Caroline Brandt: January 5, 1817</ref>
+	    </ct:context>
+	  </egXML>
+	  </p>
+	  <p>
+	    The classification of correspondence (according to external or project specific schemes) can be achieved by employing the standard mechanisms of text classification as described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD43">2.4.3 The Text Classification</ref>. 
+	    However, it might be desirable to capture the object- and/or eventlike nature of correspondence in situ and to merge the textual and contextual information with data about the physical appearance.
+	    For this purpose the <gi>ct:correspClass</gi> element provides a simple means to collect these features:
+	    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+	      <ct:correspClass>
+		<term>picture postcard</term>
+		<term>signed personally</term>
+		<term>without envelope</term>
+	      </ct:correspClass>
+	    </egXML>
+	    The proper place for the detailed description of the <soCalled>materiality</soCalled> of the correspondence object(s) and possible attachments is still the <gi>sourceDesc</gi> element (and probably <gi>msDesc</gi>), nevertheless it is possible to extract simple oppositions to facilitate processing of this information (e.g. 'without envelope'). These subject terms can either be according to a private scheme or by reference to some external classification system as used in library and documentation work in which case the <att>scheme</att> attribute should identify the according system by its URI. 
+	    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
+	      <correspClass scheme="http://d-nb.info/standards/elementset/gnd#SubjectHeadingSensoStricto">
+		<term ref="http://d-nb.info/gnd/4008240-4">Brief</term>
+		<term ref="http://d-nb.info/gnd/4140367-8">Unterschrift</term>
+	      </correspClass>
+	    </egXML>
+	    
+	    <!--pieces of correspondence may be <emph>categorized</emph> in terms of their
+		object- and/or eventlike nature (e.g. letter, signed personally; telegram;
+		picture postcard; copy; draft) within the <gi>correspDesc</gi> element. Therefore, the
+		<gi>correspClass</gi> element may be used by reference to a (external)
+		classification scheme <!-\-  cf. textClass-Geschichte -\->as used in library and documentation work (@scheme)<!-\- bei textClass gucken -\->. By the use of the <gi>term</gi> element
+		different categories can be implemented as child elements within the
+		<gi>correspClass</gi> element. -->
+	  </p>
+	  
+	  <!-- wohin unterscheidung, ob manuscript oder printed edition? -->
+	  <!-- in correspClass Abschrift/copy? -->
+	</div>
+      </div>
+      <div>
+	<head>Correspondence Interchange Format (CIF)</head>
+	<p>Next to encoding with an elaborate structure for detailed data capture, there is
+	the possibility to use the basic structure of the <soCalled>Correspondence
+	Interchange Format (CIF)</soCalled>. It is designed to enable easy data
+	interchange between digital editions and projects and is used in combination
+	with established standards, e.g. authorial files for persons and places,
+	ISO-codes for dates, etc.<!-- auch correspSearch erwähnen? --></p>
+      </div>
+      <div>
+	<head>Future Work</head>
+	<p>After dealing with correspondence-specific meta data, the next steps are: <list
+	type="simple">
+	<item>restructuring correspondence-related transcriptional elements, as
+	there are several problems with elements like <gi>postscript</gi>,
+	<gi>opener</gi>, <gi>closer</gi>, etc.</item>
+	<item>developing best practice recommendations, with examples, for the
+	encoding of correspondence material.</item>
+	</list></p>
+      </div>
 
-                <div>
-                    <head>What is—in terms of the TEI—correspondence-specific information?</head>
-                    <p>An act of communication has a <emph>sender</emph> of a message
-                            (<gi>ct:sender</gi>), who is not necessarily identical to the author of
-                        the text of the message.
-                        <!--<p> sender and author </p>--></p>
-                    <p>An act of communication generally has no unknown audience/unspecified
-                        recipient but one or more (intended, maybe even fictional)
-                            <emph>addressees</emph> (<gi>ct:addressee</gi>), “spoken” to by the
-                        piece of correspondence.</p>
-                    <p>A piece of correspondence generally has a certain <emph>time or period of
-                            writing</emph> and a definable time of sending—even though it may be
-                        unknown or indeterminate
-                        (<gi>ct:dateSender</gi>)<!-- Sabine: Hier nennen wir 2 Sachen (Schreiben und Abschicken) für 1 Element, gehen aber 
-                            nicht weiter darauf ein. Könnte das verwirren und Nachfragen hervorrufen, was man machte, wenn man beides identifizieren und 
-                            einzeln kodieren möchte? Wenn wir das ignorieren: "writing" ist in <emph> und nicht "sending", wobei letzteres aber besser wäre.-->.
-                        Similar is true for the <emph>place of writing/sending</emph>
-                            (<gi>ct:placeSender</gi>). Both very often is evident in address lines,
-                        postmarks, electronically generated sending information, etc.</p>
-                    <p>A piece of correspondence generally has a <emph>process/a medium of
-                            transfer</emph> (messenger,
-                        carrier,
-                        postman, carriage, fax machine, internet, etc.)
-                        (<gi>ct:transmission</gi>).</p>
-                    <p>Very often a particular message is sent in order to trigger an answer (in
-                        form of one or more pieces of correspondence). A single piece of
-                        correspondence therefore is normally not a secluded entity but a (written)
-                        act of communication in a communication continuum<ptr
-                            target="#bohnenkamp2013"/><!--(Bohnenkamp/Richter 2013, p.4)-->, in
-                        which it is defined by its relative position between messages sent “before”
-                        and “after” (<gi>ct:context</gi>).</p>
-                    <p>Finally, correspondence may be <emph>categorized</emph> in terms of its
-                        object- and/or eventlike nature (e.g. letter, signed personally; telegram;
-                        copy; draft) requiring a separate element <gi>ct:correspClass</gi>.</p>
-                    <!-- copy/draft etc go into correspClass, c.f. http://www.constance-de-salm.de/fud_docs/DHIParis:2-34CdS-b1-00vt -->
-                </div>
-                <div>
-                    <head>And what is left out?</head>
-                    <p>Information concerning the manuscript description, e.g. (postage) stamps,
-                        seals, water marks, form fields, letter heads, or incipits, are not
-                        considered part of the proposed correspondence description. These aspects
-                        are not necessarily correspondence-specific but rather characteristic for
-                        manuscripts in general and are thus best encoded within <gi>msDesc</gi>.</p>
-                    <p>As this proposal deals with the <emph>meta data</emph> of correspondence,
-                        aspects relating to correspondence-specific transcriptional encoding within
-                            <gi>text</gi>, e.g. with <gi>postscript</gi>, <gi>opener</gi>,
-                            <gi>closer</gi>, or <gi>signed</gi>, are not considered.</p>
-                </div>
-            </div>
-            <div>
-                <head>Implementation of the correspondence description</head>
-                <p>The <gi>ct:correspDesc</gi> element provides a detailed description of
-                    correspondence-specific metadata. The <gi>ct:correspDesc</gi> element focuses on
-                    the communicative function of correspondence, i.e. sender, addressee,
-                    transmission. It is provided as a supplement to the physical description of a
-                    correspondence object which is to be encoded within the <gi>sourceDesc</gi>. The
-                    description is organized by the following elements 
-                    <specList>
-                        <specDesc key="sender"/>
-                        <specDesc key="addressee"/>
-                        <specDesc key="placeSender"/>
-                        <specDesc key="placeAddressee"/>
-                        <specDesc key="dateSender"/>
-                        <specDesc key="dateAddressee"/>
-                        <specDesc key="transmission"/>
-                        <specDesc key="context"/>
-                        <specDesc key="correspClass" atts="scheme"/>
-                    </specList>
-                </p>
-                <p>These elements are all members of a model class called model.correspDescPart;
-                    additional features may be defined by defining new elements and adding them to 
-                    that class.</p>
-                <p>A simple example might be encoded as follows: 
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                        <ct:correspDesc>
-                            <ct:sender>Adelbert von Chamisso</ct:sender>
-                            <ct:addressee>Louis de La Foye</ct:addressee>
-                            <ct:placeSender>Vertus</ct:placeSender>
-                            <ct:placeAddressee>Caen</ct:placeAddressee>
-                            <ct:dateSender when="1807-01-29">29 January 1807</ct:dateSender>
-                            <ct:correspClass>
-                                <term>lettersheet</term>
-                                <term>signed personally</term>
-                            </ct:correspClass>
-                            <ct:context>
-                                <ref type="prev"
-                                    target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye#1"
-                                    >Previous letter of Adelbert von Chamisso to Louis de La Foye:
-                                    16 January 1807</ref>
-                                <ref type="next"
-                                    target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye#1"
-                                    >Next letter of Adelbert von Chamisso to Louis de La Foye: 07
-                                    May 1810</ref>
-                            </ct:context>
-                            <ct:transmission>
-                                <p>Post</p>
-                            </ct:transmission>
-                        </ct:correspDesc>
-                    </egXML>
-                </p>
-                <p>By default, order and number of the above elements are not constraint
-                    facilitating the encoding of several entities of each feature provided that they
-                    all belong to the same communication process. Hence, it is possible to differentiate between the intended and the actual (place of) addressee with the <att>type</att> attribute. 
-                    In other cases, the respective elements are simply repeated. See for example the postcard of the gathered philologists in Prague to their colleague Seuffert in Graz on the occasion of the first informal <soCalled>Germanistenabend</soCalled> which features several <gi>ct:sender</gi> elements with one entry each:
-                <!-- beispiel mit mehreren senders -->
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
-                        <ct:correspDesc>
-                            <ct:sender>Adolf Hauffen</ct:sender>
-                            <ct:sender>Hans Lambel</ct:sender>
-                            <ct:sender>Hans Meyer</ct:sender>
-                            <ct:sender>Richard Rosenbaum</ct:sender>
-                            <!-- … -->
-                            <ct:addressee>Bernhard Seuffert</ct:addressee>
-                            <ct:placeSender>Prag</ct:placeSender>
-                            <ct:placeAddressee>Graz</ct:placeAddressee>
-                            <ct:dateSender when="1898-01-22">22.01.1898</ct:dateSender>
-                        </ct:correspDesc>
-                    </egXML>
-                </p>
-                <div>
-                    <head>Actors, places and dates of correspondence</head>
-                    <p>The very basic information about correspondence consists of the participating actors, their respective locations and dates (of writing/sending and reception). While there is a semantice difference between the sender of a message and the author of the corresponding text, in most cases those two will be identical. To reduce the redundancy of markup and error-proneness, <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAIE">standard linking mechanisms</ref> can be applied to connect the <gi>author</gi> element within <gi>titleStmt</gi> to the appropriate <gi>ct:sender</gi> element.
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                            <fileDesc>
-                                <titleStmt>
-                                    <title>Letter of Weber to his wife. Dresden, January 1, 1817</title>
-                                    <author xml:id="author1">Carl Maria von Weber</author>
-                                </titleStmt>
-                                <!-- … -->
-                                <sourceDesc>
-                                    <ct:correspDesc>
-                                        <ct:sender sameAs="#author1"/>
-                                        <!-- … -->
-                                    </ct:correspDesc>
-                                </sourceDesc>
-                            </fileDesc>
-                        </egXML>
-                        
-                        In other cases (cf. the example of collaborative authorship above), there might as well be a clear distinction of the intellectual author of the text and the sender of the message, be it in disguise or frankly. Examples include pre-formulated greeting cards, forced dictated messages, or copied love letters. <!--In such cases, the genuine author is encoded as <gi>author</gi> within <gi>titleStmt</gi>, as usual.-->
-                        <!-- Marcel sucht ein Beispiel für unterschied author und sender -->
-                        <!--<egXML xmlns="http://www.tei-c.org/ns/Examples"></egXML>-->
-                    </p>
-                    <p>The <gi>ct:placeSender</gi> and <gi>ct:placeAddressee</gi> elements are provided to capture the names of spatial locations of sender and addressee respectivly. It is possible to differentiate those places further with the <att>type</att> attribute, e.g. to distinguish the intended place of the addressee (as noted on the address) from the actual place of reception; or to capture several places of writing when the letter was produced over several days at several places. Where applicable, these names can be encoded in more detail with elements provided by the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref>. If an (external) placeography is present or authority files are available it is also highly recommended to identify those places via unique URIs. 
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
-                            <ct:correspDesc>
-                                <!-- … -->
-                                <ct:placeSender ref="http://www.geonames.org/3067696">
-                                    <settlement>Prag</settlement>
-                                </ct:placeSender>
-                                <ct:placeAddressee ref="http://www.geonames.org/2778067">
-                                    <settlement>Graz</settlement>
-                                </ct:placeAddressee>
-                                <!-- … -->
-                            </ct:correspDesc>
-                        </egXML>
-                    </p>
-                    <p>
-                        As with other information compiled within <gi>ct:correspDesc</gi>, the spatial information is supposed to be editorial, normalised data, not necessarily the exact reproduction of the original address which should rather be encoded within <gi>text</gi>. However, it is possible to provide more address-like detail:
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                            <ct:correspDesc>
-                                <!-- … -->
-                                <ct:placeAddressee>
-                                    <ab>
-                                        <address>
-                                            <orgName type="Company">SubMarine Telegraph Company</orgName>
-                                            <street>58 Threadneedle Street</street>
-                                            <settlement>London</settlement>
-                                            <postCode>EC</postCode>
-                                         </address>
-                                    </ab>
-                                </ct:placeAddressee>
-                                <!-- … -->
-                            </ct:correspDesc>
-                        </egXML>
-                    </p>
-                </div>
-                <div>
-                    <head>Transmission of correspondence</head>
-                    <p> Because a piece of correspondence generally has a <emph>process/a medium of
-                        transfer</emph> the <gi>ct:transmission</gi> element allows to clearly identify
-                        e.g. messenger (Pheidippides who orally delivers the news of the victory against
-                        the Persians from Marathon to Athens), carrier (person who takes Goethe's
-                        letters to Charlotte Schiller), postman (official letter carrier), carriage, fax
-                        machine etc. The <gi>ct:transmission</gi> element therefor in some respect is
-                        related to <ref
-                            target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/ref-channel.html"
-                            >channel</ref> in the <ref
-                            target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/CC.html#CCAHTD">
-                            15.2.1 Text Description</ref> (for example regarding the technical channel
-                            <soCalled>internet</soCalled> for emails), but it may also refer to persons
-                        involved in the process of communication/transmission as well as to the method of
-                        transmission without assigning responsibility to a person, organisation etc.
-                        <gi>ct:transmission</gi> can both be used as an empty element with according
-                            <att>type</att> (and <att>subtype</att>) attributes or in a more verbose way
-                        with child element(s).</p>
-    
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
-                        <ct:transmission>
-                            <p>Übermittelt per Post auf dem Landweg</p>
-                        </ct:transmission>
-                    </egXML>
-    
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                        <ct:transmission>
-                            <persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
-                        </ct:transmission>
-                    </egXML>
-                    
-                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                        <ct:transmission type="internet"/>
-                    </egXML>
-    
-                </div>
-                <div>
-                    <head>Context and classification of correspondence</head>
-                    <p>The exact position of a piece of correspondence as an act of communication within a communication continuum is a defining feature. This position between a preceding and a following message is encoded within <gi>ct:context</gi>. The evalution of the exact position, the <foreign xml:lang="de">Korrespondenzstelle</foreign>, might differ between projects due to constraints of (un)available material or different concepts, e.g. all known letters between person A and B across several repositories vs just the letters <emph>from</emph> person A <emph>to</emph> person B of <emph>one</emph> collection in <emph>one</emph> repository. For the encoding of the previous and following pieces of correspondence, <gi>ref</gi> or <gi>ptr</gi> elements may be used with pointing attributes or <gi>p</gi> for a more general description, as follows:
-                    
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                            <ct:context>
-                                <ptr type="next" subtype="toAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
-                                <ptr type="prev" subtype="fromAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
-                            </ct:context>
-                        </egXML>
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                            <ct:context>
-                                <ref target="http://weber-gesamtausgabe.de/A040962">Previous letter of Carl Maria von Weber to Caroline Brandt: December 30, 1816</ref> 
-                                <ref target="http://weber-gesamtausgabe.de/A041003">Next letter of Carl Maria von Weber to Caroline Brandt: January 5, 1817</ref>
-                            </ct:context>
-                        </egXML>
-                    </p>
-                    <p>
-                        The classification of correspondence (according to external or project specific schemes) can be achieved by employing the standard mechanisms of text classification as described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD43">2.4.3 The Text Classification</ref>. 
-                        However, it might be desirable to capture the object- and/or eventlike nature of correspondence in situ and to merge the textual and contextual information with data about the physical appearance.
-                        For this purpose the <gi>ct:correspClass</gi> element provides a simple means to collect these features:
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                            <ct:correspClass>
-                                <term>picture postcard</term>
-                                <term>signed personally</term>
-                                <term>without envelope</term>
-                            </ct:correspClass>
-                        </egXML>
-                        The proper place for the detailed description of the <soCalled>materiality</soCalled> of the correspondence object(s) and possible attachments is still the <gi>sourceDesc</gi> element (and probably <gi>msDesc</gi>), nevertheless it is possible to extract simple oppositions to facilitate processing of this information (e.g. 'without envelope'). These subject terms can either be according to a private scheme or by reference to some external classification system as used in library and documentation work in which case the <att>scheme</att> attribute should identify the according system by its URI. 
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
-                            <correspClass scheme="http://d-nb.info/standards/elementset/gnd#SubjectHeadingSensoStricto">
-                                <term ref="http://d-nb.info/gnd/4008240-4">Brief</term>
-                                <term ref="http://d-nb.info/gnd/4140367-8">Unterschrift</term>
-                            </correspClass>
-                        </egXML>
-                        
-                        <!--pieces of correspondence may be <emph>categorized</emph> in terms of their
-                        object- and/or eventlike nature (e.g. letter, signed personally; telegram;
-                        picture postcard; copy; draft) within the <gi>correspDesc</gi> element. Therefore, the
-                            <gi>correspClass</gi> element may be used by reference to a (external)
-                        classification scheme <!-\-  cf. textClass-Geschichte -\->as used in library and documentation work (@scheme)<!-\- bei textClass gucken -\->. By the use of the <gi>term</gi> element
-                        different categories can be implemented as child elements within the
-                            <gi>correspClass</gi> element. -->
-                    </p>
-                
-                <!-- wohin unterscheidung, ob manuscript oder printed edition? -->
-                <!-- in correspClass Abschrift/copy? -->
-                </div>
-            </div>
-            <div>
-                <head>Correspondence Interchange Format (CIF)</head>
-                <p>Next to encoding with an elaborate structure for detailed data capture, there is
-                    the possibility to use the basic structure of the <soCalled>Correspondence
-                        Interchange Format (CIF)</soCalled>. It is designed to enable easy data
-                    interchange between digital editions and projects and is used in combination
-                    with established standards, e.g. authorial files for persons and places,
-                    ISO-codes for dates, etc.<!-- auch correspSearch erwähnen? --></p>
-            </div>
-            <div>
-                <head>Future Work</head>
-                <p>After dealing with correspondence-specific meta data, the next steps are: <list
-                        type="simple">
-                        <item>restructuring correspondence-related transcriptional elements, as
-                            there are several problems with elements like <gi>postscript</gi>,
-                                <gi>opener</gi>, <gi>closer</gi>, etc.</item>
-                        <item>developing best practice recommendations, with examples, for the
-                            encoding of correspondence material.</item>
-                    </list></p>
-            </div>
+      <!-- To be discussed: -->
+      <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
+      <!-- dual use policy for explicit encoding and minimal exchange format -->
+      <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
+      <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
+      <!-- Umschlag diskutieren. AM besten gleich zu Beginn der 'Implemenation' -->
+      <!-- decl in Implementation einbauen -->
 
-            <!-- To be discussed: -->
-            <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
-            <!-- dual use policy for explicit encoding and minimal exchange format -->
-            <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
-            <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
-            <!-- Umschlag diskutieren. AM besten gleich zu Beginn der 'Implemenation' -->
-            <!-- decl in Implementation einbauen -->
+    </body>
+    <back>
+      <div>
+	<head>Bibliography</head>
+	<listBibl>
+	  <bibl xml:id="dalf-guidelines"><ref
+	  target="http://ctb.kantl.be/project/dalf/dalfdoc/index.html">DALF
+	  guidelines for the description and encoding of modern
+	  correspondence material, version 1.0</ref></bibl>
+	  <bibl xml:id="vanhoutte2009">Edward Vanhoutte, Ron Van den Branden: Describing,
+	  transcribing, encoding and editing modern correspondence material: a
+	  textbase approach. In: Literary and Linguistic Computing 24,1 (2009), pp.
+	  77-98.</bibl>
+	  <bibl xml:id="wega-guidelines"><ref
+					     target="http://www.weber-gesamtausgabe.de/de/Editionsrichtlinien"
+					     >Editionsrichtlinien zur Ausgabe der Briefe, Tagebücher und Dokumente
+	  Webers</ref></bibl>
+	  <bibl xml:id="bohnenkamp2013">Anne Bohnenkamp, Elke Richter (Ed): Brief-Edition
+	  im digitalen Zeitalter. Berlin:DeGruyter 2009</bibl>
+	  <bibl>Klaus Hurlebusch: Divergenzen des Schreibens vom Lesen. Besonderheiten der
+	  Tagebuch- und Briefedition. In: editio 9 (1995), pp.18-36.</bibl>
+	  <bibl>Hans-Gert Roloff (Ed.): Wissenschaftliche Briefeditionen und ihre
+	  Probleme. Berlin: Weidler 1998</bibl>
+	  <bibl>Winfried Woesler: Vorschläge für eine Normierung von Briefeditionen. In:
+	  editio 2 (1988), pp. 8-18.</bibl>
+	</listBibl>
+      </div>
+      <div>
+	<head>Formal Specification</head>
+	<schemaSpec ident="correspondence" start="TEI sourceDesc" status="unstable">
+	  <moduleRef key="tei"/>
+	  <moduleRef key="textstructure"/>
+	  <moduleRef key="core"/>
+	  <moduleRef key="header"/>
+	  <moduleRef key="msdescription"/>
+	  <moduleRef key="namesdates"/>
+	  <moduleRef key="linking"/>
 
-        </body>
-        <back>
-            <div>
-                <head>Bibliography</head>
-                <listBibl>
-                    <bibl xml:id="dalf-guidelines"><ref
-                            target="http://ctb.kantl.be/project/dalf/dalfdoc/index.html">DALF
-                            guidelines for the description and encoding of modern correspondence
-                            material, version 1.0</ref></bibl>
-                    <bibl xml:id="vanhoutte2009">Edward Vanhoutte, Ron Van den Branden: Describing,
-                        transcribing, encoding and editing modern correspondence material: a
-                        textbase approach. In: Literary and Linguistic Computing 24,1 (2009), pp.
-                        77-98.</bibl>
-                    <bibl xml:id="wega-guidelines"><ref
-                            target="http://www.weber-gesamtausgabe.de/de/Editionsrichtlinien"
-                            >Editionsrichtlinien zur Ausgabe der Briefe, Tagebücher und Dokumente
-                            Webers</ref></bibl>
-                    <bibl xml:id="bohnenkamp2013">Anne Bohnenkamp, Elke Richter (Ed): Brief-Edition
-                        im digitalen Zeitalter. Berlin:DeGruyter 2009</bibl>
-                    <bibl>Klaus Hurlebusch: Divergenzen des Schreibens vom Lesen. Besonderheiten der
-                        Tagebuch- und Briefedition. In: editio 9 (1995), pp.18-36.</bibl>
-                    <bibl>Hans-Gert Roloff (Ed.): Wissenschaftliche Briefeditionen und ihre
-                        Probleme. Berlin: Weidler 1998</bibl>
-                    <bibl>Winfried Woesler: Vorschläge für eine Normierung von Briefeditionen. In:
-                        editio 2 (1988), pp. 8-18.</bibl>
-                </listBibl>
-            </div>
-            <div>
-                <head>Formal Specification</head>
-                <schemaSpec ident="correspondence" start="TEI sourceDesc" status="unstable">
-                    <moduleRef key="tei"/>
-                    <moduleRef key="textstructure"/>
-                    <moduleRef key="core"/>
-                    <moduleRef key="header"/>
-                    <moduleRef key="msdescription"/>
-                    <moduleRef key="namesdates"/>
-                    <moduleRef key="linking"/>
+	  <moduleSpec ident="correspondence" mode="add">
+	    <desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
+	    including letters, telegrams, postcards, e-mail etc.</desc>
+	  </moduleSpec>
 
-                    <moduleSpec ident="correspondence" mode="add">
-                        <desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
-                            including letters, telegrams, postcards, e-mail etc.</desc>
-                    </moduleSpec>
+	  <classSpec ident="model.correspDescPart" mode="add" type="model" module="correspondence">
+	    <desc versionDate="2014-01-13" xml:lang="en">groups together metadata
+	    elements for describing correspondence</desc>
+	  </classSpec>
 
-                    <classSpec ident="model.correspDescPart" mode="add" type="model" module="correspondence">
-                        <desc versionDate="2014-01-13" xml:lang="en">groups together metadata
-                            elements for describing correspondence</desc>
-                    </classSpec>
+	  <elementSpec ident="correspDesc" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <gloss versionDate="2014-01-13" xml:lang="en">correspondence
+	    description</gloss>
+	    <desc versionDate="2014-01-13" xml:lang="en">a wrapper element for metadata
+	    pertaining to correspondence</desc>
+	    <classes>
+	      <memberOf key="model.biblLike"/>
+	      <!-- need some mechanism to permit different <correspDesc> information-->
+	      <!-- for different <div>s or whathaveyou; perhaps <msDesc> and-->
+	      <!-- <correspDesc> should be members of model.divTop (indirectly)-->
+	      <!-- or even listCorrespDesc ?! -->
+	      <memberOf key="att.declarable"/>
+	      <memberOf key="att.canonical"/>
+	      <memberOf key="att.global"/>
+	    </classes>
+	    <content>
+	      <!-- modeled after publicationStmt -->
+	      <!-- with the addition of noteLike -->
+	      <rng:choice>
+		<rng:oneOrMore>
+		  <rng:ref name="model.correspDescPart"/>
+		</rng:oneOrMore>
+		<rng:oneOrMore>
+		  <rng:ref name="model.pLike"/>
+		</rng:oneOrMore>
+	      </rng:choice>
+	      <rng:optional>
+		<rng:ref name="model.noteLike"/>
+	      </rng:optional>
+	    </content>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:correspDesc>
+		  <ct:sender>Adelbert von Chamisso</ct:sender>
+		  <ct:addressee>Louis de La Foye</ct:addressee>
+		  <ct:placeSender>Vertus</ct:placeSender>
+		  <ct:placeAddressee>Caen</ct:placeAddressee>
+		  <ct:dateSender when="1807-01-29">29 January 1807</ct:dateSender>
+		  <ct:correspClass>
+		    <term>lettersheet</term>
+		    <term>signed personally</term>
+		  </ct:correspClass>
+		  <ct:context>
+		    <ref type="prev"
+			 target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye#1"
+			 >Previous letter of Adelbert von Chamisso to Louis de La Foye:
+		    16 January 1807</ref>
+		    <ref type="next"
+			 target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye#1"
+			 >Next letter of Adelbert von Chamisso to Louis de La Foye: 07
+		    May 1810</ref>
+		  </ct:context>
+		  <ct:transmission>
+		    <p>Post</p>
+		  </ct:transmission>
+		</ct:correspDesc>
+	      </egXML>
+	    </exemplum>
+	  </elementSpec>
 
-                    <elementSpec ident="correspDesc" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <gloss versionDate="2014-01-13" xml:lang="en">correspondence
-                            description</gloss>
-                        <desc versionDate="2014-01-13" xml:lang="en">a wrapper element for metadata
-                            pertaining to correspondence</desc>
-                        <classes>
-                            <memberOf key="model.biblLike"/>
-                            <!-- need some mechanism to permit different <correspDesc> information-->
-                            <!-- for different <div>s or whathaveyou; perhaps <msDesc> and-->
-                            <!-- <correspDesc> should be members of model.divTop (indirectly)-->
-                            <!-- or even listCorrespDesc ?! -->
-                            <memberOf key="att.declarable"/>
-                            <memberOf key="att.canonical"/>
-                            <memberOf key="att.global"/>
-                        </classes>
-                        <content>
-                            <!-- modeled after publicationStmt -->
-                            <!-- with the addition of noteLike -->
-                            <rng:choice>
-                                <rng:oneOrMore>
-                                    <rng:ref name="model.correspDescPart"/>
-                                </rng:oneOrMore>
-                                <rng:oneOrMore>
-                                    <rng:ref name="model.pLike"/>
-                                </rng:oneOrMore>
-                            </rng:choice>
-                            <rng:optional>
-                                <rng:ref name="model.noteLike"/>
-                            </rng:optional>
-                        </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:correspDesc>
-                                    <ct:sender>Adelbert von Chamisso</ct:sender>
-                                    <ct:addressee>Louis de La Foye</ct:addressee>
-                                    <ct:placeSender>Vertus</ct:placeSender>
-                                    <ct:placeAddressee>Caen</ct:placeAddressee>
-                                    <ct:dateSender when="1807-01-29">29 January 1807</ct:dateSender>
-                                    <ct:correspClass>
-                                        <term>lettersheet</term>
-                                        <term>signed personally</term>
-                                    </ct:correspClass>
-                                    <ct:context>
-                                        <ref type="prev"
-                                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief023ChamissoandeLaFoye#1"
-                                            >Previous letter of Adelbert von Chamisso to Louis de La Foye:
-                                            16 January 1807</ref>
-                                        <ref type="next"
-                                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief025ChamissoandeLaFoye#1"
-                                            >Next letter of Adelbert von Chamisso to Louis de La Foye: 07
-                                            May 1810</ref>
-                                    </ct:context>
-                                    <ct:transmission>
-                                        <p>Post</p>
-                                    </ct:transmission>
-                                </ct:correspDesc>
-                            </egXML>
-                        </exemplum>
-                    </elementSpec>
+	  <!-- make sender and addressee declarable to allow for linking with separate places and/or dates? -->
+	  <elementSpec ident="sender" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <desc versionDate="2014-01-13" xml:lang="en">contains the name or some other
+	    description of the sender of a piece of correspondence</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="att.personal"/>
+	      <!-- maybe att.editLike? -->
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <rng:choice>
+		<!-- CIF standard -->
+		<rng:text/>
+		<!-- Full fledged standard -->
+		<rng:group>
+		  <rng:choice>
+		    <rng:ref name="model.nameLike.agent"/>
+		    <rng:oneOrMore>
+		      <rng:ref name="model.pLike"/>
+		    </rng:oneOrMore>
+		  </rng:choice>
+		  <rng:optional>
+		    <rng:ref name="model.noteLike"/>
+		  </rng:optional>
+		</rng:group>
+	      </rng:choice>
+	    </content>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:sender>Weber, Carl Maria von</ct:sender>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:sender>
+		  <persName ref="http://d-nb.info/gnd/118520040">Adelbert von
+		  Chamisso</persName>
+		</ct:sender>
+	      </egXML>
+	    </exemplum>
+	    <remarks xml:lang="en">
+	      <p>In the simplest form the <gi>ct:sender</gi> element consists of text only. By inclusion of the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref> it is possible to encode the names in more detail.</p>
+	    </remarks>
+	  </elementSpec>
 
-                    <!-- make sender and addressee declarable to allow for linking with separate places and/or dates? -->
-                    <elementSpec ident="sender" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <desc versionDate="2014-01-13" xml:lang="en">contains the name or some other
-                            description of the sender of a piece of correspondence</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.personal"/>
-                            <!-- maybe att.editLike? -->
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:choice>
-                                <!-- CIF standard -->
-                                <rng:optional>
-                                    <rng:text/>
-                                </rng:optional>
-                                <!-- Full fledged standard -->
-                                <rng:group>
-                                    <rng:choice>
-                                        <rng:ref name="model.nameLike.agent"/>
-                                        <rng:oneOrMore>
-                                            <rng:ref name="model.pLike"/>
-                                        </rng:oneOrMore>
-                                    </rng:choice>
-                                    <rng:optional>
-                                        <rng:ref name="model.noteLike"/>
-                                    </rng:optional>
-                                </rng:group>
-                            </rng:choice>
-                        </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:sender>Weber, Carl Maria von</ct:sender>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:sender>
-                                    <persName ref="http://d-nb.info/gnd/118520040">Adelbert von
-                                        Chamisso</persName>
-                                </ct:sender>
-                            </egXML>
-                        </exemplum>
-                        <remarks xml:lang="en">
-                            <p>In the simplest form the <gi>ct:sender</gi> element consists of text only. By inclusion of the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref> it is possible to encode the names in more detail.</p>
-                        </remarks>
-                    </elementSpec>
+	  <elementSpec ident="addressee" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <desc versionDate="2014-01-13" xml:lang="en">contains the name or some other
+	    description of the addressee of a piece of correspondence</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="att.personal"/>
+	      <!-- maybe att.editLike? -->
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <rng:choice>
+		<!-- CIF standard -->
+		<rng:optional>
+		  <rng:text/>
+		</rng:optional>
+		<!-- Full fledged standard -->
+		<rng:group>
+		  <rng:choice>
+		    <!-- what about model.addressLike? -->
+		    <rng:ref name="model.nameLike.agent"/>
+		    <rng:oneOrMore>
+		      <rng:ref name="model.pLike"/>
+		    </rng:oneOrMore>
+		  </rng:choice>
+		  <rng:optional>
+		    <rng:ref name="model.noteLike"/>
+		  </rng:optional>
+		</rng:group>
+	      </rng:choice>
+	    </content>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<addressee>
+		  <persName key="A000046">Arnim, Achim von</persName>
+		</addressee>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<addressee>
+		  <persName>unknown</persName><!-- richtig so? -->
+		</addressee>
+	      </egXML>
+	    </exemplum>
+	    <remarks xml:lang="en">
+	      <p>In the simplest form the <gi>ct:addressee</gi> element consists of text only. By inclusion of the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref> it is possible to encode the names in more detail.</p>
+	    </remarks>
+	  </elementSpec>
 
-                    <elementSpec ident="addressee" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <desc versionDate="2014-01-13" xml:lang="en">contains the name or some other
-                            description of the addressee of a piece of correspondence</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.personal"/>
-                            <!-- maybe att.editLike? -->
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:choice>
-                                <!-- CIF standard -->
-                                <rng:optional>
-                                    <rng:text/>
-                                </rng:optional>
-                                <!-- Full fledged standard -->
-                                <rng:group>
-                                    <rng:choice>
-                                        <!-- what about model.addressLike? -->
-                                        <rng:ref name="model.nameLike.agent"/>
-                                        <rng:oneOrMore>
-                                            <rng:ref name="model.pLike"/>
-                                        </rng:oneOrMore>
-                                    </rng:choice>
-                                    <rng:optional>
-                                        <rng:ref name="model.noteLike"/>
-                                    </rng:optional>
-                                </rng:group>
-                            </rng:choice>
-                        </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <addressee>
-                                    <persName key="A000046">Arnim, Achim von</persName>
-                                </addressee>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <addressee>
-                                    <persName>unknown</persName><!-- richtig so? -->
-                                </addressee>
-                            </egXML>
-                        </exemplum>
-                        <remarks xml:lang="en">
-                            <p>In the simplest form the <gi>ct:addressee</gi> element consists of text only. By inclusion of the <ident type="module">namesdates</ident> module described in <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html">13 Names, Dates, People, and Places</ref> it is possible to encode the names in more detail.</p>
-                        </remarks>
-                    </elementSpec>
+	  <elementSpec ident="placeSender" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <gloss versionDate="2014-01-13" xml:lang="en">place of sender</gloss>
+	    <desc versionDate="2014-01-13" xml:lang="en">contains the place where the
+	    piece of correspondence was written or sent</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="att.personal"/>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <rng:choice>
+		<!-- CIF standard -->
+		<rng:optional>
+		  <rng:text/>
+		</rng:optional>
+		<!-- Full fledged standard -->
+		<rng:group>
+		  <rng:choice>
+		    <rng:ref name="model.placeNamePart"/>
+		    <rng:oneOrMore>
+		      <rng:ref name="model.pLike"/>
+		    </rng:oneOrMore>
+		  </rng:choice>
+		  <rng:optional>
+		    <rng:ref name="model.noteLike"/>
+		  </rng:optional>
+		</rng:group>
+	      </rng:choice>
+	    </content>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:placeSender>
+		  <settlement>Paris</settlement>
+		</ct:placeSender>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="de">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:placeSender type="writing">
+		  <settlement>Potsdam</settlement>
+		</ct:placeSender>
+		<ct:placeSender type="sending">
+		  <settlement>Berlin</settlement>
+		</ct:placeSender>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:placeSender ref="http://www.geonames.org/3175395">
+		  <country>Italy</country>
+		</ct:placeSender>
+	      </egXML>
+	    </exemplum>
+	  </elementSpec>
 
-                    <elementSpec ident="placeSender" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <gloss versionDate="2014-01-13" xml:lang="en">place of sender</gloss>
-                        <desc versionDate="2014-01-13" xml:lang="en">contains the place where the
-                            piece of correspondence was written or sent</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.personal"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:choice>
-                                <!-- CIF standard -->
-                                <rng:optional>
-                                    <rng:text/>
-                                </rng:optional>
-                                <!-- Full fledged standard -->
-                                <rng:group>
-                                    <rng:choice>
-                                        <rng:ref name="model.placeNamePart"/>
-                                        <rng:oneOrMore>
-                                            <rng:ref name="model.pLike"/>
-                                        </rng:oneOrMore>
-                                    </rng:choice>
-                                    <rng:optional>
-                                        <rng:ref name="model.noteLike"/>
-                                    </rng:optional>
-                                </rng:group>
-                            </rng:choice>
-                        </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeSender>
-                                    <settlement>Paris</settlement>
-                                </ct:placeSender>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="de">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeSender type="writing">
-                                    <settlement>Potsdam</settlement>
-                                </ct:placeSender>
-                                <ct:placeSender type="sending">
-                                    <settlement>Berlin</settlement>
-                                </ct:placeSender>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeSender ref="http://www.geonames.org/3175395">
-                                    <country>Italy</country>
-                                </ct:placeSender>
-                            </egXML>
-                        </exemplum>
-                    </elementSpec>
+	  <elementSpec ident="placeAddressee" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <gloss versionDate="2014-01-13" xml:lang="en">place of addressee</gloss>
+	    <!-- ask a native -->
+	    <!-- we want it to subsume all sorts of addresses -->
+	    <desc versionDate="2014-01-13" xml:lang="en">contains the place of the
+	    addressee or the place where the piece of correspondence was actually
+	    received</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="att.personal"/>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <rng:choice>
+		<!-- CIF standard -->
+		<rng:optional>
+		  <rng:text/>
+		</rng:optional>
+		<!-- Full fledged standard -->
+		<rng:group>
+		  <rng:choice>
+		    <rng:ref name="model.placeNamePart"/>
+		    <rng:oneOrMore>
+		      <rng:ref name="model.pLike"/>
+		    </rng:oneOrMore>
+		  </rng:choice>
+		  <rng:optional>
+		    <rng:ref name="model.noteLike"/>
+		  </rng:optional>
+		</rng:group>
+	      </rng:choice>
+	    </content>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:placeAddressee>
+		  <settlement>New York</settlement>
+		</ct:placeAddressee>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="de">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:placeAddressee type="intended">
+		  <settlement>Dresden</settlement>
+		</ct:placeAddressee>
+		<ct:placeAddressee type="received">
+		  <settlement>Hosterwitz</settlement>
+		</ct:placeAddressee>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:placeAddressee ref="http://www.geonames.org/5001836">
+		  <region>Michigan</region>
+		</ct:placeAddressee>
+	      </egXML>
+	    </exemplum>
+	  </elementSpec>
 
-                    <elementSpec ident="placeAddressee" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <gloss versionDate="2014-01-13" xml:lang="en">place of addressee</gloss>
-                        <!-- ask a native -->
-                        <!-- we want it to subsume all sorts of addresses -->
-                        <desc versionDate="2014-01-13" xml:lang="en">contains the place of the
-                            addressee or the place where the piece of correspondence was actually
-                            received</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.personal"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:choice>
-                                <!-- CIF standard -->
-                                <rng:optional>
-                                    <rng:text/>
-                                </rng:optional>
-                                <!-- Full fledged standard -->
-                                <rng:group>
-                                    <rng:choice>
-                                        <rng:ref name="model.placeNamePart"/>
-                                        <rng:oneOrMore>
-                                            <rng:ref name="model.pLike"/>
-                                        </rng:oneOrMore>
-                                    </rng:choice>
-                                    <rng:optional>
-                                        <rng:ref name="model.noteLike"/>
-                                    </rng:optional>
-                                </rng:group>
-                            </rng:choice>
-                        </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeAddressee>
-                                    <settlement>New York</settlement>
-                                </ct:placeAddressee>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="de">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeAddressee type="intended">
-                                    <settlement>Dresden</settlement>
-                                </ct:placeAddressee>
-                                <ct:placeAddressee type="received">
-                                    <settlement>Hosterwitz</settlement>
-                                </ct:placeAddressee>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeAddressee ref="http://www.geonames.org/5001836">
-                                    <region>Michigan</region>
-                                </ct:placeAddressee>
-                            </egXML>
-                        </exemplum>
-                    </elementSpec>
+	  <elementSpec ident="dateSender" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <gloss versionDate="2014-01-13" xml:lang="en">date of
+	    writing/sending</gloss>
+	    <!-- if more than one (writing, sending, whateveryouhave) date shall be encoded, use several dateSender elements! -->
+	    <desc versionDate="2014-01-13" xml:lang="en">contains the date of writing or
+	    sending a piece of correspondence</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="att.datable"/>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <!-- Do we need <rng:text/> here as option, as well? -->
+	      <rng:optional>
+		<rng:choice>
+		  <rng:ref name="model.dateLike"/>
+		  <rng:oneOrMore>
+		    <rng:ref name="model.pLike"/>
+		  </rng:oneOrMore>
+		</rng:choice>
+		<rng:optional>
+		  <rng:ref name="model.noteLike"/>
+		</rng:optional>
+	      </rng:optional>
+	    </content>
+	  </elementSpec>
 
-                    <elementSpec ident="dateSender" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <gloss versionDate="2014-01-13" xml:lang="en">date of
-                            writing/sending</gloss>
-                        <!-- if more than one (writing, sending, whateveryouhave) date shall be encoded, use several dateSender elements! -->
-                        <desc versionDate="2014-01-13" xml:lang="en">contains the date of writing or
-                            sending a piece of correspondence</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.datable"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <!-- Do we need <rng:text/> here as option, as well? -->
-                            <rng:optional>
-                                <rng:choice>
-                                    <rng:ref name="model.dateLike"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
-                                <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
-                                </rng:optional>
-                            </rng:optional>
-                        </content>
-                    </elementSpec>
+	  <elementSpec ident="dateAddressee" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <gloss versionDate="2014-01-13" xml:lang="en">delivery date</gloss>
+	    <!-- if more than one (receiving, reading, whateveryouhave) date shall be encoded, use several dateAddressee elements! -->
+	    <desc versionDate="2014-01-13" xml:lang="en">contains the date of receiving
+	    or reading a piece of correspondence</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="att.datable"/>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <!-- Do we need <rng:text/> here as option, as well? -->
+	      <rng:optional>
+		<rng:choice>
+		  <rng:ref name="model.dateLike"/>
+		  <rng:oneOrMore>
+		    <rng:ref name="model.pLike"/>
+		  </rng:oneOrMore>
+		</rng:choice>
+		<rng:optional>
+		  <rng:ref name="model.noteLike"/>
+		</rng:optional>
+	      </rng:optional>
+	    </content>
+	  </elementSpec>
 
-                    <elementSpec ident="dateAddressee" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <gloss versionDate="2014-01-13" xml:lang="en">delivery date</gloss>
-                        <!-- if more than one (receiving, reading, whateveryouhave) date shall be encoded, use several dateAddressee elements! -->
-                        <desc versionDate="2014-01-13" xml:lang="en">contains the date of receiving
-                            or reading a piece of correspondence</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.datable"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <!-- Do we need <rng:text/> here as option, as well? -->
-                            <rng:optional>
-                                <rng:choice>
-                                    <rng:ref name="model.dateLike"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
-                                <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
-                                </rng:optional>
-                            </rng:optional>
-                        </content>
-                    </elementSpec>
+	  <!-- need another name?!? -->
+	  <!-- neither accMat nor additions nor bindingDesc nor textClass do fully qualify for our purposes -->
+	  <elementSpec ident="correspClass" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <!-- modeled after keywords -->
+	    <gloss versionDate="2014-02-14" xml:lang="en">correspondence
+	    classification</gloss>
+	    <desc versionDate="2014-01-13" xml:lang="en">describes the piece of
+	    correspondence (e.g. letter, postcard, email), if possible according to
+	    some (external) classification scheme</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <rng:choice>
+		<!-- CIF standard -->
+		<rng:text/>
+		<!-- Full fledged standard -->
+		<rng:zeroOrMore>
+		  <rng:ref name="term"/>
+		</rng:zeroOrMore>
+		<!-- model.pLike hinzufügen -->
+	      </rng:choice>
+	    </content>
+	    <attList>
+	      <attDef ident="scheme" usage="opt" mode="add">
+		<desc>identifies the controlled vocabulary within which the set of
+		keywords concerned is defined.</desc>
+		<datatype>
+		  <rng:ref name="data.pointer"/>
+		</datatype>
+	      </attDef>
+	    </attList>
+	    <exemplum xml:lang="de">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<correspClass>
+		  <term>Brief</term>
+		  <term>eigenhändig</term>
+		  <term>mit Unterschrift</term>
+		  <term>mit Umschlag</term>
+		</correspClass>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:correspClass>
+		  <term>picture postcard</term>
+		  <term>signed personally</term>
+		  <term>without envelope</term>
+		</ct:correspClass>
+	      </egXML>
+	    </exemplum>
+	    <remarks>
+	      <p>Information about the presence of an envelope may be captured
+	      here.</p>
+	      <p><gi>ct:correspClass</gi> can both be used as an empty element with
+	      according <att>type</att> (and <att>subtype</att>) attributes or in
+	      a more elaborate way with several <gi>term</gi> child elements.</p>
+	    </remarks>
+	  </elementSpec>
 
-                    <!-- need another name?!? -->
-                    <!-- neither accMat nor additions nor bindingDesc nor textClass do fully qualify for our purposes -->
-                    <elementSpec ident="correspClass" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <!-- modeled after keywords -->
-                        <gloss versionDate="2014-02-14" xml:lang="en">correspondence
-                            classification</gloss>
-                        <desc versionDate="2014-01-13" xml:lang="en">describes the piece of
-                            correspondence (e.g. letter, postcard, email), if possible according to
-                            some (external) classification scheme</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:choice>
-                                <!-- CIF standard -->
-                                <rng:text/>
-                                <!-- Full fledged standard -->
-                                <rng:zeroOrMore>
-                                    <rng:ref name="term"/>
-                                </rng:zeroOrMore>
-                                <!-- model.pLike hinzufügen -->
-                            </rng:choice>
-                        </content>
-                        <attList>
-                            <attDef ident="scheme" usage="opt" mode="add">
-                                <desc>identifies the controlled vocabulary within which the set of
-                                    keywords concerned is defined.</desc>
-                                <datatype>
-                                    <rng:ref name="data.pointer"/>
-                                </datatype>
-                            </attDef>
-                        </attList>
-                        <exemplum xml:lang="de">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <correspClass>
-                                    <term>Brief</term>
-                                    <term>eigenhändig</term>
-                                    <term>mit Unterschrift</term>
-                                    <term>mit Umschlag</term>
-                                </correspClass>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:correspClass>
-                                    <term>picture postcard</term>
-                                    <term>signed personally</term>
-                                    <term>without envelope</term>
-                                </ct:correspClass>
-                            </egXML>
-                        </exemplum>
-                        <remarks>
-                            <p>Information about the presence of an envelope may be captured
-                                here.</p>
-                            <p><gi>ct:correspClass</gi> can both be used as an empty element with
-                                according <att>type</att> (and <att>subtype</att>) attributes or in
-                                a more elaborate way with several <gi>term</gi> child elements.</p>
-                        </remarks>
-                    </elementSpec>
+	  <!-- we'd like a different name?! -->
+	  <!-- respStmt is not able to cover the *method* of transmission without assigning responsibility to a person or organisation -->
+	  <elementSpec ident="transmission" module="correspondence" mode="add"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <desc versionDate="2014-01-13" xml:lang="en">describes the method and
+	    transmitter of the piece of correspondence</desc>
+	    <classes>
+	      <memberOf key="att.global"/>
+	      <memberOf key="att.typed"/>
+	      <memberOf key="att.responsibility"/>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <!-- Still somehow unhappy with this content model :-( -->
+	      <rng:optional>
+		<rng:choice>
+		  <rng:ref name="model.nameLike.agent"/>
+		  <rng:oneOrMore>
+		    <rng:ref name="model.pLike"/>
+		  </rng:oneOrMore>
+		</rng:choice>
+		<rng:optional>
+		  <rng:ref name="model.noteLike"/>
+		</rng:optional>
+	      </rng:optional>
+	    </content>
+	    <exemplum xml:lang="de">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:transmission>
+		  <p>Übermittelt per Post auf dem Landweg</p>
+		</ct:transmission>
+	      </egXML>
+	    </exemplum>
+	    <exemplum  xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:transmission>
+		  <persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
+		</ct:transmission>
+	      </egXML>
+	    </exemplum>
+	    <exemplum  xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:transmission type="internet"/>
+	      </egXML>
+	    </exemplum>
+	    <remarks>
+	      <p><gi>ct:transmission</gi> can both be used as an empty element with
+	      according <att>type</att> (and <att>subtype</att>) attributes or in
+	      a more verbose way with child element.</p>
+	    </remarks>
+	  </elementSpec>
 
-                    <!-- we'd like a different name?! -->
-                    <!-- respStmt is not able to cover the *method* of transmission without assigning responsibility to a person or organisation -->
-                    <elementSpec ident="transmission" module="correspondence" mode="add"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <desc versionDate="2014-01-13" xml:lang="en">describes the method and
-                            transmitter of the piece of correspondence</desc>
-                        <classes>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.typed"/>
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <!-- Still somehow unhappy with this content model :-( -->
-                            <rng:optional>
-                                <rng:choice>
-                                    <rng:ref name="model.nameLike.agent"/>
-                                    <rng:oneOrMore>
-                                        <rng:ref name="model.pLike"/>
-                                    </rng:oneOrMore>
-                                </rng:choice>
-                                <rng:optional>
-                                    <rng:ref name="model.noteLike"/>
-                                </rng:optional>
-                            </rng:optional>
-                        </content>
-                        <exemplum xml:lang="de">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:transmission>
-                                    <p>Übermittelt per Post auf dem Landweg</p>
-                                </ct:transmission>
-                            </egXML>
-                        </exemplum>
-                        <exemplum  xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:transmission>
-                                    <persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
-                                </ct:transmission>
-                            </egXML>
-                        </exemplum>
-                        <exemplum  xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:transmission type="internet"/>
-                            </egXML>
-                        </exemplum>
-                        <remarks>
-                            <p><gi>ct:transmission</gi> can both be used as an empty element with
-                                according <att>type</att> (and <att>subtype</att>) attributes or in
-                                a more verbose way with child element.</p>
-                        </remarks>
-                    </elementSpec>
-
-                    <elementSpec ident="context" mode="add" module="correspondence"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <!-- we'd like a different name than <context> -->
-                        <gloss xml:lang="en" versionDate="2014-01-13">context</gloss>
-                        <gloss xml:lang="de" versionDate="2014-01-13">Korrespondenzstelle</gloss>
-                        <!-- related by sender/addressee or topics … -->
-                        <desc xml:lang="en" versionDate="2014-01-13">provides references to
-                            preceding or following correspondence related to this piece of
-                            correspondence</desc>
-                        <classes>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:choice>
-                                <rng:zeroOrMore>
-                                    <rng:ref name="model.ptrLike"/>
-                                </rng:zeroOrMore>
-                                <rng:zeroOrMore>
-                                    <rng:ref name="model.pLike"/>
-                                </rng:zeroOrMore>
-                            </rng:choice>
-                            <rng:optional>
-                                <rng:ref name="model.noteLike"/>
-                            </rng:optional>
-                        </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:context>
-                                    <ptr type="next" subtype="toAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
-                                    <ptr type="prev" subtype="fromAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
-                                </ct:context>
-                            </egXML>
-                        </exemplum>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:context>
-                                    <ref target="http://weber-gesamtausgabe.de/A040962">Previous letter of Carl Maria von Weber to Caroline Brandt: December 30, 1816</ref> 
-                                    <ref target="http://weber-gesamtausgabe.de/A041003">Next letter of Carl Maria von Weber to Caroline Brandt: January 5, 1817</ref>
-                                </ct:context>
-                            </egXML>
-                        </exemplum>
-                    </elementSpec>
-                   
-                </schemaSpec>
-            </div>
-        </back>
-    </text>
+	  <elementSpec ident="context" mode="add" module="correspondence"
+		       ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+	    <!-- we'd like a different name than <context> -->
+	    <gloss xml:lang="en" versionDate="2014-01-13">context</gloss>
+	    <gloss xml:lang="de" versionDate="2014-01-13">Korrespondenzstelle</gloss>
+	    <!-- related by sender/addressee or topics … -->
+	    <desc xml:lang="en" versionDate="2014-01-13">provides references to
+	    preceding or following correspondence related to this piece of
+	    correspondence</desc>
+	    <classes>
+	      <memberOf key="model.correspDescPart"/>
+	    </classes>
+	    <content>
+	      <rng:choice>
+		<rng:zeroOrMore>
+		  <rng:ref name="model.ptrLike"/>
+		</rng:zeroOrMore>
+		<rng:zeroOrMore>
+		  <rng:ref name="model.pLike"/>
+		</rng:zeroOrMore>
+	      </rng:choice>
+	      <rng:zeroOrMore>
+		<rng:ref name="model.noteLike"/>
+	      </rng:zeroOrMore>
+	    </content>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:context>
+		  <ptr type="next" subtype="toAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
+		  <ptr type="prev" subtype="fromAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
+		</ct:context>
+	      </egXML>
+	    </exemplum>
+	    <exemplum xml:lang="en">
+	      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+		<ct:context>
+		  <ref target="http://weber-gesamtausgabe.de/A040962">Previous letter of Carl Maria von Weber to Caroline Brandt: December 30, 1816</ref> 
+		  <ref target="http://weber-gesamtausgabe.de/A041003">Next letter of Carl Maria von Weber to Caroline Brandt: January 5, 1817</ref>
+		</ct:context>
+	      </egXML>
+	    </exemplum>
+	  </elementSpec>
+	  
+	</schemaSpec>
+      </div>
+    </back>
+  </text>
 </TEI>
