@@ -163,63 +163,19 @@
 			</div>
 			<div>
 				<head>Theoretical Considerations</head>
-				<p>In this document <term>correspondence</term> is regarded as an <gloss>act of
-						communication</gloss>, in which the message of a sender reaches—mediated and
-					time-delayed—an addressee at a different place. Such an act of communication
-					becomes manifest in a <term>piece of correspondence</term>, that may be tangible
-					“object”, characterised by its “materiality” and co-determining the
-					communication, and that is generally related to a medium or process of delivery.
-					Hence, correspondence has a hybrid nature between <emph>event</emph> and
-						<emph>object</emph>.</p>
-				<p>As an act of communication is directed at someone, each piece of correspondence
-					has one or more addressees, who may or may not be individually identifiable.
-					Therefore, the scope of “correspondence” in this proposal covers not only
-					letters, postcards, telegrams, and similar “material” pieces of correspondence
-					but also electronic communications, e.g. e-mails and text
-					messages.<!-- =Satz zu Adressatenbezug und
-	scope of correspondence --></p>
-				<div>
-					<head>What is correspondence-specific information (in terms of the TEI)?</head>
-					<p>An act of communication has a <emph>sender</emph> of a message
-							(<gi>ct:sender</gi>), who is not necessarily identical to the author of
-						the text of the message. <!--<p>
-	  sender and author </p>--></p>
-					<p>An act of communication generally has no unknown audience/unspecified
-						recipient but one or more (intended, perhaps fictional)
-							<emph>addressees</emph> (<gi>ct:addressee</gi>), “spoken” to by the
-						piece of correspondence.</p>
-					<p>A piece of correspondence generally has a certain <emph>time or period of
-							writing</emph> and a definable time of sending—even though it may be
-						unknown or indeterminate
-						(<gi>ct:dateSender</gi>)<!-- Sabine: Hier nennen wir 2
-	  Sachen (Schreiben und Abschicken) für 1 Element, gehen aber
-	  nicht weiter darauf ein. Könnte das verwirren und Nachfragen
-	  hervorrufen, was man machte, wenn man beides identifizieren
-	  und einzeln kodieren möchte? Wenn wir das ignorieren:
-	  “writing” ist in <emph> und nicht “sending”, wobei letzteres
-	  aber besser wäre.-->.
-						Similarly, a piece of correspondence was generally written at a particular
-						location(s) (the <emph>place of writing</emph>), although that location may
-						be unknown; and was most often sent from a particular location (the
-							<emph>place from which sent</emph>), which may or may not be the same as
-						the place of writing. Very often these bits of information are evident in an
-						address line, postmark, electronically generated sending metadata, etc. In
-						any case, they may be recorded in the <gi>ct:placeSencer</gi>.</p>
-					<p>A piece of correspondence generally has a <emph>process</emph> or a
-							<emph>medium of transfer</emph> (messenger, carrier, postman, carriage,
-						fax machine, internet, etc.) (<gi>ct:transmission</gi>).</p>
-					<p>Very often a particular message is sent in order to trigger an answer (in
-						form of one or more pieces of correspondence). A single piece of
-						correspondence therefore is normally not a secluded entity but a (written)
-						act of communication in a communication continuum<ptr
-							target="#bohnenkamp2013"/><!--(Bohnenkamp/Richter 2013,
-	  p.4)-->, in
-						which it is defined by its relative position between messages sent “before”
-						and “after” (<gi>ct:context</gi>).</p>
-					<p>Finally, correspondence may be <emph>categorized</emph> in terms of its
-						object- and/or eventlike nature (e.g. letter, signed personally; telegram;
-						copy; draft) requiring a separate element <gi>ct:correspClass</gi>.</p>
-					<!-- copy/draft etc go into correspClass, c.f. http://www.constance-de-salm.de/fud_docs/DHIParis:2-34CdS-b1-00vt -->
+				<p>Usually, letters (or any other poeces of correspondence) are considered as having a double nature as object and event.</p>
+				<p>The aspect of objecthood predominantly, but not exclusively, is tied to materiality. The facets of this materiality are manifold, but they do not differ much between letters and other manuscripts and therfore need not to be discussed here because the TEI Guidelines have elaborated instruments for describing them, especially within the manuscript description <gi>msDesc</gi>.</p>
+				<p>More important than questions of objecthood and materiality is the aspect of eventness (in a wide ontological sense): Correspondence does not mean merely written messages. Very often the surrounding circumstances - sent works, presents, works of art, other oral messages - show that the letter is embedded within an ensemble of communication media, which enriches the importance of the letter in itself. Sometimes there may be no actual letter at all - still "correspondence" happens.</p>
+<p>Hence, the basic assumption in this document is the understanding of correspondence in general as an <emph>event</emph> - namely an <emph>of communication</emph> - connected to a <emph>document</emph> and/or an (electronical) text. The topos of correspondence being a “half dialogue”, a ”conversation amongst absentees” is very often found in theoretical considerations about epistolography, also "the letter’s function as a connector between two distant points, as a bridge between sender and receiver” (Janet Gurkin Altman). This concept of communication (sender, transmission, receiver) can not yet be expressed with existing TEI elements though. To answer the questions WHO WRITES? - TO WHOM? - WHERE FROM? - WHERE TO? - ANSWERING WHAT? - AT WHAT DATE? - and (very often unknown) AT WHAT DATE IS THE LETTER BEING RECEIVED? a correspondence module needs to provide information about persons (or organisations) as sender, receiver or messenger as well as about the respective dates and places. Additionally, one needs mechanisms for pointing at (or: referencing) preceding and subsequent messages.</p>
+				<head>What is correspondence-specific information (in terms of the TEI)?</head>
+<p>With this concept of correspondence = communication in mind a letter (or any other piece of correspondence) has different participants:
+<list>
+<item>a sender of the message, who is not necessarily identical to the author of the text of the message (imagine sending a Shakespeare poem instead of writing an original love letter). He sends the piece of correspondence generally at a certain <emph>time</emph> (though it may be unknown or indeterminate) from a certain <emph>place</emph> (which may or may not be the same as the place of writing). If author and sender are the same person - which in most letters will be the case - one can use a pointer to another part of the TEI-header to indicate this: <gi>sender sameAs=“#author“/</gi>.</item>
+<item>one or more (intended, perhaps fictional) addressees, “spoken” to by the piece of correspondence (and generally no unknown audience/unspecified recipient), who receives the piece of correspondence  at a certain <emph>time</emph> at a certain <emph>place</emph> (though it may be unknown or indeterminate).</item>
+<!-- messenger ??? -->
+</list>
+<p>Very often these bits of information are evident in the text of the message, in  address lines, postmarks, electronically generated sending meta data, etc.</p>
+<p>Furthermore a particular message usually is sent in order to trigger an answer (in form of one or more pieces of correspondence). A single piece of correspondence therefore is normally not a secluded entity but a (written) act of communication in a communication continuum, in which it is defined by its relative position between messages sent “before” and “after”. Dates can be helpful – but finding out the correct chronology is part of the editing process, and  should be given in a specific element.</p> 
 				</div>
 				<div>
 					<head>And what is left out?</head>
