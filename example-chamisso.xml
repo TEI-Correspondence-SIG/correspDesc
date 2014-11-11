@@ -22,48 +22,35 @@
             </publicationStmt>
             <sourceDesc>
                 <bibl><ref target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief024ChamissoandeLaFoye">Letter from Adelbert von Chamisso to Louis de La Foye  (Vertus, 29 January 1807) [Digital Edition]</ref></bibl>
-                <!-- The proposed ct:correspDesc element starts here -->
-                <ct:correspDesc xml:id="correspDesc-chamisso">
-                    <ct:sender>
-                        <persName ref="http://d-nb.info/gnd/118520040">Adelbert von Chamisso</persName>
-                    </ct:sender>
-                    <ct:addressee>
-                        <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
-                    </ct:addressee>
-                    <ct:placeSender>
-                        <placeName ref="http://d-nb.info/gnd/4835139-8">Vertus</placeName>
-                    </ct:placeSender>
-                    <ct:placeAddressee>
-                        <placeName ref="http://www.geonames.org/3029241">Caen</placeName>
-                    </ct:placeAddressee>
-                    <ct:dateSender>
-                        <date when="1807-01-29">29 January 1807</date>
-                    </ct:dateSender>
-                    <ct:dateAddressee>
-                        <!-- for an unknown date the entire ct:dateAddressee could simply be skipped, alternatively -->
-                        <date>unknown</date>
-                    </ct:dateAddressee>
-                    <ct:correspClass>
-                        <term>letter</term>
-                        <term>signed personally</term>
-                    </ct:correspClass>
-                    <ct:context>
-                        <ref type="prev"
-                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief023ChamissoandeLaFoye"
-                            >Previous letter of Adelbert von Chamisso to Louis de La Foye: 16
-                            January 1807</ref>
-                        <ref type="next"
-                            target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief025ChamissoandeLaFoye"
-                            >Next letter of Adelbert von Chamisso to Louis de La Foye: 07 May
-                            1810</ref>
-                    </ct:context>
-                    <ct:transmission>
-                        <p>Post</p>
-                    </ct:transmission>
-                </ct:correspDesc>
-                <!-- The proposed ct:correspDesc element ends here -->
             </sourceDesc>
         </fileDesc>
+        <profileDesc>
+            <!-- The proposed ct:correspDesc element starts here -->
+            <ct:correspDesc xml:id="correspDesc-chamisso">
+                <ct:participant role="sender">
+                    <persName ref="http://d-nb.info/gnd/118520040">Adelbert von Chamisso</persName>
+                    <placeName ref="http://d-nb.info/gnd/4835139-8">Vertus</placeName>
+                    <date when="1807-01-29">29 January 1807</date>
+                </ct:participant>
+                <ct:participant role="recipient">
+                    <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
+                    <placeName ref="http://www.geonames.org/3029241">Caen</placeName>
+                    <!-- for an unknown date the following date element could simply be skipped, alternatively -->
+                    <date>unknown</date>
+                </ct:participant>
+                <ct:correspContext>
+                    <ref type="prev"
+                        target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief023ChamissoandeLaFoye"
+                        >Previous letter of Adelbert von Chamisso to Louis de La Foye: 16
+                        January 1807</ref>
+                    <ref type="next"
+                        target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief025ChamissoandeLaFoye"
+                        >Next letter of Adelbert von Chamisso to Louis de La Foye: 07 May
+                        1810</ref>
+                </ct:correspContext>
+            </ct:correspDesc>
+            <!-- The proposed ct:correspDesc element ends here -->
+        </profileDesc>
     </teiHeader>
     <text>
         <body>
