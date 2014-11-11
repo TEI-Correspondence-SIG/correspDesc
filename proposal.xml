@@ -21,6 +21,11 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
+			<change when="2014-11-11">
+				<persName>Peter Stadler</persName>
+				<desc>Duely implemented changes decided on during last 
+					correspDesc conf call on <date when="2014-11-04">Nov 4, 2014</date></desc>
+			</change>
 			<change when="2014-10-06">
 				<persName>Sabine Seifert</persName>
 				<desc>Corrected some information on DALF's element letDesc.</desc>
@@ -98,7 +103,7 @@
 						<item>a basic structure for easy data interchange (CIF).</item>
 					</list> A guiding idea has been to only tentatively modify the TEI standard by
 					merely adding a few elements, wrapping them in a special purpose element
-						<gi>ct:correspDesc</gi> and injecting the latter into <gi>sourceDesc</gi>.
+						<gi>ct:correspDesc</gi> and injecting the latter into <gi>profileDesc</gi>.
 					Please note that <gi>ct:correspDesc</gi> is <emph>not</emph> intended to and can
 						<emph>not</emph> replace the whole TEI header.</p>
 				<p>These efforts are supposed to be just a first step in the Correspondence SIG's
@@ -331,12 +336,12 @@
 									<author xml:id="author1">Carl Maria von Weber</author>
 								</titleStmt>
 								<!-- … -->
-								<sourceDesc>
+								<profileDesc>
 									<ct:correspDesc>
-										<ct:sender sameAs="#author1"/>
+										<ct:participant sameAs="#author1"/>
 										<!-- … -->
 									</ct:correspDesc>
-								</sourceDesc>
+								</profileDesc>
 							</fileDesc>
 						</egXML> In other cases (cf. the example of collaborative authorship above),
 						there might as well be a clear distinction of the intellectual author of the
@@ -486,8 +491,8 @@
 							<soCalled>materiality</soCalled> of the correspondence object(s) and
 						possible attachments is still the <gi>sourceDesc</gi> element (and probably
 							<gi>msDesc</gi>), nevertheless it is possible to extract simple
-						oppositions to facilitate processing of this information (e.g. 'without
-						envelope'). These subject terms can either be according to a private scheme
+						oppositions to facilitate processing of this information (e.g. <q>without
+						envelope</q>). These subject terms can either be according to a private scheme
 						or by reference to some external classification system as used in library
 						and documentation work in which case the <att>scheme</att> attribute should
 						identify the according system by its URI. <egXML
@@ -569,14 +574,14 @@
 			</div>
 			<div>
 				<head>Formal Specification</head>
-				<schemaSpec ident="correspondence" start="TEI sourceDesc" status="unstable">
-					<!--<moduleRef key="tei"/>
+				<schemaSpec ident="correspondence" start="TEI" status="unstable">
+					<moduleRef key="tei"/>
 					<moduleRef key="textstructure"/>
 					<moduleRef key="core"/>
 					<moduleRef key="header"/>
 					<moduleRef key="msdescription"/>
 					<moduleRef key="namesdates"/>
-					<moduleRef key="linking"/>-->
+					<moduleRef key="linking"/>
 
 					<moduleSpec ident="correspondence" mode="add">
 						<desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
@@ -588,6 +593,18 @@
 						<desc versionDate="2014-01-13" xml:lang="en">groups together metadata
 							elements for describing correspondence</desc>
 					</classSpec>
+					
+					<classSpec ident="model.correspContextPart" mode="add" type="model"
+						module="correspondence">
+						<desc versionDate="2014-11-11" xml:lang="en">groups elements which may 
+							appear as part of the correspContext element</desc>
+					</classSpec>
+					
+					<classSpec ident="model.participantPart" mode="add" type="model"
+						module="correspondence">
+						<desc versionDate="2014-11-11" xml:lang="en">groups elements which define
+							parts of the participant element.</desc>
+					</classSpec>
 
 					<elementSpec ident="correspDesc" module="correspondence" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
@@ -596,18 +613,13 @@
 						<desc versionDate="2014-01-13" xml:lang="en">a wrapper element for metadata
 							pertaining to correspondence</desc>
 						<classes>
-							<memberOf key="model.biblLike"/>
-							<!-- need some mechanism to permit different <correspDesc> information-->
-							<!-- for different <div>s or whathaveyou; perhaps <msDesc> and-->
-							<!-- <correspDesc> should be members of model.divTop (indirectly)-->
-							<!-- or even listCorrespDesc ?! -->
+							<memberOf key="model.profileDescPart"/>
 							<memberOf key="att.declarable"/>
 							<memberOf key="att.canonical"/>
 							<memberOf key="att.global"/>
 						</classes>
 						<content>
 							<!-- modeled after publicationStmt -->
-							<!-- with the addition of noteLike -->
 							<rng:choice>
 								<rng:oneOrMore>
 									<rng:ref name="model.correspDescPart"/>
@@ -616,9 +628,6 @@
 									<rng:ref name="model.pLike"/>
 								</rng:oneOrMore>
 							</rng:choice>
-							<rng:optional>
-								<rng:ref name="model.noteLike"/>
-							</rng:optional>
 						</content>
 						<exemplum xml:lang="en">
 							<egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -650,413 +659,43 @@
 						</exemplum>
 					</elementSpec>
 
-					<!-- make sender and addressee declarable to allow for linking with separate places and/or dates? -->
-					<elementSpec ident="sender" module="correspondence" mode="add"
+					<!-- if participant is to be a generic element, 
+						it should be outside the correspondence module 
+						and the description needs modification -->
+					<elementSpec ident="participant" module="correspondence" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<desc versionDate="2014-01-13" xml:lang="en">contains the name or some other
-							description of the sender of a piece of correspondence</desc>
+						<desc versionDate="2014-09-05" xml:lang="en">contains a structured description of the place,  
+							the name and the date of the sending of a message</desc>
 						<classes>
 							<memberOf key="att.global"/>
 							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="att.personal"/>
-							<!-- maybe att.editLike? -->
 							<memberOf key="model.correspDescPart"/>
 						</classes>
 						<content>
-							<rng:choice>
-								<!-- CIF standard -->
-								<rng:text/>
-								<!-- Full fledged standard -->
-								<rng:group>
-									<rng:choice>
-										<rng:ref name="model.nameLike.agent"/>
-										<rng:oneOrMore>
-											<rng:ref name="model.pLike"/>
-										</rng:oneOrMore>
-									</rng:choice>
-									<rng:optional>
-										<rng:ref name="model.noteLike"/>
-									</rng:optional>
-								</rng:group>
-							</rng:choice>
-						</content>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:sender>Weber, Carl Maria von</ct:sender>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:sender>
-									<persName ref="http://d-nb.info/gnd/118520040">Adelbert von
-										Chamisso</persName>
-								</ct:sender>
-							</egXML>
-						</exemplum>
-						<remarks xml:lang="en">
-							<p>In the simplest form the <gi>ct:sender</gi> element consists of text
-								only. By inclusion of the <ident type="module">namesdates</ident>
-								module described in <ref
-									target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html"
-									>13 Names, Dates, People, and Places</ref> it is possible to
-								encode the names in more detail.</p>
-						</remarks>
-					</elementSpec>
-
-					<elementSpec ident="addressee" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<desc versionDate="2014-01-13" xml:lang="en">contains the name or some other
-							description of the addressee of a piece of correspondence</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="att.personal"/>
-							<!-- maybe att.editLike? -->
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<rng:choice>
-								<!-- CIF standard -->
-								<rng:optional>
-									<rng:text/>
-								</rng:optional>
-								<!-- Full fledged standard -->
-								<rng:group>
-									<rng:choice>
-										<!-- what about model.addressLike? -->
-										<rng:ref name="model.nameLike.agent"/>
-										<rng:oneOrMore>
-											<rng:ref name="model.pLike"/>
-										</rng:oneOrMore>
-									</rng:choice>
-									<rng:optional>
-										<rng:ref name="model.noteLike"/>
-									</rng:optional>
-								</rng:group>
-							</rng:choice>
-						</content>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<addressee>
-									<persName key="A000046">Arnim, Achim von</persName>
-								</addressee>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<addressee>
-									<persName>unknown</persName><!-- richtig so? -->
-								</addressee>
-							</egXML>
-						</exemplum>
-						<remarks xml:lang="en">
-							<p>In the simplest form the <gi>ct:addressee</gi> element consists of
-								text only. By inclusion of the <ident type="module"
-									>namesdates</ident> module described in <ref
-									target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html"
-									>13 Names, Dates, People, and Places</ref> it is possible to
-								encode the names in more detail.</p>
-						</remarks>
-					</elementSpec>
-
-					<elementSpec ident="placeSender" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<gloss versionDate="2014-01-13" xml:lang="en">place of sender</gloss>
-						<desc versionDate="2014-01-13" xml:lang="en">contains the place where the
-							piece of correspondence was written or sent</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="att.personal"/>
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<rng:choice>
-								<!-- CIF standard -->
-								<rng:optional>
-									<rng:text/>
-								</rng:optional>
-								<!-- Full fledged standard -->
-								<rng:group>
-									<rng:choice>
-										<rng:ref name="model.placeNamePart"/>
-										<rng:oneOrMore>
-											<rng:ref name="model.pLike"/>
-										</rng:oneOrMore>
-									</rng:choice>
-									<rng:optional>
-										<rng:ref name="model.noteLike"/>
-									</rng:optional>
-								</rng:group>
-							</rng:choice>
-						</content>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:placeSender>
-									<settlement>Paris</settlement>
-								</ct:placeSender>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="de">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:placeSender type="writing">
-									<settlement>Potsdam</settlement>
-								</ct:placeSender>
-								<ct:placeSender type="sending">
-									<settlement>Berlin</settlement>
-								</ct:placeSender>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:placeSender ref="http://www.geonames.org/3175395">
-									<country>Italy</country>
-								</ct:placeSender>
-							</egXML>
-						</exemplum>
-					</elementSpec>
-
-					<elementSpec ident="placeAddressee" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<gloss versionDate="2014-01-13" xml:lang="en">place of addressee</gloss>
-						<!-- ask a native -->
-						<!-- we want it to subsume all sorts of addresses -->
-						<desc versionDate="2014-01-13" xml:lang="en">contains the place of the
-							addressee or the place where the piece of correspondence was actually
-							received</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="att.personal"/>
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<rng:choice>
-								<!-- CIF standard -->
-								<rng:optional>
-									<rng:text/>
-								</rng:optional>
-								<!-- Full fledged standard -->
-								<rng:group>
-									<rng:choice>
-										<rng:ref name="model.placeNamePart"/>
-										<rng:oneOrMore>
-											<rng:ref name="model.pLike"/>
-										</rng:oneOrMore>
-									</rng:choice>
-									<rng:optional>
-										<rng:ref name="model.noteLike"/>
-									</rng:optional>
-								</rng:group>
-							</rng:choice>
-						</content>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:placeAddressee>
-									<settlement>New York</settlement>
-								</ct:placeAddressee>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="de">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:placeAddressee type="intended">
-									<settlement>Dresden</settlement>
-								</ct:placeAddressee>
-								<ct:placeAddressee type="received">
-									<settlement>Hosterwitz</settlement>
-								</ct:placeAddressee>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:placeAddressee ref="http://www.geonames.org/5001836">
-									<region>Michigan</region>
-								</ct:placeAddressee>
-							</egXML>
-						</exemplum>
-					</elementSpec>
-
-					<elementSpec ident="dateSender" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<gloss versionDate="2014-01-13" xml:lang="en">date of
-							writing/sending</gloss>
-						<!-- if more than one (writing, sending, whateveryouhave) date shall be encoded, use several dateSender elements! -->
-						<desc versionDate="2014-01-13" xml:lang="en">contains the date of writing or
-							sending a piece of correspondence</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="att.datable"/>
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<!-- Do we need <rng:text/> here as option, as well? -->
-							<rng:optional>
-								<rng:choice>
+							<rng:oneOrMore>
+								<rng:ref name="model.participantPart"/>
+								<!--<rng:choice>
+									<rng:ref name="model.nameLike"/>
 									<rng:ref name="model.dateLike"/>
-									<rng:oneOrMore>
-										<rng:ref name="model.pLike"/>
-									</rng:oneOrMore>
-								</rng:choice>
-								<rng:optional>
 									<rng:ref name="model.noteLike"/>
-								</rng:optional>
-							</rng:optional>
-						</content>
-					</elementSpec>
-
-					<elementSpec ident="dateAddressee" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<gloss versionDate="2014-01-13" xml:lang="en">delivery date</gloss>
-						<!-- if more than one (receiving, reading, whateveryouhave) date shall be encoded, use several dateAddressee elements! -->
-						<desc versionDate="2014-01-13" xml:lang="en">contains the date of receiving
-							or reading a piece of correspondence</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="att.datable"/>
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<!-- Do we need <rng:text/> here as option, as well? -->
-							<rng:optional>
-								<rng:choice>
-									<rng:ref name="model.dateLike"/>
-									<rng:oneOrMore>
-										<rng:ref name="model.pLike"/>
-									</rng:oneOrMore>
-								</rng:choice>
-								<rng:optional>
-									<rng:ref name="model.noteLike"/>
-								</rng:optional>
-							</rng:optional>
-						</content>
-					</elementSpec>
-
-					<!-- need another name?!? -->
-					<!-- neither accMat nor additions nor bindingDesc nor textClass do fully qualify for our purposes -->
-					<elementSpec ident="correspClass" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<!-- modeled after keywords -->
-						<gloss versionDate="2014-02-14" xml:lang="en">correspondence
-							classification</gloss>
-						<desc versionDate="2014-01-13" xml:lang="en">describes the piece of
-							correspondence (e.g. letter, postcard, email), if possible according to
-							some (external) classification scheme</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<rng:choice>
-								<!-- CIF standard -->
-								<rng:text/>
-								<!-- Full fledged standard -->
-								<rng:zeroOrMore>
-									<rng:ref name="term"/>
-								</rng:zeroOrMore>
-								<!-- model.pLike hinzufügen -->
-							</rng:choice>
+								</rng:choice>-->
+							</rng:oneOrMore>
 						</content>
 						<attList>
-							<attDef ident="scheme" usage="opt" mode="add">
-								<desc>identifies the controlled vocabulary within which the set of
-									keywords concerned is defined.</desc>
-								<datatype>
-									<rng:ref name="data.pointer"/>
-								</datatype>
+							<attDef ident="role" mode="add" usage="rec">
+								<valList type="semi">
+									<valItem ident="sender">
+										<desc versionDate="2014-09-05" xml:lang="en">identifies a/the sender of the message</desc>
+									</valItem>
+									<valItem ident="recipient">
+										<desc versionDate="2014-09-05" xml:lang="en">identifies a/the recipient of the message</desc>
+									</valItem>
+								</valList>
 							</attDef>
 						</attList>
-						<exemplum xml:lang="de">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<correspClass>
-									<term>Brief</term>
-									<term>eigenhändig</term>
-									<term>mit Unterschrift</term>
-									<term>mit Umschlag</term>
-								</correspClass>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:correspClass>
-									<term>picture postcard</term>
-									<term>signed personally</term>
-									<term>without envelope</term>
-								</ct:correspClass>
-							</egXML>
-						</exemplum>
-						<remarks>
-							<p>Information about the presence of an envelope may be captured
-								here.</p>
-							<p><gi>ct:correspClass</gi> can both be used as an empty element with
-								according <att>type</att> (and <att>subtype</att>) attributes or in
-								a more elaborate way with several <gi>term</gi> child elements.</p>
-						</remarks>
 					</elementSpec>
-
-					<!-- we'd like a different name?! -->
-					<!-- respStmt is not able to cover the *method* of transmission without assigning responsibility to a person or organisation -->
-					<elementSpec ident="transmission" module="correspondence" mode="add"
-						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<desc versionDate="2014-01-13" xml:lang="en">describes the method and
-							transmitter of the piece of correspondence</desc>
-						<classes>
-							<memberOf key="att.global"/>
-							<memberOf key="att.typed"/>
-							<memberOf key="att.responsibility"/>
-							<memberOf key="model.correspDescPart"/>
-						</classes>
-						<content>
-							<!-- Still somehow unhappy with this content model :-( -->
-							<rng:optional>
-								<rng:choice>
-									<rng:ref name="model.nameLike.agent"/>
-									<rng:oneOrMore>
-										<rng:ref name="model.pLike"/>
-									</rng:oneOrMore>
-								</rng:choice>
-								<rng:optional>
-									<rng:ref name="model.noteLike"/>
-								</rng:optional>
-							</rng:optional>
-						</content>
-						<exemplum xml:lang="de">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:transmission>
-									<p>Übermittelt per Post auf dem Landweg</p>
-								</ct:transmission>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:transmission>
-									<persName ref="https://viaf.org/viaf/46172473/"
-										>Pheidippides</persName>
-								</ct:transmission>
-							</egXML>
-						</exemplum>
-						<exemplum xml:lang="en">
-							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<ct:transmission type="internet"/>
-							</egXML>
-						</exemplum>
-						<remarks>
-							<p><gi>ct:transmission</gi> can both be used as an empty element with
-								according <att>type</att> (and <att>subtype</att>) attributes or in
-								a more verbose way with child element.</p>
-						</remarks>
-					</elementSpec>
-
-					<elementSpec ident="context" mode="add" module="correspondence"
+					
+					<elementSpec ident="correspContext" mode="add" module="correspondence"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
 						<!-- we'd like a different name than <context> -->
 						<gloss xml:lang="en" versionDate="2014-01-13">context</gloss>
@@ -1069,41 +708,73 @@
 							<memberOf key="model.correspDescPart"/>
 						</classes>
 						<content>
-							<rng:choice>
+							<rng:oneOrMore>
+								<rng:ref name="model.correspContextPart"/>
+							</rng:oneOrMore>
+							<!--<rng:choice>
 								<rng:zeroOrMore>
 									<rng:ref name="model.ptrLike"/>
 								</rng:zeroOrMore>
 								<rng:zeroOrMore>
 									<rng:ref name="model.pLike"/>
 								</rng:zeroOrMore>
-							</rng:choice>
-							<rng:zeroOrMore>
+							</rng:choice>-->
+							<!--<rng:zeroOrMore>
 								<rng:ref name="model.noteLike"/>
-							</rng:zeroOrMore>
+							</rng:zeroOrMore>-->
 						</content>
 						<exemplum xml:lang="en">
 							<egXML xmlns="http://www.tei-c.org/ns/Examples">
 								<ct:context>
-									<ptr type="next" subtype="toAuthor"
-										target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
-									<ptr type="prev" subtype="fromAuthor"
-										target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"
-									/>
+									<ptr type="next" subtype="toAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief101VarnhagenanBoeckh"/>
+									<ptr type="prev" subtype="fromAuthor" target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript?Brief103BoeckhanVarnhagen"/>
 								</ct:context>
 							</egXML>
 						</exemplum>
 						<exemplum xml:lang="en">
 							<egXML xmlns="http://www.tei-c.org/ns/Examples">
 								<ct:context>
-									<ref target="http://weber-gesamtausgabe.de/A040962">Previous
-										letter of Carl Maria von Weber to Caroline Brandt: December
-										30, 1816</ref>
-									<ref target="http://weber-gesamtausgabe.de/A041003">Next letter
-										of Carl Maria von Weber to Caroline Brandt: January 5,
-										1817</ref>
+									<ref target="http://weber-gesamtausgabe.de/A040962">Previous letter of Carl Maria von Weber to Caroline Brandt: December 30, 1816</ref> 
+									<ref target="http://weber-gesamtausgabe.de/A041003">Next letter of Carl Maria von Weber to Caroline Brandt: January 5, 1817</ref>
 								</ct:context>
 							</egXML>
 						</exemplum>
+					</elementSpec>
+
+					<!--
+						Redefining existing elements and classes starts here
+					-->
+					
+					<classSpec type="model" ident="model.nameLike" module="tei" mode="change">
+						<classes mode="change">
+							<memberOf key="model.participantPart"/>
+						</classes>
+					</classSpec>
+					
+					<classSpec type="model" ident="model.dateLike" module="tei" mode="change">
+						<classes mode="change">
+							<memberOf key="model.participantPart"/>
+						</classes>
+					</classSpec>
+					
+					<classSpec type="model" ident="model.ptrLike" module="tei" mode="change">
+						<classes mode="change">
+							<memberOf key="model.correspContextPart"/>
+						</classes>
+					</classSpec>
+					
+					<classSpec type="model" ident="model.pLike" module="tei" mode="change">
+						<classes mode="change">
+							<memberOf key="model.correspContextPart"/>
+						</classes>
+					</classSpec>
+					
+					<elementSpec ident="note" module="core" mode="change">
+						<classes mode="change">
+							<memberOf key="model.correspDescPart" mode="add"/>
+							<memberOf key="model.participantPart" mode="add"/>
+							<memberOf key="model.correspContextPart" mode="add"/>
+						</classes>
 					</elementSpec>
 
 				</schemaSpec>
