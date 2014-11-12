@@ -7,9 +7,9 @@ Starting point is the "[second draft](http://wiki.tei-c.org/index.php/SIG:Corres
 
 Most important files
 --------------------
-* odd/proposal.xml: 	The current proposal as ODD file. This is the source of (almost) everything!
-* schema/proposal.rng:	The derived RelaxNG schema for testing with your TEI files 
-* doc/proposal.html: 	The derived documentation in HTML format for convenient reading of the prose parts of the proposal
+* `odd/proposal.xml`: 	The current proposal as ODD file. This is the source of (almost) everything!
+* `schema/proposal.rng`:	The derived RelaxNG schema for testing with your TEI files 
+* `doc/proposal.html`: 	The derived documentation in HTML format for convenient reading of the prose parts of the proposal
 
 Correspondence Interchange Format (CIF)
 ---------------------------------------
