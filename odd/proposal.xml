@@ -587,7 +587,7 @@
 			</div>
 			<div>
 				<head>Formal Specification</head>
-				<schemaSpec ident="correspondence" start="TEI" status="unstable">
+				<schemaSpec ident="correspondence" start="TEI teiCorpus" status="unstable">
 					<moduleRef key="tei"/>
 					<moduleRef key="textstructure"/>
 					<moduleRef key="core"/>
