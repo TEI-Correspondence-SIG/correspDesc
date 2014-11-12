@@ -393,50 +393,50 @@
 		      <settlement>London</settlement>
 		      <postCode>EC</postCode>
 		    </address>
-									</ab>
-								</ct:placeAddressee>
-								<!-- … -->
-							</ct:correspDesc>
-						</egXML>
-					</p>
-				</div>
-				<div>
-					<head>Transmission of correspondence</head>
-					<p> Because a piece of correspondence generally has a <emph>process/a medium of
-							transfer</emph> the <gi>ct:transmission</gi> element allows to clearly
-						identify e.g. messenger (Pheidippides who orally delivers the news of the
-						victory against the Persians from Marathon to Athens), carrier (person who
-						takes Goethe's letters to Charlotte Schiller), postman (official letter
-						carrier), carriage, fax machine etc. The <gi>ct:transmission</gi> element
-						therefor in some respect is related to <ref
-							target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/ref-channel.html"
-							>channel</ref> in the <ref
-							target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/CC.html#CCAHTD"
-							> 15.2.1 Text Description</ref> (for example regarding the technical
-						channel <soCalled>internet</soCalled> for emails), but it may also refer to
-						persons involved in the process of communication/transmission as well as to
-						the method of transmission without assigning responsibility to a person,
-						organisation etc. <gi>ct:transmission</gi> can both be used as an empty
-						element with according <att>type</att> (and <att>subtype</att>)<note
-							resp="#sbauman.emt">I'd prefer an attribute for the purpose, rather than
-								<att>type</att>.</note> attributes or in a more verbose way with
-						child element(s).</p>
+                                    </ab>
+                                </ct:placeAddressee>
+                                <!-- … -->
+                            </ct:correspDesc>
+                        </egXML>
+                    </p>
+                </div>
+                <div>
+                    <head>Transmission of correspondence</head>
+                    <p> Because a piece of correspondence generally has a <emph>process/a medium of
+                            transfer</emph> the <gi>ct:transmission</gi> element allows to clearly
+                        identify e.g. messenger (Pheidippides who orally delivers the news of the
+                        victory against the Persians from Marathon to Athens), carrier (person who
+                        takes Goethe's letters to Charlotte Schiller), postman (official letter
+                        carrier), carriage, fax machine etc. The <gi>ct:transmission</gi> element
+                        therefor in some respect is related to <ref
+                            target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/ref-channel.html"
+                            >channel</ref> in the <ref
+                            target="http://www.tei-c.org/release/doc/tei-p5-doc/de/html/CC.html#CCAHTD"
+                            > 15.2.1 Text Description</ref> (for example regarding the technical
+                        channel <soCalled>internet</soCalled> for emails), but it may also refer to
+                        persons involved in the process of communication/transmission as well as to
+                        the method of transmission without assigning responsibility to a person,
+                        organisation etc. <gi>ct:transmission</gi> can both be used as an empty
+                        element with according <att>type</att> (and <att>subtype</att>)<note
+                            resp="#sbauman.emt">I'd prefer an attribute for the purpose, rather than
+                                <att>type</att>.</note> attributes or in a more verbose way with
+                        child element(s).</p>
 
-					<egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
-						<ct:transmission>
-							<p>Übermittelt per Post auf dem Landweg</p>
-						</ct:transmission>
-					</egXML>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="de">
+                        <ct:transmission>
+                            <p>Übermittelt per Post auf dem Landweg</p>
+                        </ct:transmission>
+                    </egXML>
 
-					<egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-						<ct:transmission>
-							<persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
-						</ct:transmission>
-					</egXML>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+                        <ct:transmission>
+                            <persName ref="https://viaf.org/viaf/46172473/">Pheidippides</persName>
+                        </ct:transmission>
+                    </egXML>
 
-					<egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-						<ct:transmission type="internet"/>
-					</egXML>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+                        <ct:transmission type="internet"/>
+                    </egXML>
 
 				</div>
 				<div>
@@ -504,46 +504,47 @@
 							</correspClass>
 						</egXML>
 						<!--pieces of correspondence may be <emph>categorized</emph> in terms of their
+
 		object- and/or eventlike nature (e.g. letter, signed personally; telegram;
 		picture postcard; copy; draft) within the <gi>correspDesc</gi> element. Therefore, the
 		<gi>correspClass</gi> element may be used by reference to a (external)
 		classification scheme <!-\-  cf. textClass-Geschichte -\->as used in library and documentation work (@scheme)<!-\- bei textClass gucken -\->. By the use of the <gi>term</gi> element
 		different categories can be implemented as child elements within the
 		<gi>correspClass</gi> element. -->
-					</p>
+                    </p>
 
-					<!-- wohin unterscheidung, ob manuscript oder printed edition? -->
-					<!-- in correspClass Abschrift/copy? -->
-				</div>
-			</div>
-			<div>
-				<head>Correspondence Interchange Format (CIF)</head>
-				<p>Next to encoding with an elaborate structure for detailed data capture, there is
-					the possibility to use the basic structure of the <soCalled>Correspondence
-						Interchange Format (CIF)</soCalled>. It is designed to enable easy data
-					interchange between digital editions and projects and is used in combination
-					with established standards, e.g. authorial files for persons and places,
-					ISO-codes for dates, etc.<!-- auch correspSearch erwähnen? --></p>
-			</div>
-			<div>
-				<head>Future Work</head>
-				<p>After dealing with correspondence-specific meta data, the next steps are: <list
-						type="simple">
-						<item>restructuring correspondence-related transcriptional elements, as
-							there are several problems with elements like <gi>postscript</gi>,
-								<gi>opener</gi>, <gi>closer</gi>, etc.</item>
-						<item>developing best practice recommendations, with examples, for the
-							encoding of correspondence material.</item>
-					</list></p>
-			</div>
+                    <!-- wohin unterscheidung, ob manuscript oder printed edition? -->
+                    <!-- in correspClass Abschrift/copy? -->
+                </div>
+            </div>
+            <div>
+                <head>Correspondence Interchange Format (CIF)</head>
+                <p>Next to encoding with an elaborate structure for detailed data capture, there is
+                    the possibility to use the basic structure of the <soCalled>Correspondence
+                        Interchange Format (CIF)</soCalled>. It is designed to enable easy data
+                    interchange between digital editions and projects and is used in combination
+                    with established standards, e.g. authorial files for persons and places,
+                    ISO-codes for dates, etc.<!-- auch correspSearch erwähnen? --></p>
+            </div>
+            <div>
+                <head>Future Work</head>
+                <p>After dealing with correspondence-specific meta data, the next steps are: <list
+                        type="simple">
+                        <item>restructuring correspondence-related transcriptional elements, as
+                            there are several problems with elements like <gi>postscript</gi>,
+                                <gi>opener</gi>, <gi>closer</gi>, etc.</item>
+                        <item>developing best practice recommendations, with examples, for the
+                            encoding of correspondence material.</item>
+                    </list></p>
+            </div>
 
-			<!-- To be discussed: -->
-			<!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
-			<!-- dual use policy for explicit encoding and minimal exchange format -->
-			<!-- create schematron rules to check against redundant use of both flat and verbose structure -->
-			<!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
-			<!-- Umschlag diskutieren. AM besten gleich zu Beginn der 'Implemenation' -->
-			<!-- decl in Implementation einbauen -->
+            <!-- To be discussed: -->
+            <!-- Presence/absence (classification of the letter) and text (tei:text/tei:body or tei:front?) and physical description (tei:physDesc) of an envelope -->
+            <!-- dual use policy for explicit encoding and minimal exchange format -->
+            <!-- create schematron rules to check against redundant use of both flat and verbose structure -->
+            <!-- create schematron rules and add prose to keep people from adding @when both on <dateSender> and its child <date> (same applies to <dateAddressee>) -->
+            <!-- Umschlag diskutieren. AM besten gleich zu Beginn der 'Implemenation' -->
+            <!-- decl in Implementation einbauen -->
 
 		</body>
 		<back>
@@ -583,10 +584,11 @@
 					<moduleRef key="namesdates"/>
 					<moduleRef key="linking"/>
 
-					<moduleSpec ident="correspondence" mode="add">
-						<desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
-							including letters, telegrams, postcards, e-mail etc.</desc>
-					</moduleSpec>
+
+                    <moduleSpec ident="correspondence" mode="add">
+                        <desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
+                            including letters, telegrams, postcards, e-mail etc.</desc>
+                    </moduleSpec>
 
 					<classSpec ident="model.correspDescPart" mode="add" type="model"
 						module="correspondence">
