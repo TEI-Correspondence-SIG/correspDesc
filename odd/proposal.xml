@@ -21,6 +21,10 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
+			<change when="2014-11-13">
+					<persName>Sabine Seifert</persName>
+					<desc>Corrected some minor mistakes, rephrasing of gloss of element participant.</desc>
+				</change>
 			<change when="2014-11-11">
 				<persName>Peter Stadler</persName>
 				<desc>Duely implemented changes decided on during last 
@@ -85,9 +89,8 @@
 			<div>
 				<head>About this document</head>
 				<p>This document proposes the addition of a TEI module for correspondence. It is the
-					product of a Correspondence SIG task force (Sabine Seifert, Marcel Illetschko,
-					Peter Stadler<!--
-	Sabine: Reihenfolge?! -->) with valuable input from various
+					product of a Correspondence SIG task force (Marcel Illetschko, Sabine Seifert
+					Peter Stadler) with valuable input from various
 					people.</p>
 				<p>The aim of the proposal is to define a common set of correspondence-specific meta
 					data, brought together at one place in the TEI header. The lack of special
@@ -676,7 +679,7 @@
 					<elementSpec ident="participant" module="correspondence" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
 						<desc versionDate="2014-09-05" xml:lang="en">contains a structured description of the place,  
-							the name and the date of the sending of a message</desc>
+							the name of a person/organization and the date related to the sending/receiving of a message</desc>
 						<classes>
 							<memberOf key="att.global"/>
 							<memberOf key="att.typed"/>
@@ -717,8 +720,8 @@
 					
 					<elementSpec ident="correspContext" mode="add" module="correspondence"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<!-- we'd like a different name than <context> -->
-						<gloss xml:lang="en" versionDate="2014-01-13">context</gloss>
+						<!-- we'd like a different name than <correspContext> -->
+						<gloss xml:lang="en" versionDate="2014-01-13">correspondence context</gloss>
 						<gloss xml:lang="de" versionDate="2014-01-13">Korrespondenzstelle</gloss>
 						<!-- related by sender/addressee or topics … -->
 						<desc xml:lang="en" versionDate="2014-01-13">provides references to
