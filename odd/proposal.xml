@@ -700,13 +700,26 @@
 							</rng:oneOrMore>
 						</content>
 						<attList>
-							<attDef ident="role" mode="add" usage="rec">
-								<valList type="semi">
-									<valItem ident="sender">
-										<desc versionDate="2014-09-05" xml:lang="en">identifies a/the sender of the message</desc>
+							<!-- How to set sample values? Seems I can't overwrite like this … -->
+							<attDef ident="type" mode="change" usage="rec">
+								<datatype>
+									<ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+								</datatype>
+								<valList type="open" mode="add">
+									<valItem ident="sending">
+										<desc versionDate="2014-11-25" xml:lang="en">identifies a/the sending action of the message</desc>
 									</valItem>
-									<valItem ident="recipient">
-										<desc versionDate="2014-09-05" xml:lang="en">identifies a/the recipient of the message</desc>
+									<valItem ident="receiving">
+										<desc versionDate="2014-11-25" xml:lang="en">identifies a/the receiving action of the message</desc>
+									</valItem>
+									<valItem ident="transmitting">
+										<desc versionDate="2014-11-25" xml:lang="en">identifies a/the transmitting action of the message</desc>
+									</valItem>
+									<valItem ident="redirecting">
+										<desc versionDate="2014-11-25" xml:lang="en">identifies a/the redirecting action of the message</desc>
+									</valItem>
+									<valItem ident="forwarding">
+										<desc versionDate="2014-11-25" xml:lang="en">identifies a/the forwarding action of the message</desc>
 									</valItem>
 								</valList>
 							</attDef>
