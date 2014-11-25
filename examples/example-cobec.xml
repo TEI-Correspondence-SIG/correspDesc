@@ -29,24 +29,24 @@
         <profileDesc>
             <!-- The proposed ct:correspDesc element starts here -->
             <ct:correspDesc xml:id="correspDesc-cobec">
-                <!-- names are made anonymous in this corpus due to privacy protection -->
-                <ct:participant role="sender">
+                <ct:correspAction type="sending">
+                    <!-- names are made anonymous in this corpus due to privacy protection -->
                     <persName key="PN0001">PN0001</persName>
                     <date when="1999-06-02">Wed, 02 Jun 1999</date>
-                </ct:participant>
-                <!-- addressees are categorized (to, cc, bcc) via @type attribute -->
-                <ct:participant role="recipient" type="to">
+                </ct:correspAction>
+                <!-- addressees are categorized (to, cc, bcc) via @subtype attribute -->
+                <ct:correspAction type="receiving" subtype="to">
                     <persName key="PN0002">PN0002</persName>
-                </ct:participant>
-                <ct:participant role="recipient" type="to">
+                </ct:correspAction>
+                <ct:correspAction type="receiving" subtype="to">
                     <persName key="PN0003">PN0003</persName>
-                </ct:participant>
-                <ct:participant role="recipient" type="cc">
+                </ct:correspAction>
+                <ct:correspAction type="receiving" subtype="cc">
                     <persName key="PN0004">PN0004</persName>
-                </ct:participant>
-                <ct:participant role="recipient" type="cc">
+                </ct:correspAction>
+                <ct:correspAction type="receiving" subtype="cc">
                     <persName key="PN0005">PN0005</persName>
-                </ct:participant>
+                </ct:correspAction>
                 <ct:correspContext>
                     <!--3) where in the chain the email belongs.-->
                     <p>1 of 1</p>

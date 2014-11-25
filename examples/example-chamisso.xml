@@ -27,17 +27,17 @@
         <profileDesc>
             <!-- The proposed ct:correspDesc element starts here -->
             <ct:correspDesc xml:id="correspDesc-chamisso">
-                <ct:participant role="sender">
+                <ct:correspAction type="sending">
                     <persName ref="http://d-nb.info/gnd/118520040">Adelbert von Chamisso</persName>
                     <placeName ref="http://d-nb.info/gnd/4835139-8">Vertus</placeName>
                     <date when="1807-01-29">29 January 1807</date>
-                </ct:participant>
-                <ct:participant role="recipient">
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
                     <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
                     <placeName ref="http://www.geonames.org/3029241">Caen</placeName>
                     <!-- for an unknown date the following date element could simply be skipped, alternatively -->
                     <date>unknown</date>
-                </ct:participant>
+                </ct:correspAction>
                 <ct:correspContext>
                     <ref type="prev"
                         target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief023ChamissoandeLaFoye"
