@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Letter from Werther to Wilhelm (within Goethe's novel 'The sorrows of young
+                    Werther')</title>
+                <title type="sub">Example TEI document with the inclusion of the proposed
+                    ct:correspDesc element for the encoding of correspondence specific meta
+                    data</title>
+                <!-- example of a fictional letter in a novel. -->
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Sabine Seifert</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl><author ref="http://d-nb.info/gnd/118540238">Johann Wolfgang von
+                        Goethe</author>: <title>Die Leiden des jungen Werther</title>. <pubPlace
+                        ref="http://d-nb.info/gnd/4035206-7">Leipzig</pubPlace>:
+                        <publisher>Weygandsche Buchhandlung</publisher>, <date when-iso="1825"
+                        >1825</date> (<edition>new edition</edition>), pp. 80-83.</bibl>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- The proposed ct:correspDesc element starts here -->
+            <ct:correspDesc xml:id="correspDesc-goethe-1771-07-30">
+                <ct:correspAction type="sending">
+                    <persName>Werther</persName>
+                    <!-- How to encode that this is a fictional person? 
+                        <persName type="fictional"> or sth. means that just the name (and not the person) is fictional?! <person> not allowed. -->
+                    <placeName type="fictional">Wahlheim (i.e. Garbenheim, a district of <placeName
+                            ref="http://d-nb.info/gnd/4065878-8">Wetzlar</placeName>)</placeName>
+                    <date when="1771-07-30">30 July 1771</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Wilhelm</persName>
+                    <!-- How to encode that this is a fictional person? 
+                        <persName type="fictional"> or sth. means that just the name (and not the person) is fictional?! <person> not allowed. -->
+                    <!-- for an unknown date and place the respective elements could simply be skipped, alternatively -->
+                    <placeName>unkown</placeName>
+                    <date>unknown</date>
+                </ct:correspAction>
+                <ct:correspContext>
+                    <p>Previous letter: <persName>Werther</persName> to
+                        <persName>Wilhelm</persName>, <date when-iso="1771-07-26">26 July
+                            1771</date>, pp. 79-80.</p>
+                    <p>Next letter: <persName>Werther</persName> to <persName>Wilhelm</persName>,
+                            <date when-iso="1771-08-08">8 August 1771</date>, pp. 83-85.</p>
+                    <!-- Encoding of information what is previous and and what is next letter? -->
+                </ct:correspContext>
+            </ct:correspDesc>
+            <!-- The proposed ct:correspDesc element ends here -->
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div><!-- Transcription of novel before letter with xml:id="correspDesc-goethe-1771-07-30" --></div>
+            <div decls="correspDesc-goethe-1771-07-30"/>
+            <div><!-- Transcription of novel after letter with xml:id="correspDesc-goethe-1771-07-30" --></div>
+        </body>
+    </text>
+</TEI>

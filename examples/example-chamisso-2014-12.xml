@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Letter from Adelbert von Chamisso to Louis de La Foye (Excerpt)</title>
+                <title type="sub">Example TEI document with the inclusion of the proposed
+                    ct:correspDesc element for the encoding of correspondence specific meta
+                    data</title>
+                <!-- example of a letter (excerpt) in a biography. -->
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Sabine Seifert</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl><author ref="http://d-nb.info/gnd/106054325">Werner Feudel</author>: <title
+                        ref="http://d-nb.info/881272949">Adelbert von Chamisso. Leben und
+                        Werk</title>. <pubPlace ref="http://d-nb.info/gnd/4035206-7"
+                        >Leipzig</pubPlace>: <publisher>Reclam</publisher>, <date when-iso="1988"
+                        >1988</date> (<edition>3rd edition</edition>), p. 9 (quoted according
+                            to:<bibl><editor ref="http://d-nb.info/gnd/119209349">Julius Eduard
+                            Hitzig</editor>, <editor ref="#">Johann Friedrich Palm</editor>: <title
+                            ref="http://d-nb.info/950186597">Leben und Briefe von Adelbert von
+                            Chamisso</title>. <pubPlace ref="#l1103">Berlin</pubPlace>:
+                            <publisher>Weidmann</publisher>, <date when-iso="1864">1864</date>
+                            (<edition>5th edition</edition>), vol. 5, pp. 59f.</bibl>
+                    <!-- one <bibl> in another <bibl> when the first edition quotes the second one? -->
+                </bibl>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- The proposed ct:correspDesc element starts here -->
+            <ct:correspDesc xml:id="correspDesc-chamisso">
+                <ct:correspAction type="sending">
+                    <persName ref="http://d-nb.info/gnd/118520040">Adelbert von Chamisso</persName>
+                    <placeName>unknown</placeName>
+                    <date when="1805-01-20">20 January 1805</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
+                    <!-- for an unknown date and place the respective elements could simply be skipped, alternatively -->
+                    <placeName>unkown</placeName>
+                    <date>unknown</date>
+                </ct:correspAction>
+                <!--  <ct:correspContext/> -->
+            </ct:correspDesc>
+            <!-- The proposed ct:correspDesc element ends here -->
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p/>
+        </body>
+    </text>
+</TEI>
