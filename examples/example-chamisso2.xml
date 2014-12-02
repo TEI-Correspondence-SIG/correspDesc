@@ -24,18 +24,12 @@
                 </availability>
             </publicationStmt>
             <sourceDesc>
-                <bibl><author ref="http://d-nb.info/gnd/106054325">Werner Feudel</author>: <title
-                        ref="http://d-nb.info/881272949">Adelbert von Chamisso. Leben und
-                        Werk</title>. <pubPlace ref="http://d-nb.info/gnd/4035206-7"
-                        >Leipzig</pubPlace>: <publisher>Reclam</publisher>, <date when-iso="1988"
-                        >1988</date> (<edition>3rd edition</edition>), p. 9 (quoted according
-                            to:<bibl><editor ref="http://d-nb.info/gnd/119209349">Julius Eduard
-                            Hitzig</editor>, <editor ref="#">Johann Friedrich Palm</editor>: <title
-                            ref="http://d-nb.info/950186597">Leben und Briefe von Adelbert von
-                            Chamisso</title>. <pubPlace ref="#l1103">Berlin</pubPlace>:
-                            <publisher>Weidmann</publisher>, <date when-iso="1864">1864</date>
-                            (<edition>5th edition</edition>), vol. 5, pp. 59f.</bibl>
-                    <!-- one <bibl> in another <bibl> when the first edition quotes the second one? -->
+                <bibl>Werner Feudel: Adelbert von Chamisso. Leben und Werk. Leipzig: Reclam, 1988
+                    (3rd edition), p. 9 (quoted according to:<bibl>Julius Eduard Hitzig, Johann
+                        Friedrich Palm: Leben und Briefe von Adelbert von Chamisso. Berlin:
+                        Weidmann, 1864 (5th edition), vol. 5, pp. 59f.</bibl>).
+                    <!-- one <bibl> in another <bibl> when the source (here the biography) quotes from another source 
+                        (here "Leben und Briefe" = "Life and Letters of Chamisso" by Hitzig/Palm? -->
                 </bibl>
             </sourceDesc>
         </fileDesc>
@@ -49,9 +43,9 @@
                 </ct:correspAction>
                 <ct:correspAction type="receiving">
                     <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
-                    <!-- for an unknown date and place the respective elements could simply be skipped, alternatively -->
+                    <!-- for an unknown date and place the respective elements can be skipped, or used like this:
                     <placeName>unkown</placeName>
-                    <date>unknown</date>
+                    <date>unknown</date> -->
                 </ct:correspAction>
                 <!--  <ct:correspContext/> -->
             </ct:correspDesc>
@@ -60,7 +54,7 @@
     </teiHeader>
     <text>
         <body>
-            <p/>
+            <p><!-- transcription of letter (excerpt) (just the letter, no transcription of the rest of the biography) --></p>
         </body>
     </text>
 </TEI>
