@@ -5,8 +5,8 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>The COBEC Sampler Corpus: The Corpus of Business English Correspondence</title>
-                <title type="sub">Example TEI document with the inclusion of the proposed ct:correspDesc element for the encoding of correspondence specific meta data</title>
+                <title>Example encoding of an email with several recipients (to and cc)</title>
+                <title type="sub">Example taken from "The COBEC Sampler Corpus: The Corpus of Business English Correspondence"</title>
                 <respStmt>
                     <resp>example provided by</resp>
                     <name>Emma Moreton</name>
