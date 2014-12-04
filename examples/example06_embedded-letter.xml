@@ -21,12 +21,16 @@
             </publicationStmt>
             <sourceDesc>
                 <bibl>Werner Feudel: Adelbert von Chamisso. Leben und Werk. Leipzig: Reclam, 1988
-                    (3rd edition), p. 9.</bibl>
+                    (3rd edition).</bibl>
+                <bibl sameAs="#letter1">Werner Feudel: Adelbert von Chamisso. Leben und Werk.
+                    Leipzig: Reclam, 1988 (3rd edition), p. 9.</bibl>
+                <!-- Wenn die gesamte Biographie kodiert wird, dann brauchen wir doch zwei <bibl>: einmal für die ganze biographie und
+                einmal die genaue stelle des briefes innerhalb der biographie?! mit @sameAs kodieren oder besser anders? -->
             </sourceDesc>
         </fileDesc>
         <profileDesc>
             <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc>
+            <ct:correspDesc xml:id="letter1">
                 <ct:correspAction type="sending">
                     <persName>Adelbert von Chamisso</persName>
                     <placeName>unknown</placeName>
@@ -44,7 +48,9 @@
     </teiHeader>
     <text>
         <body>
-            <p><!-- Transcription of text of letter excerpt here, no transcription of the text of the biography. --></p>
+            <div><!-- Transcription of text of biography. --></div>
+            <div decls="#letter1"><!-- Transcription of text of letter excerpt. --></div>
+            <div><!-- Transcription of text of biography. --></div>
         </body>
     </text>
 </TEI>
