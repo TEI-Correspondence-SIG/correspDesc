@@ -5,12 +5,7 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>Letter from Werther to Wilhelm (within Goethe's novel 'The sorrows of young
-                    Werther')</title>
-                <title type="sub">Example TEI document with the inclusion of the proposed
-                    ct:correspDesc element for the encoding of correspondence specific meta
-                    data</title>
-                <!-- example of a fictional letter in a novel. -->
+                <title>Example of a fictional letter (in a novel)</title>
                 <respStmt>
                     <resp>example provided by</resp>
                     <name>Sabine Seifert</name>
@@ -24,6 +19,16 @@
                     </licence>
                 </availability>
             </publicationStmt>
+            <notesStmt>
+                <note>
+                    <p>Fictional correspondence can be encoded the same way as 'real'
+                        correspondence. It may be useful to also encode the fictionality of the
+                        correspondence/people/places/dates.</p>
+                    <p>When there are several letters within the fictional text, the text of the
+                        letter in the element body needs to be linked with the corresponding
+                        correspDesc in the header.</p>
+                </note>
+            </notesStmt>
             <sourceDesc>
                 <bibl>Johann Wolfgang von Goethe: Die Leiden des jungen Werther. Leipzig:
                     Weygandsche Buchhandlung, 1825 (new edition), pp. 80-83.</bibl>
@@ -31,32 +36,23 @@
         </fileDesc>
         <profileDesc>
             <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc xml:id="correspDesc-goethe-1771-07-30">
+            <ct:correspDesc>
                 <ct:correspAction type="sending">
                     <persName>Werther</persName>
-                    <!-- How to encode that this is a fictional person? 
-                        <persName type="fictional"> or sth. means that just the name (and not the person) is fictional?! 
-                        <person> not allowed. -->
-                    <placeName type="fictional">Wahlheim (i.e. Garbenheim, a district of <placeName
-                            ref="http://d-nb.info/gnd/4065878-8">Wetzlar</placeName>)</placeName>
+                    <placeName>Wahlheim</placeName>
                     <date when="1771-07-30">30 July 1771</date>
                 </ct:correspAction>
                 <ct:correspAction type="receiving">
                     <persName>Wilhelm</persName>
-                    <!-- How to encode that this is a fictional person? 
-                        <persName type="fictional"> or sth. means that just the name (and not the person) is fictional?! 
-                        <person> not allowed. -->
-                    <!-- for an unknown date and place the respective elements can be skipped, or used like this:
                     <placeName>unkown</placeName>
-                    <date>unknown</date> -->
+                    <date>unknown</date>
                 </ct:correspAction>
                 <ct:correspContext>
                     <p>Previous letter: <persName>Werther</persName> to
-                        <persName>Wilhelm</persName>, <date when-iso="1771-07-26">26 July
-                            1771</date>, pp. 79-80.</p>
+                        <persName>Wilhelm</persName>, <date when="1771-07-26">26 July 1771</date>,
+                        pp. 79-80.</p>
                     <p>Next letter: <persName>Werther</persName> to <persName>Wilhelm</persName>,
-                            <date when-iso="1771-08-08">8 August 1771</date>, pp. 83-85.</p>
-                    <!-- Encoding of information what is previous and what is next letter? -->
+                            <date when="1771-08-08">8 August 1771</date>, pp. 83-85.</p>
                 </ct:correspContext>
             </ct:correspDesc>
             <!-- The proposed ct:correspDesc element ends here -->
@@ -64,9 +60,7 @@
     </teiHeader>
     <text>
         <body>
-            <div><!-- Transcription of novel before letter with xml:id="correspDesc-goethe-1771-07-30" --></div>
-            <div decls="correspDesc-goethe-1771-07-30"/>
-            <div><!-- Transcription of novel after letter with xml:id="correspDesc-goethe-1771-07-30" --></div>
+            <div><!-- Transcription of the fictional letter. --></div>
         </body>
     </text>
 </TEI>

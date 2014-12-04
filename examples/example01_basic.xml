@@ -5,8 +5,7 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>Letter from Adelbert von Chamisso to Louis de La Foye</title>
-                <title type="sub">Example TEI document with the inclusion of the proposed ct:correspDesc element for the encoding of correspondence specific meta data</title>
+                <title>Example encoding for a basic correspondence between person A and B</title>
                 <respStmt>
                     <resp>example provided by</resp>
                     <name>Sabine Seifert</name>
@@ -21,32 +20,34 @@
                 </availability>
             </publicationStmt>
             <sourceDesc>
-                <bibl><ref target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief024ChamissoandeLaFoye">Letter from Adelbert von Chamisso to Louis de La Foye  (Vertus, 29 January 1807) [Digital Edition]</ref></bibl>
+                <bibl><ref
+                        target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief024ChamissoandeLaFoye"
+                        >Letter from Adelbert von Chamisso to Louis de La Foye (Vertus, 29 January
+                        1807) [Digital Edition]</ref></bibl>
             </sourceDesc>
         </fileDesc>
         <profileDesc>
             <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc xml:id="correspDesc-chamisso">
+            <ct:correspDesc>
                 <ct:correspAction type="sending">
-                    <persName ref="http://d-nb.info/gnd/118520040">Adelbert von Chamisso</persName>
-                    <placeName ref="http://d-nb.info/gnd/4835139-8">Vertus</placeName>
+                    <persName>Adelbert von Chamisso</persName>
+                    <placeName>Vertus</placeName>
                     <date when="1807-01-29">29 January 1807</date>
                 </ct:correspAction>
                 <ct:correspAction type="receiving">
-                    <persName ref="http://d-nb.info/gnd/116057203">Louis de La Foye</persName>
-                    <placeName ref="http://www.geonames.org/3029241">Caen</placeName>
+                    <persName>Louis de La Foye</persName>
+                    <placeName>Caen</placeName>
                     <!-- for an unknown date the following date element could simply be skipped, alternatively -->
                     <date>unknown</date>
                 </ct:correspAction>
                 <ct:correspContext>
                     <ref type="prev"
                         target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief023ChamissoandeLaFoye"
-                        >Previous letter of Adelbert von Chamisso to Louis de La Foye: 16
-                        January 1807</ref>
+                        >Previous letter of Adelbert von Chamisso to Louis de La Foye: 16 January
+                        1807</ref>
                     <ref type="next"
                         target="http://tei.ibi.hu-berlin.de/berliner-intellektuelle/manuscript.pl?id=Brief025ChamissoandeLaFoye"
-                        >Next letter of Adelbert von Chamisso to Louis de La Foye: 07 May
-                        1810</ref>
+                        >Next letter of Adelbert von Chamisso to Louis de La Foye: 07 May 1810</ref>
                 </ct:correspContext>
             </ct:correspDesc>
             <!-- The proposed ct:correspDesc element ends here -->
@@ -54,7 +55,7 @@
     </teiHeader>
     <text>
         <body>
-            <p/>
+            <p><!-- Transcription of text of letter here. --></p>
         </body>
     </text>
 </TEI>
