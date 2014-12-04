@@ -23,10 +23,11 @@
                 <note>
                     <p>Fictional correspondence can be encoded the same way as 'real'
                         correspondence. It may be useful to also encode the fictionality of the
-                        correspondence/people/places/dates.</p>
+                        correspondence/people/places/dates within e.g. textClass.</p>
                     <p>When there are several letters within the fictional text, the text of the
                         letter in the element body needs to be linked with the corresponding
-                        correspDesc in the header.</p>
+                        correspDesc in the header (see <ref target="example07_anthology-of-letters.xml">example07_anthology-of-letters.xml</ref> 
+                        and <ref target="example06_embedded-letter.xml">example06_embedded-letter.xml</ref>). </p>
                 </note>
             </notesStmt>
             <sourceDesc>
@@ -44,7 +45,7 @@
                 </ct:correspAction>
                 <ct:correspAction type="receiving">
                     <persName>Wilhelm</persName>
-                    <placeName>unkown</placeName>
+                    <placeName>unknown</placeName>
                     <date>unknown</date>
                 </ct:correspAction>
                 <ct:correspContext>
