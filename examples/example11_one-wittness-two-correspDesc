@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Example encoding of two acts of correspondence connected to one document</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Marcel Illetschko</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <notesStmt>
+                <note>
+                    <p>In this example taken from ‘The Interdisciplinary Life and Letters of John G. Neihardt’ (http://neihardt.unl.edu) a letter by John Neihardt has a post script written on it by his daughter Enid Neihardt. 
+                        Also, the letter was originally sent to New River State College, Montgomery, West Virginia, but redirected to New York. This information is given on the envelope.</p>
+                    <p>In this file we want to focus on the fact, that there are two acts of correspondence connected to one textual wittness/document.
+                        For the encoding of the postal redirection see: example09_redirecting.</p>
+                </note>
+            </notesStmt>
+                <sourceDesc>
+                    <bibl>Letter from John G. Neihardt to Julius T. House, 17 December 1932, with a postscipt by Enid Neihardt</bibl>
+                </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- The proposed ct:correspDesc element starts here -->
+            <ct:correspDesc xml:id="correspDesc-one-wittness-two-correspDesc_1">
+                <ct:correspAction type="sending">
+                    <persName>John Gneisenau Neihardt</persName>
+                    <placeName>Branson (Montgomery)</placeName>
+                    <date>17 December 1932</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Julius Temple House</persName>
+                    <placeName>New York</placeName>
+                    <!-- for an unknown date the respective elements can be skipped, or used like this:
+                    <date>unknown</date> --> 
+                </ct:correspAction>
+                <!--  <ct:correspContext/> -->
+            </ct:correspDesc>
+            <ct:correspDesc xml:id="correspDesc-one-wittness-two-correspDesc_2">
+                <ct:correspAction type="sending">
+                    <persName>Enid Neihardt</persName>
+                    <placeName>Branson (Montgomery)</placeName>
+                    <date>17 December 1932</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Julius Temple House</persName>
+                    <placeName>New York</placeName>
+                    <!-- for an unknown date the respective elements can be skipped, or used like this:
+                    <date>unknown</date> -->                
+                </ct:correspAction>
+                <!--  <ct:correspContext/> -->
+            </ct:correspDesc>
+            <!-- The proposed ct:correspDesc element ends here -->
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div decls="#correspDesc-one-wittness-two-correspDesc_1"><!-- Transcription of "letter one" --></div>
+            <div decls="#correspDesc-one-wittness-two-correspDesc_2"><!-- Transcription of "letter two" --></div>
+        </body>
+    </text>
+</TEI>
