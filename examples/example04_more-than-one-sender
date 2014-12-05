@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Example encoding of a correspondence with more than one sender</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Marcel Illetschko</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>Brief Adolf Hauffen, Hans Lambel, Hans Meyer, Richard Rosenbaum, August Sauer, Hans Tschinkel, Franz Werner und Spiridion Wukadinovic an Bernhard Seuffert, 22.01.1898, Österreichische Nationalbibliothek, Nachlass August Sauer, 422/1-346</bibl>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- The proposed ct:correspDesc element starts here -->
+            <ct:correspDesc xml:id="correspDesc-more-than-one-sender">
+                <ct:correspAction type="sending">
+                    <persName>Adolf Hauffen</persName>
+                    <persName>Hans Lambel</persName>
+                    <persName>Hans Meyer</persName>
+                    <persName>Richard Rosenbaum</persName>
+                    <persName>August Sauer</persName>
+                    <persName>Hans Tschinkel</persName>
+                    <persName>Franz Werner</persName>
+                    <persName>Spiridion Wukadinovic</persName>
+                    <placeName>Prague</placeName>
+                    <date>22 January 1898</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Bernhard Seuffert</persName>
+                    <placeName>Graz</placeName>
+                    <date>24 January 1898</date>
+                </ct:correspAction>
+                <!--  <ct:correspContext/> -->
+            </ct:correspDesc>
+            <!-- The proposed ct:correspDesc element ends here -->
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p></p>
+        </body>
+    </text>
+</TEI>
