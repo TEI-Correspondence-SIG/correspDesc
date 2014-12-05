@@ -21,19 +21,19 @@
             </publicationStmt>
             <notesStmt>
                 <note>
-                    <p>In this example taken from ‘The Interdisciplinary Life and Letters of John G. Neihardt’ (http://neihardt.unl.edu) a letter by John Neihardt has a post script written on it by his daughter Enid Neihardt. 
-                        Also, the letter was originally sent to New River State College, Montgomery, West Virginia, but redirected to New York. This information is given on the envelope.</p>
-                    <p>In this file we want to focus on the fact, that there are two acts of correspondence connected to one textual wittness/document.
-                        For the encoding of the postal redirection see: example09_redirecting.</p>
+                    <p>In this example taken from ‘The Interdisciplinary Life and Letters of John G. Neihardt’ (http://neihardt.unl.edu) a letter by John Neihardt has a postscript written on it by his daughter Enid Neihardt. 
+                        Also, the letter was originally sent to New River State College, Montgomery, West Virginia, but redirected to New York from the office there. This information is given on the envelope.</p>
+                    <p>In this file we want to focus on the fact, that there are two acts of correspondence connected to one textual witness/document.
+                        For the encoding of the postal redirection see: <ref target="example09_redirecting.xml">example09_redirecting.xml</ref>.</p>
                 </note>
             </notesStmt>
                 <sourceDesc>
-                    <bibl>Letter from John G. Neihardt to Julius T. House, 17 December 1932, with a postscipt by Enid Neihardt</bibl>
+                    <bibl>Letter from John G. Neihardt to Julius T. House, 17 December 1932, with a postscript by Enid Neihardt</bibl>
                 </sourceDesc>
         </fileDesc>
         <profileDesc>
             <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc xml:id="correspDesc-one-wittness-two-correspDesc_1">
+            <ct:correspDesc xml:id="correspDesc-one-witness-two-correspDesc_1">
                 <ct:correspAction type="sending">
                     <persName>John Gneisenau Neihardt</persName>
                     <placeName>Branson (Montgomery)</placeName>
@@ -47,7 +47,7 @@
                 </ct:correspAction>
                 <!--  <ct:correspContext/> -->
             </ct:correspDesc>
-            <ct:correspDesc xml:id="correspDesc-one-wittness-two-correspDesc_2">
+            <ct:correspDesc xml:id="correspDesc-one-witness-two-correspDesc_2">
                 <ct:correspAction type="sending">
                     <persName>Enid Neihardt</persName>
                     <placeName>Branson (Montgomery)</placeName>
@@ -66,8 +66,8 @@
     </teiHeader>
     <text>
         <body>
-            <div decls="#correspDesc-one-wittness-two-correspDesc_1"><!-- Transcription of "letter one" --></div>
-            <div decls="#correspDesc-one-wittness-two-correspDesc_2"><!-- Transcription of "letter two" --></div>
+            <div decls="#correspDesc-one-witness-two-correspDesc_1"><!-- Transcription of "letter one" --></div>
+            <div decls="#correspDesc-one-witness-two-correspDesc_2"><!-- Transcription of "letter two" --></div>
         </body>
     </text>
 </TEI>
