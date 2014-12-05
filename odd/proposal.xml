@@ -638,6 +638,7 @@
 							<memberOf key="att.declarable"/>
 							<memberOf key="att.canonical"/>
 							<memberOf key="att.global"/>
+							<memberOf key="att.typed"/>
 						</classes>
 						<content>
 							<!-- modeled after publicationStmt -->
@@ -687,6 +688,7 @@
 						<classes>
 							<memberOf key="att.global"/>
 							<memberOf key="att.typed"/>
+							<memberOf key="att.sortable"/>
 							<memberOf key="model.correspDescPart"/>
 						</classes>
 						<content>
