@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Example encoding of a correspondence with more than one addressee</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Marcel Illetschko</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>Brief Hans Marsilius Purrmann an Hermann und Ninon Hesse, 1951, Pfälzische Landesbibliothek, Signatur: Autogr. 38/10</bibl>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- The proposed ct:correspDesc element starts here -->
+            <ct:correspDesc xml:id="correspDesc-more-than-one-addressee">
+                <ct:correspAction type="sending">
+                    <persName>Hans Marsilius Purrmann</persName>
+                    <date>1951</date>
+                    <placeName>Capo di Sorrento</placeName>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Hermann Hesse</persName>
+                    <persName>Ninon Hesse</persName>
+                    <placeName>Montagnola</placeName>
+                    <!-- for an unknown date the respective elements can be skipped, or used like this:
+                    <date>unknown</date> -->
+                </ct:correspAction>
+                <!--  <ct:correspContext/> -->
+            </ct:correspDesc>
+            <!-- The proposed ct:correspDesc element ends here -->
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p></p>
+        </body>
+    </text>
+</TEI>
