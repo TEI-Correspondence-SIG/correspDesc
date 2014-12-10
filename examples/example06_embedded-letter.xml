@@ -24,8 +24,6 @@
                     (3rd edition).</bibl>
                 <bibl sameAs="#letter1">Werner Feudel: Adelbert von Chamisso. Leben und Werk.
                     Leipzig: Reclam, 1988 (3rd edition), p. 9.</bibl>
-                <!-- Wenn die gesamte Biographie kodiert wird, dann brauchen wir doch zwei <bibl>: einmal für die ganze biographie und
-                einmal die genaue stelle des briefes innerhalb der biographie?! mit @sameAs kodieren oder besser anders? -->
             </sourceDesc>
         </fileDesc>
         <profileDesc>
