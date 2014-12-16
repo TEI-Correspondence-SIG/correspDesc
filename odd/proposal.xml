@@ -596,13 +596,26 @@
 				<head>Formal Specification</head>
 				<schemaSpec ident="correspondence" start="TEI teiCorpus" status="unstable">
 					<moduleRef key="tei"/>
-					<moduleRef key="textstructure"/>
 					<moduleRef key="core"/>
+					<moduleRef key="analysis"/>
+					<moduleRef key="certainty"/>
+					<moduleRef key="corpus"/>
+					<moduleRef key="dictionaries"/>
+					<moduleRef key="drama"/>
+					<moduleRef key="figures"/>
+					<moduleRef key="gaiji"/>
 					<moduleRef key="header"/>
+					<moduleRef key="iso-fs"/>
+					<moduleRef key="linking"/>
 					<moduleRef key="msdescription"/>
 					<moduleRef key="namesdates"/>
-					<moduleRef key="linking"/>
-
+					<moduleRef key="nets"/>
+					<moduleRef key="spoken"/>
+					<moduleRef key="textcrit"/>
+					<moduleRef key="textstructure"/>
+					<moduleRef key="transcr"/>
+					<moduleRef key="verse"/>
+					<moduleRef key="tagdocs"/>
 
                     <moduleSpec ident="correspondence" mode="add">
                         <desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
