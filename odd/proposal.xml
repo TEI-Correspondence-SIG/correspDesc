@@ -838,6 +838,32 @@
 						</classes>
 					</elementSpec>
 					
+					<!-- Need to exclude our namespace from egXML to prevent "conflicting ID-types for attribute" errors -->
+					<macroSpec ident="macro.anyXML" mode="change" module="tagdocs">
+						<content>
+							<rng:element>
+								<rng:anyName>
+									<rng:except>
+										<rng:nsName ns="http://www.tei-c.org/ns/1.0"/>
+										<rng:name ns="http://www.tei-c.org/ns/Examples">egXML</rng:name>
+										<rng:nsName ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"/>
+									</rng:except>
+								</rng:anyName>
+								<rng:zeroOrMore>
+									<rng:attribute>
+										<rng:anyName/>
+									</rng:attribute>
+								</rng:zeroOrMore>
+								<rng:zeroOrMore>
+									<rng:choice>
+										<rng:text/>
+										<rng:ref name="macro.anyXML"/>
+									</rng:choice>
+								</rng:zeroOrMore>
+							</rng:element>
+						</content>
+					</macroSpec>
+					
 				</schemaSpec>
 			</div>
 		</back>

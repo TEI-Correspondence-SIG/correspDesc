@@ -3,10 +3,10 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-12-16T17:42:39Z. 
-Edition: Version 2.7.0. Last updated on
+Schema generated from ODD source 2015-01-09T16:04:32Z. .
+TEI Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
-Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
+TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
   
 --><!--CC+BY and BSD-2 licences-->
    <define name="macro.paraContent">
@@ -214,6 +214,7 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
             <except>
                <nsName ns="http://www.tei-c.org/ns/1.0"/>
                <name ns="http://www.tei-c.org/ns/Examples">egXML</name>
+               <nsName ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"/>
             </except>
          </anyName>
          <zeroOrMore>
