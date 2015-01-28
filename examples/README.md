@@ -7,11 +7,11 @@ Examples
 * `example04_more-than-one-sender.xml`: The basic example extended to several senders
 * `example05_fictional-letter.xml`: A basic example of a fictional correspondence from Goethe's "Werther"
 * `example06_embedded-letter.xml`: A letter within a larger work, i.e. the <correspDesc> applies only to a  portion of the text
-* `example07_anthology-of-letters.xml`: yet missing 
+* `example07_anthology-of-letters.xml`: An example for the encoding of several letters (from one volume) within one document 
 * `example08_transmission-by-messenger.xml`: yet missing
 * `example09_redirecting.xml`: 'Blind' redirecting of a piece of correspondence, i.e. without 'consuming' the message at the redirection stage
 * `example10_forwarding.xml`: yet missing
-* `example11_one-witness-two-correspDesc.xml`: 
-* `example12_several-witnesses-one-correspDesc.xml`: yet missing
+* `example11_one-witness-two-correspDesc.xml`: yet missing
+* `example12_several-witnesses-one-correspDesc.xml`: Text preserved as draft _and_  autograph
 
 * `example-correspBeacon.xml`: an outdated example of the CIF format

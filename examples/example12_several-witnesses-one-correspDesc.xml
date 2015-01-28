@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Example of multiple (textual) witnesses for one correspondence</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Peter Stadler</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <listWit>
+                    <!-- We have a draft and the autograph for this letter, so we encode those sources as witnesses here -->
+                    <witness xml:id="autograph">
+                        <msDesc>
+                            <msIdentifier>
+                                <country>D</country>
+                                <settlement>Dresden</settlement>
+                                <repository>Sächsische Landesbibliothek - Staats- und Universitätsbibliothek</repository>
+                                <idno>Mscr.Dresd. App. 514 A, 2344</idno>
+                            </msIdentifier>
+                        </msDesc>
+                    </witness>
+                    <witness xml:id="draft">
+                        <msDesc>
+                            <msIdentifier>
+                                <country>D</country>
+                                <settlement>Berlin</settlement>
+                                <repository>Staatsbibliothek zu Berlin – Preußischer Kulturbesitz</repository>
+                                <idno>WFN - Handschriftliches XIV, Bl. 81b</idno>
+                            </msIdentifier>
+                        </msDesc>
+                    </witness>
+                </listWit>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- Yet we have only one correspDesc -->
+            <ct:correspDesc xml:id="letter1">
+                <ct:correspAction type="sending">
+                    <persName>Weber, Carl Maria von</persName>
+                    <placeName>Dresden</placeName>
+                    <date when="1824-04-12">12 April 1824</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Brühl, Karl Graf von</persName>
+                    <placeName>Berlin</placeName>
+                </ct:correspAction>
+            </ct:correspDesc>
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div><!-- Text of letter goes here --></div>
+        </body>
+    </text>
+</TEI>

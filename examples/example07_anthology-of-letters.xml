@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Example of an anthology of letters</title>
+                <respStmt>
+                    <resp>example provided by</resp>
+                    <name>Peter Stadler</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>TEI Correspondence SIG, correspDesc task force</authority>
+                <availability>
+                    <licence>
+                        <p>CC+BY and BSD-2 licences</p>
+                    </licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>Giacomo Meyerbeer. Briefwechsel und Tagebücher, Bd. 1, Berlin 1960</bibl>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <!-- Every letter gets its own correspDesc -->
+            <ct:correspDesc xml:id="letter1">
+                <ct:correspAction type="sending">
+                    <persName>Amalia Beer</persName>
+                    <placeName>Berlin</placeName>
+                    <date when="1815-02-28">28 February 1815</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Giacomo Meyerbeer</persName>
+                    <placeName>Paris</placeName>
+                </ct:correspAction>
+            </ct:correspDesc>
+            <ct:correspDesc xml:id="letter2">
+                <ct:correspAction type="sending">
+                    <persName>L. Schoenberger</persName>
+                    <placeName>London</placeName>
+                    <date when="1815-03-04">4 March 1815</date>
+                </ct:correspAction>
+                <ct:correspAction type="receiving">
+                    <persName>Giacomo Meyerbeer</persName>
+                    <placeName>Paris</placeName>
+                </ct:correspAction>
+            </ct:correspDesc>
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <!-- We put every letter in a <div> of its own and link to the respective <correspDesc> via @decls -->
+            <div decls="#letter1">
+                <opener>
+                    <dateline>Berlin den 28t Februar <choice><sic>1814</sic><corr>1815</corr></choice></dateline>
+                </opener>
+                <p>Mein lieber Sohn, …</p>
+            </div>
+            <div decls="#letter2">
+                <opener>
+                    <dateline>London d. 4. März <supplied>1</supplied>815</dateline>
+                    <salute>Schätzbarster Freund!</salute>
+                </opener>
+                <p>Wir sind ganz wohlbehalten …</p>
+            </div>
+        </body>
+    </text>
+</TEI>
