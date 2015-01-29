@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2015-01-09T16:04:32Z. .
+Schema generated from ODD source 2015-01-29T12:02:49Z. .
 TEI Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -17000,7 +17000,7 @@ Child elements of <name/> are only allowed when an external module is being load
       <element name="correspDesc"
                ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(correspondence
-							description) a wrapper element for metadata pertaining to correspondence</a:documentation>
+							description) contains a description of the actions related to one act of correspondence</a:documentation>
          <choice>
             <oneOrMore>
                <ref name="model.correspDescPart"/>
@@ -17020,9 +17020,14 @@ Child elements of <name/> are only allowed when an external module is being load
       <element name="correspAction"
                ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a structured description of the place, the name of a person/organization and the date related to the sending/receiving of a message or any other action related to the correspondence</a:documentation>
-         <oneOrMore>
-            <ref name="model.correspActionPart"/>
-         </oneOrMore>
+         <choice>
+            <oneOrMore>
+               <ref name="model.correspActionPart"/>
+            </oneOrMore>
+            <oneOrMore>
+               <ref name="model.pLike"/>
+            </oneOrMore>
+         </choice>
          <ref name="att.global.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.sortable.attributes"/>

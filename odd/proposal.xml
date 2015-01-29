@@ -21,6 +21,13 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
+			<change when="2015-01-29">
+				<persName>Peter Stadler</persName>
+				<desc>
+					Removed module declaration and added elementSpecs to module "header" and classSpecs to module "tei".
+					Made unstructured content (model.pLike) an alternative within <gi>correspAction</gi>.
+				</desc>
+			</change>
 			<change when="2014-11-19">
 				<persName>Peter Stadler</persName>
 				<desc>Implemented the changes as discussed during the Council face to face meeting at Duke</desc>
@@ -617,35 +624,30 @@
 					<moduleRef key="verse"/>
 					<moduleRef key="tagdocs"/>
 
-                    <moduleSpec ident="correspondence" mode="add">
-                        <desc versionDate="2014-01-13" xml:lang="en">Module for correspondence,
-                            including letters, telegrams, postcards, e-mail etc.</desc>
-                    </moduleSpec>
-
 					<classSpec ident="model.correspDescPart" mode="add" type="model"
-						module="correspondence">
+						module="tei">
 						<desc versionDate="2014-01-13" xml:lang="en">groups together metadata
 							elements for describing correspondence</desc>
 					</classSpec>
 					
 					<classSpec ident="model.correspContextPart" mode="add" type="model"
-						module="correspondence">
+						module="tei">
 						<desc versionDate="2014-11-11" xml:lang="en">groups elements which may 
 							appear as part of the correspContext element</desc>
 					</classSpec>
 					
 					<classSpec ident="model.correspActionPart" mode="add" type="model"
-						module="correspondence">
+						module="tei">
 						<desc versionDate="2014-11-11" xml:lang="en">groups elements which define the
 							parts (usually names, dates and places) of one action related to the correspondence.</desc>
 					</classSpec>
 
-					<elementSpec ident="correspDesc" module="correspondence" mode="add"
+					<elementSpec ident="correspDesc" module="header" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
 						<gloss versionDate="2014-01-13" xml:lang="en">correspondence
 							description</gloss>
-						<desc versionDate="2014-01-13" xml:lang="en">a wrapper element for metadata
-							pertaining to correspondence</desc>
+						<desc versionDate="2015-01-29" xml:lang="en">contains a description
+							of the actions related to one act of correspondence</desc>
 						<classes>
 							<memberOf key="model.profileDescPart"/>
 							<memberOf key="att.declarable"/>
@@ -691,10 +693,7 @@
 						</exemplum>
 					</elementSpec>
 
-					<!-- if participant is to be a generic element, 
-						it should be outside the correspondence module 
-						and the description needs modification -->
-					<elementSpec ident="correspAction" module="correspondence" mode="add"
+					<elementSpec ident="correspAction" module="header" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
 						<desc versionDate="2014-09-05" xml:lang="en">contains a structured description of the place,  
 							the name of a person/organization and the date related to the sending/receiving of a message or any other action related to the correspondence</desc>
@@ -705,22 +704,23 @@
 							<memberOf key="model.correspDescPart"/>
 						</classes>
 						<content>
-							<rng:oneOrMore>
-								<rng:ref name="model.correspActionPart"/>
-								<!--<rng:choice>
-									<rng:ref name="model.nameLike"/>
-									<rng:ref name="model.dateLike"/>
-									<rng:ref name="model.noteLike"/>
-								</rng:choice>-->
-							</rng:oneOrMore>
+							<rng:choice>
+								<rng:oneOrMore>
+									<rng:ref name="model.correspActionPart"/>
+								</rng:oneOrMore>
+								<rng:oneOrMore>
+									<rng:ref name="model.pLike"/>
+								</rng:oneOrMore>
+							</rng:choice>
 						</content>
 						<attList>
 							<!-- How to set sample values? Seems I can't overwrite like this … -->
-							<attDef ident="type" mode="change" usage="rec">
+							<attDef ident="type" mode="change" usage="opt">
+								<desc versionDate="2015-01-29" xml:lang="en">describes the nature of the action</desc>
 								<datatype>
 									<ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
 								</datatype>
-								<valList type="open" mode="add">
+								<valList type="semi" mode="add">
 									<valItem ident="sending">
 										<desc versionDate="2014-11-25" xml:lang="en">identifies a/the sending action of the message</desc>
 									</valItem>
@@ -750,9 +750,8 @@
 						</exemplum>
 					</elementSpec>
 					
-					<elementSpec ident="correspContext" mode="add" module="correspondence"
+					<elementSpec ident="correspContext" mode="add" module="header"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-						<!-- we'd like a different name than <correspContext> -->
 						<gloss xml:lang="en" versionDate="2014-01-13">correspondence context</gloss>
 						<gloss xml:lang="de" versionDate="2014-01-13">Korrespondenzstelle</gloss>
 						<!-- related by sender/addressee or topics … -->
@@ -766,17 +765,6 @@
 							<rng:oneOrMore>
 								<rng:ref name="model.correspContextPart"/>
 							</rng:oneOrMore>
-							<!--<rng:choice>
-								<rng:zeroOrMore>
-									<rng:ref name="model.ptrLike"/>
-								</rng:zeroOrMore>
-								<rng:zeroOrMore>
-									<rng:ref name="model.pLike"/>
-								</rng:zeroOrMore>
-							</rng:choice>-->
-							<!--<rng:zeroOrMore>
-								<rng:ref name="model.noteLike"/>
-							</rng:zeroOrMore>-->
 						</content>
 						<exemplum xml:lang="en">
 							<egXML xmlns="http://www.tei-c.org/ns/Examples">
