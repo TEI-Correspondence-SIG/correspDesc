@@ -624,25 +624,22 @@
 					<moduleRef key="verse"/>
 					<moduleRef key="tagdocs"/>
 
-					<classSpec ident="model.correspDescPart" mode="add" type="model"
-						module="tei">
+					<classSpec ident="model.correspDescPart" mode="add" type="model">
 						<desc versionDate="2014-01-13" xml:lang="en">groups together metadata
 							elements for describing correspondence</desc>
 					</classSpec>
 					
-					<classSpec ident="model.correspContextPart" mode="add" type="model"
-						module="tei">
+					<classSpec ident="model.correspContextPart" mode="add" type="model">
 						<desc versionDate="2014-11-11" xml:lang="en">groups elements which may 
 							appear as part of the correspContext element</desc>
 					</classSpec>
 					
-					<classSpec ident="model.correspActionPart" mode="add" type="model"
-						module="tei">
+					<classSpec ident="model.correspActionPart" mode="add" type="model">
 						<desc versionDate="2014-11-11" xml:lang="en">groups elements which define the
 							parts (usually names, dates and places) of one action related to the correspondence.</desc>
 					</classSpec>
 
-					<elementSpec ident="correspDesc" module="header" mode="add"
+					<elementSpec ident="correspDesc" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
 						<gloss versionDate="2014-01-13" xml:lang="en">correspondence
 							description</gloss>
@@ -693,7 +690,7 @@
 						</exemplum>
 					</elementSpec>
 
-					<elementSpec ident="correspAction" module="header" mode="add"
+					<elementSpec ident="correspAction" mode="add"
 						ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
 						<desc versionDate="2014-09-05" xml:lang="en">contains a structured description of the place,  
 							the name of a person/organization and the date related to the sending/receiving of a message or any other action related to the correspondence</desc>
@@ -714,7 +711,6 @@
 							</rng:choice>
 						</content>
 						<attList>
-							<!-- How to set sample values? Seems I can't overwrite like this … -->
 							<attDef ident="type" mode="change" usage="opt">
 								<desc versionDate="2015-01-29" xml:lang="en">describes the nature of the action</desc>
 								<datatype>
