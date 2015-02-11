@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.github.com/TEI-Correspondence-SIG/correspDesc/master/cif-customization.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Example of correspondence descriptions from the Carl-Maria-von-Weber-Gesamtausgabe</title>
+                <respStmt>
+                    <resp>This file is provided by</resp>
+                    <name>Peter Stadler <email>stadler@weber-gesamtausgabe.de</email></name>
+                </respStmt>
+            </titleStmt>
+            <!-- This file is an example of a list of correspondence descriptions from a whole 
+                printed scholarly edition of letters. The letters are *only* in a printed 
+                book available, i.e. you have to use a "classic" reference with bibliographic information
+                (sourceDesc/bibl) and the identification number of the letter (noted in every correspDesc/@key). 
+                
+                For an example with letters from a *digital* edition see example13_cif.xml.
+                
+                If you provide such a file online for your edition, it can be retrieved by other digital 
+                scholarly editions and web services, e.g. http://correspSearch.bbaw.de.
+                
+                Example provided by Stefan Dumont
+            -->
+            <publicationStmt>
+                <publisher>
+                    <ref target="http://weber-gesamtausgabe.de">Carl-Maria-von-Weber-Gesamtausgabe</ref>
+                </publisher>
+                <date when="2015-02-11T13:47:49.11+02:00"/>
+                <availability>
+                    <licence target="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>
+                    Carl-Maria-von-Weber-Gesamtausgabe. Digitale Edition, <ref target="http://www.weber-gesamtausgabe.de">http://www.weber-gesamtausgabe.de</ref> (Version 1.2 vom 12. Juni 2014)
+                </bibl>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <listBibl>
+                <ct:correspDesc ref="http://www.weber-gesamtausgabe.de/A044980">
+                    <ct:correspAction type="sending">
+                        <persName ref="http://d-nb.info/gnd/118814044">Gänsbacher, Johann</persName>
+                        <date notBefore="1810-07-11" notAfter="1810-07-18" cert="medium"/>
+                    </ct:correspAction>
+                    <ct:correspAction type="receiving">
+                        <persName ref="http://d-nb.info/gnd/118629662">Weber, Carl Maria von</persName>
+                        <placeName ref="http://www.geonames.org/2873891">Mannheim</placeName>
+                        <date when="1810-07-18"/>
+                    </ct:correspAction>
+                </ct:correspDesc>
+                <ct:correspDesc ref="http://www.weber-gesamtausgabe.de/A044943">
+                    <ct:correspAction type="sending">
+                        <persName ref="http://d-nb.info/gnd/118629662">Weber, Carl Maria von</persName>
+                        <placeName ref="http://www.geonames.org/2935022">Dresden</placeName>
+                        <date when="1825-05-07"/>
+                    </ct:correspAction>
+                    <ct:correspAction type="receiving">
+                        <persName ref="http://d-nb.info/gnd/116113669">Dietrichstein, Moritz von</persName>
+                        <placeName ref="http://www.geonames.org/2761369">Wien</placeName>
+                        <!-- unkown date should be skipped -->
+                    </ct:correspAction>
+                </ct:correspDesc>
+                <ct:correspDesc ref="http://www.weber-gesamtausgabe.de/A041523">
+                    <ct:correspAction type="sending">
+                        <persName ref="http://d-nb.info/gnd/118629662">Weber, Carl Maria von</persName>
+                        <placeName ref="http://www.geonames.org/2898442">Hosterwitz</placeName>
+                        <date when="1819-08-05"/>
+                    </ct:correspAction>
+                    <ct:correspAction type="receiving">
+                        <persName>Pastenaci, E.</persName>
+                    </ct:correspAction>
+                </ct:correspDesc>
+            </listBibl>
+        </body>
+    </text>
+</TEI>
