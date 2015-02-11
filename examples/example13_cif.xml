@@ -12,14 +12,11 @@
                 </respStmt>
             </titleStmt>
             <!-- This file is an example of a list of correspondence descriptions from a whole 
-                printed scholarly edition of letters. The letters are *only* in a printed 
-                book available, i.e. you have to use a "classic" reference with bibliographic information
-                (sourceDesc/bibl) and the identification number of the letter (noted in every correspDesc/@key). 
+                digital scholarly edition of letters. If you provide such a file online for your 
+                edition, it can be retrieved by other digital scholarly editions and web services, 
+                e.g. http://correspSearch.bbaw.de.
                 
-                For an example with letters from a *digital* edition see example13_cif.xml.
-                
-                If you provide such a file online for your edition, it can be retrieved by other digital 
-                scholarly editions and web services, e.g. http://correspSearch.bbaw.de.
+                For an example with letters from a *only printed* edition see example14_cif-with-printed-edition.xml.
                 
                 Example provided by Stefan Dumont
             -->
