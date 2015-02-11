@@ -14,4 +14,4 @@ Examples
 * `example11_one-witness-two-correspDesc.xml`: yet missing
 * `example12_several-witnesses-one-correspDesc.xml`: Text preserved as draft _and_  autograph
 * `example13_cif.xml`: an example of the Correspondence Interchange format (CIF), i.e. a list of reduced correspDesc elements from a whole digital scholarly edition
-* * `example13_cif-with-printed-edition.xml`: an example of the Correspondence Interchange format (CIF) for an *only printed* scholarly edition
+* `example13_cif-with-printed-edition.xml`: an example of the Correspondence Interchange format (CIF) for an *only printed* scholarly edition
