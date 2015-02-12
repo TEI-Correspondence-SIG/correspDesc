@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-07-02T17:08:25Z. 
+Schema generated from ODD source 2015-02-12T10:48:13Z. 
 Edition: Version 2.6.0. Last updated on
 	20th January 2014, revision 12802
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
@@ -30,6 +30,15 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
          </choice>
       </zeroOrMore>
    </define>
+   <define name="macro.phraseSeq.limited">
+      <zeroOrMore>
+         <choice>
+            <text/>
+            <ref name="model.limitedPhrase"/>
+            <ref name="model.global"/>
+         </choice>
+      </zeroOrMore>
+   </define>
    <define name="macro.specialPara">
       <zeroOrMore>
          <choice>
@@ -50,6 +59,24 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
          <value>unknown</value>
       </choice>
    </define>
+   <define name="data.probability">
+      <data type="double">
+         <param name="minInclusive">0</param>
+         <param name="maxInclusive">1</param>
+      </data>
+   </define>
+   <define name="data.numeric">
+      <choice>
+         <data type="double"/>
+         <data type="token">
+            <param name="pattern">(\-?[\d]+/\-?[\d]+)</param>
+         </data>
+         <data type="decimal"/>
+      </choice>
+   </define>
+   <define name="data.count">
+      <data type="nonNegativeInteger"/>
+   </define>
    <define name="data.temporal.w3c">
       <choice>
          <data type="date"/>
@@ -60,6 +87,13 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
          <data type="gMonthDay"/>
          <data type="time"/>
          <data type="dateTime"/>
+      </choice>
+   </define>
+   <define name="data.xTruthValue">
+      <choice>
+         <data type="boolean"/>
+         <value>unknown</value>
+         <value>inapplicable</value>
       </choice>
    </define>
    <define name="data.language">
@@ -90,6 +124,21 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
    <define name="data.enumerated">
       <ref name="data.name"/>
    </define>
+   <define name="data.temporal.iso">
+      <choice>
+         <data type="date"/>
+         <data type="gYear"/>
+         <data type="gMonth"/>
+         <data type="gDay"/>
+         <data type="gYearMonth"/>
+         <data type="gMonthDay"/>
+         <data type="time"/>
+         <data type="dateTime"/>
+         <data type="token">
+            <param name="pattern">[0-9.,DHMPRSTWYZ/:+\-]+</param>
+         </data>
+      </choice>
+   </define>
    <define name="att.canonical.attributes">
       <ref name="att.canonical.attribute.key"/>
       <ref name="att.canonical.attribute.ref"/>
@@ -111,6 +160,115 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
                   <ref name="data.pointer"/>
                </oneOrMore>
             </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.ranging.attributes">
+      <ref name="att.ranging.attribute.atLeast"/>
+      <ref name="att.ranging.attribute.atMost"/>
+      <ref name="att.ranging.attribute.min"/>
+      <ref name="att.ranging.attribute.max"/>
+      <ref name="att.ranging.attribute.confidence"/>
+   </define>
+   <define name="att.ranging.attribute.atLeast">
+      <optional>
+         <attribute name="atLeast">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">gives a minimum estimated value for the approximate measurement.</a:documentation>
+            <ref name="data.numeric"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.ranging.attribute.atMost">
+      <optional>
+         <attribute name="atMost">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">gives a maximum estimated value for the approximate measurement.</a:documentation>
+            <ref name="data.numeric"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.ranging.attribute.min">
+      <optional>
+         <attribute name="min">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">where the measurement summarizes more than one observation or a range, supplies the minimum value observed.</a:documentation>
+            <ref name="data.numeric"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.ranging.attribute.max">
+      <optional>
+         <attribute name="max">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">where the measurement summarizes more than one observation or a range, supplies the maximum value observed.</a:documentation>
+            <ref name="data.numeric"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.ranging.attribute.confidence">
+      <optional>
+         <attribute name="confidence">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the degree of statistical confidence (between zero and one) that a value falls within the range specified by min and max, or the proportion of observed values that fall within that range.</a:documentation>
+            <ref name="data.probability"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.dimensions.attributes">
+      <ref name="att.ranging.attributes"/>
+      <ref name="att.dimensions.attribute.unit"/>
+      <ref name="att.dimensions.attribute.quantity"/>
+      <ref name="att.dimensions.attribute.extent"/>
+      <ref name="att.dimensions.attribute.precision"/>
+      <ref name="att.dimensions.attribute.scope"/>
+   </define>
+   <define name="att.dimensions.attribute.unit">
+      <optional>
+         <attribute name="unit">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">names the unit used for the measurement
+Suggested values include: 1] cm; 2] mm; 3] in; 4] lines; 5] chars</a:documentation>
+            <choice>
+               <value>cm</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(centimetres) </a:documentation>
+               <value>mm</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(millimetres) </a:documentation>
+               <value>in</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(inches) </a:documentation>
+               <value>lines</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">lines of text</a:documentation>
+               <value>chars</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(characters) characters of text</a:documentation>
+               <data type="Name"/>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.dimensions.attribute.quantity">
+      <optional>
+         <attribute name="quantity">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the length in the units specified</a:documentation>
+            <ref name="data.numeric"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.dimensions.attribute.extent">
+      <optional>
+         <attribute name="extent">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the size of the object concerned using a project-specific vocabulary combining quantity and units in a single string of words.</a:documentation>
+            <ref name="data.text"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.dimensions.attribute.precision">
+      <optional>
+         <attribute name="precision">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the precision of the values specified by the other attributes.</a:documentation>
+            <ref name="data.certainty"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.dimensions.attribute.scope">
+      <optional>
+         <attribute name="scope">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">where the measurement summarizes more than one observation, specifies the applicability of this measurement.
+Sample values include: 1] all; 2] most; 3] range</a:documentation>
+            <ref name="data.enumerated"/>
          </attribute>
       </optional>
    </define>
@@ -169,6 +327,41 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.6.0/
          <attribute name="to">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the ending point of the period in standard form, e.g. yyyy-mm-dd.</a:documentation>
             <ref name="data.temporal.w3c"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.attributes">
+      <ref name="att.datable.w3c.attributes"/>
+      <ref name="att.datable.iso.attributes"/>
+      <ref name="att.datable.custom.attributes"/>
+      <ref name="att.datable.attribute.calendar"/>
+      <ref name="att.datable.attribute.period"/>
+   </define>
+   <define name="att.datable.attribute.calendar">
+      <optional>
+         <attribute name="calendar">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the system or calendar to which the date represented by the content of this element belongs.</a:documentation>
+            <ref name="data.pointer"/>
+         </attribute>
+      </optional>
+   </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="calendar-constraint-calendar">
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"
+                context="tei:*[@calendar]">
+            <sch:assert test="string-length(.) gt 0">
+@calendar indicates the system or calendar to which the date represented by the content of this element
+belongs, but this <sch:name/> element has no textual content.</sch:assert>
+          </sch:rule>
+   </pattern>
+   <define name="att.datable.attribute.period">
+      <optional>
+         <attribute name="period">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a pointer to some location defining a named period of time within which the datable item is understood to have occurred.</a:documentation>
+            <ref name="data.pointer"/>
          </attribute>
       </optional>
    </define>
@@ -241,6 +434,43 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
                   <ref name="data.pointer"/>
                </oneOrMore>
             </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.editLike.attributes">
+      <ref name="att.dimensions.attributes"/>
+      <ref name="att.responsibility.attributes"/>
+      <ref name="att.editLike.attribute.evidence"/>
+      <ref name="att.editLike.attribute.instant"/>
+   </define>
+   <define name="att.editLike.attribute.evidence">
+      <optional>
+         <attribute name="evidence">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the nature of the evidence supporting the reliability or accuracy of the intervention or interpretation.
+Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentation>
+            <list>
+               <oneOrMore>
+                  <choice>
+                     <value>internal</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">there is internal evidence to support the intervention.</a:documentation>
+                     <value>external</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">there is external evidence to support the intervention.</a:documentation>
+                     <value>conjecture</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the intervention or interpretation has been made by the editor, cataloguer, or scholar on the basis of their expertise.</a:documentation>
+                     <data type="Name"/>
+                  </choice>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.editLike.attribute.instant">
+      <optional>
+         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                    name="instant"
+                    a:defaultValue="false">
+            <a:documentation>indicates whether this is an instant revision or not.</a:documentation>
+            <ref name="data.xTruthValue"/>
          </attribute>
       </optional>
    </define>
@@ -354,8 +584,12 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    <define name="att.naming.attribute.role">
       <optional>
          <attribute name="role">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">may be used to specify further information about the entity referenced by this name, for example the occupation of a person, or the status of a place.</a:documentation>
-            <ref name="data.enumerated"/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">may be used to specify further information about the entity referenced by this name in the form of a set of whitespace-separated values, for example the occupation of a person, or the status of a place.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.enumerated"/>
+               </oneOrMore>
+            </list>
          </attribute>
       </optional>
    </define>
@@ -464,22 +698,44 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       </optional>
    </define>
    <define name="model.nameLike.agent">
-      <notAllowed/>
+      <choice>
+         <ref name="name"/>
+         <ref name="persName"/>
+      </choice>
    </define>
    <define name="model.nameLike.agent_alternation">
-      <notAllowed/>
+      <choice>
+         <ref name="name"/>
+         <ref name="persName"/>
+      </choice>
    </define>
    <define name="model.nameLike.agent_sequence">
-      <empty/>
+      <ref name="name"/>
+      <ref name="persName"/>
    </define>
    <define name="model.nameLike.agent_sequenceOptional">
-      <empty/>
+      <optional>
+         <ref name="name"/>
+      </optional>
+      <optional>
+         <ref name="persName"/>
+      </optional>
    </define>
    <define name="model.nameLike.agent_sequenceOptionalRepeatable">
-      <empty/>
+      <zeroOrMore>
+         <ref name="name"/>
+      </zeroOrMore>
+      <zeroOrMore>
+         <ref name="persName"/>
+      </zeroOrMore>
    </define>
    <define name="model.nameLike.agent_sequenceRepeatable">
-      <notAllowed/>
+      <oneOrMore>
+         <ref name="name"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="persName"/>
+      </oneOrMore>
    </define>
    <define name="model.segLike">
       <notAllowed/>
@@ -517,6 +773,34 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <ref name="model.emphLike"/>
       </choice>
    </define>
+   <define name="model.dateLike">
+      <choice>
+         <ref name="date"/>
+      </choice>
+   </define>
+   <define name="model.dateLike_alternation">
+      <choice>
+         <ref name="date"/>
+      </choice>
+   </define>
+   <define name="model.dateLike_sequence">
+      <ref name="date"/>
+   </define>
+   <define name="model.dateLike_sequenceOptional">
+      <optional>
+         <ref name="date"/>
+      </optional>
+   </define>
+   <define name="model.dateLike_sequenceOptionalRepeatable">
+      <zeroOrMore>
+         <ref name="date"/>
+      </zeroOrMore>
+   </define>
+   <define name="model.dateLike_sequenceRepeatable">
+      <oneOrMore>
+         <ref name="date"/>
+      </oneOrMore>
+   </define>
    <define name="model.pPart.edit">
       <notAllowed/>
    </define>
@@ -524,9 +808,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       <choice>
          <ref name="ref"/>
       </choice>
-   </define>
-   <define name="model.milestoneLike">
-      <notAllowed/>
    </define>
    <define name="model.gLike">
       <notAllowed/>
@@ -583,27 +864,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <ref name="correspDesc"/>
       </oneOrMore>
    </define>
-   <define name="model.headLike">
-      <notAllowed/>
-   </define>
-   <define name="model.headLike_alternation">
-      <notAllowed/>
-   </define>
-   <define name="model.headLike_sequence">
-      <empty/>
-   </define>
-   <define name="model.headLike_sequenceOptional">
-      <empty/>
-   </define>
-   <define name="model.headLike_sequenceOptionalRepeatable">
-      <empty/>
-   </define>
-   <define name="model.headLike_sequenceRepeatable">
-      <notAllowed/>
-   </define>
-   <define name="model.noteLike">
-      <notAllowed/>
-   </define>
    <define name="model.pLike">
       <notAllowed/>
    </define>
@@ -627,6 +887,62 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <ref name="model.pLike"/>
       </choice>
    </define>
+   <define name="model.placeNamePart">
+      <choice>
+         <ref name="placeName"/>
+      </choice>
+   </define>
+   <define name="model.placeNamePart_alternation">
+      <choice>
+         <ref name="placeName"/>
+      </choice>
+   </define>
+   <define name="model.placeNamePart_sequence">
+      <ref name="placeName"/>
+   </define>
+   <define name="model.placeNamePart_sequenceOptional">
+      <optional>
+         <ref name="placeName"/>
+      </optional>
+   </define>
+   <define name="model.placeNamePart_sequenceOptionalRepeatable">
+      <zeroOrMore>
+         <ref name="placeName"/>
+      </zeroOrMore>
+   </define>
+   <define name="model.placeNamePart_sequenceRepeatable">
+      <oneOrMore>
+         <ref name="placeName"/>
+      </oneOrMore>
+   </define>
+   <define name="model.placeStateLike">
+      <choice>
+         <ref name="model.placeNamePart"/>
+      </choice>
+   </define>
+   <define name="model.placeStateLike_alternation">
+      <choice>
+         <ref name="model.placeNamePart_alternation"/>
+      </choice>
+   </define>
+   <define name="model.placeStateLike_sequence">
+      <ref name="model.placeNamePart_sequence"/>
+   </define>
+   <define name="model.placeStateLike_sequenceOptional">
+      <optional>
+         <ref name="model.placeNamePart_sequenceOptional"/>
+      </optional>
+   </define>
+   <define name="model.placeStateLike_sequenceOptionalRepeatable">
+      <zeroOrMore>
+         <ref name="model.placeNamePart_sequenceOptionalRepeatable"/>
+      </zeroOrMore>
+   </define>
+   <define name="model.placeStateLike_sequenceRepeatable">
+      <oneOrMore>
+         <ref name="model.placeNamePart_sequenceRepeatable"/>
+      </oneOrMore>
+   </define>
    <define name="model.availabilityPart">
       <choice>
          <ref name="licence"/>
@@ -634,7 +950,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    </define>
    <define name="model.respLike">
       <choice>
-         <ref name="editor"/>
+         <ref name="respStmt"/>
       </choice>
    </define>
    <define name="model.imprintPart">
@@ -673,46 +989,57 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    <define name="model.nameLike">
       <choice>
          <ref name="model.nameLike.agent"/>
+         <ref name="model.placeStateLike"/>
       </choice>
    </define>
    <define name="model.nameLike_alternation">
       <choice>
          <ref name="model.nameLike.agent_alternation"/>
+         <ref name="model.placeStateLike_alternation"/>
       </choice>
    </define>
    <define name="model.nameLike_sequence">
       <ref name="model.nameLike.agent_sequence"/>
+      <ref name="model.placeStateLike_sequence"/>
    </define>
    <define name="model.nameLike_sequenceOptional">
       <optional>
          <ref name="model.nameLike.agent_sequenceOptional"/>
+      </optional>
+      <optional>
+         <ref name="model.placeStateLike_sequenceOptional"/>
       </optional>
    </define>
    <define name="model.nameLike_sequenceOptionalRepeatable">
       <zeroOrMore>
          <ref name="model.nameLike.agent_sequenceOptionalRepeatable"/>
       </zeroOrMore>
+      <zeroOrMore>
+         <ref name="model.placeStateLike_sequenceOptionalRepeatable"/>
+      </zeroOrMore>
    </define>
    <define name="model.nameLike_sequenceRepeatable">
       <oneOrMore>
          <ref name="model.nameLike.agent_sequenceRepeatable"/>
       </oneOrMore>
+      <oneOrMore>
+         <ref name="model.placeStateLike_sequenceRepeatable"/>
+      </oneOrMore>
    </define>
    <define name="model.global">
-      <choice>
-         <ref name="model.milestoneLike"/>
-         <ref name="model.noteLike"/>
-      </choice>
+      <notAllowed/>
    </define>
    <define name="model.biblPart">
       <choice>
          <ref name="model.respLike"/>
          <ref name="model.imprintPart"/>
          <ref name="bibl"/>
+         <ref name="availability"/>
       </choice>
    </define>
    <define name="model.pPart.data">
       <choice>
+         <ref name="model.dateLike"/>
          <ref name="model.addressLike"/>
          <ref name="model.nameLike"/>
       </choice>
@@ -727,6 +1054,13 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <ref name="model.segLike"/>
          <ref name="model.highlighted"/>
          <ref name="model.pPart.edit"/>
+         <ref name="model.ptrLike"/>
+         <ref name="model.pPart.data"/>
+      </choice>
+   </define>
+   <define name="model.limitedPhrase">
+      <choice>
+         <ref name="model.emphLike"/>
          <ref name="model.ptrLike"/>
          <ref name="model.pPart.data"/>
       </choice>
@@ -752,9 +1086,51 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    <define name="model.resourceLike">
       <notAllowed/>
    </define>
+   <define name="att.personal.attributes">
+      <ref name="att.naming.attributes"/>
+      <ref name="att.personal.attribute.full"/>
+      <ref name="att.personal.attribute.sort"/>
+   </define>
+   <define name="att.personal.attribute.full">
+      <optional>
+         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                    name="full"
+                    a:defaultValue="yes">
+            <a:documentation>indicates whether the name component is given in full, as an abbreviation or simply as an initial.</a:documentation>
+            <choice>
+               <value>yes</value>
+               <a:documentation>the name component is spelled out in full.</a:documentation>
+               <value>abb</value>
+               <a:documentation>(abbreviated) the name component is given in an abbreviated form.</a:documentation>
+               <value>init</value>
+               <a:documentation>(initial letter) the name component is indicated only by one initial.</a:documentation>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.personal.attribute.sort">
+      <optional>
+         <attribute name="sort">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the sort order of the name component in relation to others within the name.</a:documentation>
+            <ref name="data.count"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="name">
+      <element name="name">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(name, proper noun) contains a proper noun or noun phrase. [3.5.1. ]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.personal.attributes"/>
+         <ref name="att.datable.attributes"/>
+         <ref name="att.editLike.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="email">
       <element name="email">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(electronic mail address) contains an e-mail address identifying a location to which e-mail messages can be delivered. [3.5.2. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(electronic mail address) contains an email address identifying a location to which email messages can be delivered. [3.5.2. ]</a:documentation>
          <ref name="macro.phraseSeq"/>
          <ref name="att.global.attributes"/>
          <empty/>
@@ -763,8 +1139,18 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    <define name="date">
       <element name="date">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a date in any format. [3.5.4.  2.2.4.  2.5.  3.11.2.4.  15.2.3.  13.3.6. ]</a:documentation>
-         <empty/>
-         <ref name="att.datable.w3c.attribute.when"/>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.gLike"/>
+               <ref name="model.phrase"/>
+               <ref name="model.global"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.global.attributes"/>
+         <ref name="att.datable.attributes"/>
+         <ref name="att.editLike.attributes"/>
+         <ref name="att.typed.attributes"/>
          <empty/>
       </element>
    </define>
@@ -790,12 +1176,39 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <empty/>
       </element>
    </define>
-   <define name="editor">
-      <element name="editor">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a secondary statement of responsibility for a bibliographic item, for example the name of an individual, institution or organization, (or of several such) acting as editor, compiler, translator, etc. [3.11.2.2. ]</a:documentation>
-         <ref name="macro.phraseSeq"/>
+   <define name="respStmt">
+      <element name="respStmt">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(statement of responsibility) supplies a statement of responsibility for the intellectual content of a text, edition, recording, or series, where the specialized elements for authors, editors, etc. do not suffice or do not apply. May also be used to encode information about individuals or organizations which have played a role in the production or distribution of a bibliographic work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]</a:documentation>
+         <choice>
+            <group>
+               <oneOrMore>
+                  <ref name="resp"/>
+               </oneOrMore>
+               <oneOrMore>
+                  <ref name="model.nameLike.agent"/>
+               </oneOrMore>
+            </group>
+            <group>
+               <oneOrMore>
+                  <ref name="model.nameLike.agent"/>
+               </oneOrMore>
+               <oneOrMore>
+                  <ref name="resp"/>
+               </oneOrMore>
+            </group>
+         </choice>
          <ref name="att.global.attributes"/>
-         <ref name="att.naming.attributes"/>
+         <ref name="att.canonical.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="resp">
+      <element name="resp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]</a:documentation>
+         <ref name="macro.phraseSeq.limited"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.canonical.attributes"/>
+         <ref name="att.datable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -861,17 +1274,9 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    <define name="listBibl">
       <element name="listBibl">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(citation list) contains a list of bibliographic citations of any kind. [3.11.1.  2.2.7.  15.3.2. ]</a:documentation>
-         <group>
-            <zeroOrMore>
-               <ref name="model.headLike"/>
-            </zeroOrMore>
-            <oneOrMore>
-               <choice>
-                  <ref name="model.biblLike"/>
-                  <ref name="model.milestoneLike"/>
-               </choice>
-            </oneOrMore>
-         </group>
+         <oneOrMore>
+            <ref name="correspDesc"/>
+         </oneOrMore>
          <ref name="att.global.attributes"/>
          <ref name="att.sortable.attributes"/>
          <ref name="att.declarable.attributes"/>
@@ -952,7 +1357,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    </define>
    <define name="teiHeader">
       <element name="teiHeader">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(TEI header) supplies the descriptive and declarative information making up an electronic title page prefixed to every TEI-conformant text. [2.1.1.  15.1. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]</a:documentation>
          <group>
             <ref name="fileDesc"/>
             <zeroOrMore>
@@ -993,7 +1398,7 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(title statement) groups information about the title of a work and those responsible for its content. [2.2.1.  2.2. ]</a:documentation>
          <ref name="title"/>
          <oneOrMore>
-            <ref name="editor"/>
+            <ref name="respStmt"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
          <empty/>
@@ -1062,150 +1467,209 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <empty/>
       </element>
    </define>
+   <define name="att.datable.custom.attributes">
+      <ref name="att.datable.custom.attribute.when-custom"/>
+      <ref name="att.datable.custom.attribute.notBefore-custom"/>
+      <ref name="att.datable.custom.attribute.notAfter-custom"/>
+      <ref name="att.datable.custom.attribute.from-custom"/>
+      <ref name="att.datable.custom.attribute.to-custom"/>
+      <ref name="att.datable.custom.attribute.datingPoint"/>
+      <ref name="att.datable.custom.attribute.datingMethod"/>
+   </define>
+   <define name="att.datable.custom.attribute.when-custom">
+      <optional>
+         <attribute name="when-custom">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies the value of a date or time in some standard form.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.word"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.custom.attribute.notBefore-custom">
+      <optional>
+         <attribute name="notBefore-custom">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the earliest possible date for the event in some custom standard form.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.word"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.custom.attribute.notAfter-custom">
+      <optional>
+         <attribute name="notAfter-custom">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the latest possible date for the event in some custom standard form.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.word"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.custom.attribute.from-custom">
+      <optional>
+         <attribute name="from-custom">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the starting point of the period in some standard form.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.word"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.custom.attribute.to-custom">
+      <optional>
+         <attribute name="to-custom">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the ending point of the period in some standard form.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.word"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.custom.attribute.datingPoint">
+      <optional>
+         <attribute name="datingPoint">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a pointer to some location defining a named point in time with reference to which the datable item is understood to have occurred</a:documentation>
+            <ref name="data.pointer"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.custom.attribute.datingMethod">
+      <optional>
+         <attribute name="datingMethod">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a pointer to a calendar element or other means of interpreting the values of the custom dating attributes.</a:documentation>
+            <ref name="data.pointer"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.iso.attributes">
+      <ref name="att.datable.iso.attribute.when-iso"/>
+      <ref name="att.datable.iso.attribute.notBefore-iso"/>
+      <ref name="att.datable.iso.attribute.notAfter-iso"/>
+      <ref name="att.datable.iso.attribute.from-iso"/>
+      <ref name="att.datable.iso.attribute.to-iso"/>
+   </define>
+   <define name="att.datable.iso.attribute.when-iso">
+      <optional>
+         <attribute name="when-iso">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies the value of a date or time in a standard form.</a:documentation>
+            <ref name="data.temporal.iso"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.iso.attribute.notBefore-iso">
+      <optional>
+         <attribute name="notBefore-iso">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the earliest possible date for the event in standard form, e.g. yyyy-mm-dd.</a:documentation>
+            <ref name="data.temporal.iso"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.iso.attribute.notAfter-iso">
+      <optional>
+         <attribute name="notAfter-iso">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the latest possible date for the event in standard form, e.g. yyyy-mm-dd.</a:documentation>
+            <ref name="data.temporal.iso"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.iso.attribute.from-iso">
+      <optional>
+         <attribute name="from-iso">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the starting point of the period in standard form.</a:documentation>
+            <ref name="data.temporal.iso"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.datable.iso.attribute.to-iso">
+      <optional>
+         <attribute name="to-iso">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the ending point of the period in standard form.</a:documentation>
+            <ref name="data.temporal.iso"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="persName">
+      <element name="persName">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(personal name) contains a proper noun or proper-noun phrase referring to a person, possibly including one or more of the person's forenames, surnames, honorifics, added names, etc. [13.2.1. ]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.datable.attributes"/>
+         <ref name="att.editLike.attributes"/>
+         <ref name="att.personal.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="placeName">
+      <element name="placeName">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains an absolute or relative place name. [13.2.3. ]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.datable.attributes"/>
+         <ref name="att.editLike.attributes"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.personal.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="model.correspDescPart">
       <choice>
-         <ref name="sender"/>
-         <ref name="addressee"/>
-         <ref name="placeSender"/>
-         <ref name="placeAddressee"/>
-         <ref name="dateSender"/>
-         <ref name="dateAddressee"/>
-         <ref name="correspClass"/>
-         <ref name="transmission"/>
-         <ref name="context"/>
+         <ref name="correspAction"/>
+      </choice>
+   </define>
+   <define name="model.correspActionPart">
+      <choice>
+         <ref name="model.dateLike"/>
+         <ref name="model.nameLike"/>
       </choice>
    </define>
    <define name="correspDesc">
       <element name="correspDesc"
                ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(correspondence
-                            description) a wrapper element for metadata pertaining to correspondence</a:documentation>
-         <oneOrMore>
-            <ref name="model.correspDescPart"/>
-         </oneOrMore>
+							description) contains a description of the actions related to one act of correspondence</a:documentation>
+         <choice>
+            <oneOrMore>
+               <ref name="model.correspDescPart"/>
+            </oneOrMore>
+            <oneOrMore>
+               <ref name="model.pLike"/>
+            </oneOrMore>
+         </choice>
          <ref name="att.declarable.attributes"/>
          <ref name="att.canonical.attributes"/>
          <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="sender">
-      <element name="sender"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains the name or some other description of the sender of a piece of correspondence</a:documentation>
-         <text/>
-         <ref name="att.responsibility.attributes"/>
-         <ref name="att.canonical.attribute.ref"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="addressee">
-      <element name="addressee"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains the name or some other description of the addressee of a piece of correspondence</a:documentation>
-         <text/>
-         <ref name="att.responsibility.attributes"/>
-         <ref name="att.canonical.attribute.ref"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="placeSender">
-      <element name="placeSender"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(place of sender) contains the place where the piece of correspondence was written or sent</a:documentation>
-         <text/>
-         <ref name="att.responsibility.attributes"/>
-         <ref name="att.canonical.attribute.ref"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="placeAddressee">
-      <element name="placeAddressee"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(place of addressee) contains the place of the addressee or the place where the piece of correspondence was actually received</a:documentation>
-         <text/>
-         <ref name="att.responsibility.attributes"/>
-         <ref name="att.canonical.attribute.ref"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="dateSender">
-      <element name="dateSender"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(date of
-                            writing/sending) contains the date of writing or sending a piece of correspondence</a:documentation>
-         <empty/>
-         <ref name="att.responsibility.attributes"/>
-         <ref name="att.datable.w3c.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="dateAddressee">
-      <element name="dateAddressee"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(delivery date) contains the date of receiving or reading a piece of correspondence</a:documentation>
-         <empty/>
-         <ref name="att.responsibility.attributes"/>
-         <ref name="att.datable.w3c.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="correspClass">
-      <element name="correspClass"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(correspondence
-                            classification) describes the piece of correspondence (e.g. letter, postcard, email), if possible according to some (external) classification scheme</a:documentation>
-         <choice>
-            <text/>
-         </choice>
-         <ref name="att.global.attributes"/>
          <ref name="att.typed.attributes"/>
-         <ref name="att.responsibility.attributes"/>
-         <optional>
-            <attribute name="scheme">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies the controlled vocabulary within which the set of keywords concerned is defined.</a:documentation>
-               <ref name="data.pointer"/>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
-   <define name="transmission">
-      <element name="transmission"
+   <define name="correspAction">
+      <element name="correspAction"
                ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">describes the method and transmitter of the piece of correspondence</a:documentation>
-         <optional>
-            <choice>
-               <ref name="model.nameLike.agent"/>
-               <oneOrMore>
-                  <ref name="model.pLike"/>
-               </oneOrMore>
-            </choice>
-            <optional>
-               <ref name="model.noteLike"/>
-            </optional>
-         </optional>
-         <ref name="att.global.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <ref name="att.responsibility.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="context">
-      <element name="context"
-               ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(context) provides references to preceding or following correspondence related to this piece of correspondence</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a structured description of the place, the name of a person/organization and the date related to the sending/receiving of a message or any other action related to the correspondence</a:documentation>
          <choice>
-            <zeroOrMore>
-               <ref name="model.ptrLike"/>
-            </zeroOrMore>
-            <zeroOrMore>
+            <oneOrMore>
+               <ref name="model.correspActionPart"/>
+            </oneOrMore>
+            <oneOrMore>
                <ref name="model.pLike"/>
-            </zeroOrMore>
+            </oneOrMore>
          </choice>
-         <optional>
-            <ref name="model.noteLike"/>
-         </optional>
+         <ref name="att.global.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <ref name="att.sortable.attributes"/>
+         <empty/>
       </element>
    </define>
    <start>
