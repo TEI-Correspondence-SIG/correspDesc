@@ -70,6 +70,8 @@
                     </ct:correspAction>
                     <ct:correspAction type="receiving">
                         <persName>Pastenaci, E.</persName>
+                        <!-- persons without an authority file ID (GND, VIAF, LC etc.) could (and should) also be noted, 
+                            but be aware that it's very difficult to query them automatically in web services etc. --> 
                     </ct:correspAction>
                 </ct:correspDesc>
             </listBibl>
