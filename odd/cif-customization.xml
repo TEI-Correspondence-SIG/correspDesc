@@ -20,6 +20,10 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2015-02-11">
+                <persName>Stefan Dumont</persName>
+                <desc>Updated CIF to current state of proposal and correspSearch. teiHeader//titleStmt/respStmt replaces editor.</desc>
+            </change>
             <change when="2014-07-02">
                 <persName>Peter Stadler</persName>
                 <desc>Initial creation of Correspondence Interchange Format schema.</desc>
@@ -28,65 +32,38 @@
     </teiHeader>
     <text>
         <body>
-            <p>This customization builds on the correspDesc proposal as described at <ref target="https://github.com/TEI-Correspondence-SIG/correspDesc">https://github.com/TEI-Correspondence-SIG/correspDesc</ref>.
-                It aims to define an interchange format for correspondence projects.
-            </p>
+            <p>This customization builds on the correspDesc proposal as described at <ref
+                    target="https://github.com/TEI-Correspondence-SIG/correspDesc"
+                    >https://github.com/TEI-Correspondence-SIG/correspDesc</ref>. It aims to define
+                an interchange format for correspondence projects. </p>
         </body>
         <back>
             <div>
                 <head>Formal Specification</head>
-                <schemaSpec ident="cif" start="TEI" status="unstable" source="/Users/pstadler/Documents/git/correspDesc/proposal.xml.compiled">
+                <schemaSpec ident="cif" start="TEI" status="unstable"
+                    source="/Users/dumont/Desktop/proposal.xml.compiled">
                     <moduleRef key="tei"/>
                     <moduleRef key="textstructure" include="body TEI text"/>
-                    <moduleRef key="core" include="bibl date editor email listBibl ref title publisher"/>
+                    <moduleRef key="core" include="bibl date respStmt resp name email listBibl ref title publisher"/>
                     <moduleRef key="header" include="availability teiHeader fileDesc licence publicationStmt sourceDesc titleStmt"/>
-                    <moduleRef key="correspondence"/>
-<!--                    <moduleRef key="linking"/>-->
-                    
-                    <elementSpec ident="correspClass" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"/>
-                    <elementSpec ident="context" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"/>
-                    <elementSpec ident="transmission" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc"/>
+                    <moduleRef key="namesdates" include="persName placeName" />
+                    <moduleRef key="derived-module-correspondence" />
                     
                     <elementSpec ident="titleStmt" mode="change" module="header">
                         <content>
                             <rng:ref name="title"/>
                             <rng:oneOrMore>
-                                <rng:ref name="editor"/>
+                                <rng:ref name="respStmt"/>
                             </rng:oneOrMore>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="publicationStmt" mode="change" module="header">
                         <content>
                             <rng:ref name="publisher"/>
                             <rng:ref name="date"/>
                             <rng:ref name="availability"/>
                         </content>
-                    </elementSpec>
-                    
-                    <elementSpec ident="sourceDesc" mode="change" module="header">
-                        <content>
-                            <rng:ref name="bibl"/>
-                        </content>
-                    </elementSpec>
-                    
-                    <elementSpec ident="body" mode="change" module="textstructure">
-                        <content>
-                            <rng:ref name="listBibl"/>
-                        </content>
-                    </elementSpec>
-                    
-                    <elementSpec ident="date" mode="change" module="core">
-                        <classes mode="replace"/>
-                        <content>
-                            <rng:empty/>
-                        </content>
-                        <attList>
-                            <attRef name="when" class="att.datable.w3c"/>
-                        </attList>
                     </elementSpec>
                     
                     <elementSpec ident="licence" mode="change" module="header">
@@ -101,130 +78,38 @@
                         </attList>
                     </elementSpec>
 
-                    <elementSpec ident="correspDesc" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes>
-                            <memberOf key="model.biblLike"/>
-                            <memberOf key="att.declarable"/>
-                            <memberOf key="att.canonical"/>
-                            <memberOf key="att.global"/>
-                        </classes>
+                    <elementSpec ident="sourceDesc" mode="change" module="header">
+                        <content>
+                            <rng:ref name="bibl"/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="body" mode="change" module="textstructure">
+                        <content>
+                            <rng:ref name="listBibl"/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="listBibl" mode="change" module="core">
                         <content>
                             <rng:oneOrMore>
-                                <rng:ref name="model.correspDescPart"/>
+                                <rng:ref name="correspDesc"/>
                             </rng:oneOrMore>
                         </content>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:correspDesc>
-                                    <ct:sender>Adelbert von Chamisso</ct:sender>
-                                    <ct:addressee>Louis de La Foye</ct:addressee>
-                                    <ct:placeSender>Vertus</ct:placeSender>
-                                    <ct:placeAddressee>Caen</ct:placeAddressee>
-                                    <ct:dateSender when="1807-01-29">29 January 1807</ct:dateSender>
-                                </ct:correspDesc>
-                            </egXML>
-                        </exemplum>
                     </elementSpec>
 
-                    <!-- make sender and addressee declarable to allow for linking with separate places and/or dates? -->
-                    <elementSpec ident="sender" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="replace">
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="model.correspDescPart"/>
+                    <elementSpec ident="correspDesc" module="derived-module-correspondence" mode="change" ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+                        <classes mode="change">
+                            <memberOf key="model.biblLike" />
                         </classes>
-                        <content>
-                            <!-- CIF standard -->
-                            <rng:text/>
-                        </content>
-                        <attList>
-                            <attRef name="ref" class="att.canonical"/>
-                        </attList>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:sender>Weber, Carl Maria von</ct:sender>
-                            </egXML>
-                        </exemplum>
                     </elementSpec>
-
-                    <elementSpec ident="addressee" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="replace">
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="model.correspDescPart"/>
+                    
+                    <classSpec type="model" ident="model.addressLike" module="tei" mode="change">
+                        <classes mode="change">
+                            <memberOf key="model.correspActionPart" mode="delete"/>
                         </classes>
-                        <content>
-                            <!-- CIF standard -->
-                            <rng:text/>
-                        </content>
-                        <attList>
-                            <attRef name="ref" class="att.canonical"/>
-                        </attList>
-                    </elementSpec>
-
-                    <elementSpec ident="placeSender" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="replace">
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:text/>
-                        </content>
-                        <attList>
-                            <attRef name="ref" class="att.canonical"/>
-                        </attList>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeSender ref="http://www.geonames.org/3175395">Italy</ct:placeSender>
-                            </egXML>
-                        </exemplum>
-                    </elementSpec>
-
-                    <elementSpec ident="placeAddressee" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="replace">
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:text/>
-                        </content>
-                        <attList>
-                            <attRef name="ref" class="att.canonical"/>
-                        </attList>
-                        <exemplum xml:lang="en">
-                            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                                <ct:placeAddressee ref="http://www.geonames.org/5001836">Michigan</ct:placeAddressee>
-                            </egXML>
-                        </exemplum>
-                    </elementSpec>
-
-                    <elementSpec ident="dateSender" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="replace">
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.datable.w3c"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:empty/>
-                        </content>
-                    </elementSpec>
-
-                    <elementSpec ident="dateAddressee" module="correspondence" mode="change"
-                        ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="replace">
-                            <memberOf key="att.responsibility"/>
-                            <memberOf key="att.datable.w3c" mode="add"/>
-                            <memberOf key="model.correspDescPart"/>
-                        </classes>
-                        <content>
-                            <rng:empty/>
-                        </content>
-                    </elementSpec>
-
+                    </classSpec>
+                    
                 </schemaSpec>
             </div>
         </back>
