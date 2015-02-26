@@ -48,7 +48,7 @@
                     source="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/odd/p5subset.xml">
                     <moduleRef key="tei"/>
                     <moduleRef key="textstructure" include="body TEI text"/>
-                    <moduleRef key="core" include="bibl date editor email name p ref title publisher"/>
+                    <moduleRef key="core" include="bibl date editor email name note p ref title publisher"/>
                     <moduleRef key="header" include="availability correspDesc correspAction correspContext fileDesc licence profileDesc publicationStmt sourceDesc teiHeader titleStmt"/>
                     <moduleRef key="namesdates" include="persName orgName placeName" />
                     
