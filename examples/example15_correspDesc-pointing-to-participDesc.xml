@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="CIDTC5823">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Corpus of Ioannes Dantiscus' Texts and Correspondence: Letter #5823
+               Bona Sforza to Ioannes DANTISCUS</title>
+            <editor>Anna Skolimowska et al.</editor>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>University of Warsaw</publisher>
+            <date>2007</date>
+         </publicationStmt>
+         <sourceDesc>
+            
+            <p>Letter #5823
+               Bona Sforza to Ioannes DANTISCUS
+               Cracow, 1524-04-29
+               received Naples, 1524-06-26
+            </p><p>
+               Manuscript sources:
+               1	fair copy in Latin, in secretary's hand, author's signature, BCz, 1601, p. 537-538 
+               2	copy in Latin, 20th-century, B. PAU-PAN, 8245 (TK 7), f. 265 </p>
+         </sourceDesc>
+      </fileDesc>
+      <profileDesc>
+         <particDesc>
+            <listPerson>
+               <person xml:id="BS">
+                  <idno type="VIAF">https://viaf.org/viaf/88717722</idno>
+                  <idno type="LC">http://id.loc.gov/authorities/names/n83073803</idno>
+                  <persName>Bona Sforza</persName>
+               </person>
+               <person xml:id="ID">
+                  <idno type="VIAF">https://viaf.org/viaf/5031671</idno>
+                  <idno type="LC">http://id.loc.gov/authorities/names/n83147044</idno>
+                  <persName>Ioannes Dantiscus</persName>
+               </person>
+               <person xml:id="CH">
+                  <idno type="VIAF">https://viaf.org/viaf/88598818</idno>
+                  <idno type="LC">http://id.loc.gov/authorities/names/n79112289</idno>
+                  <persName>Charles V of Habsburg</persName>
+               </person>
+            </listPerson>
+         </particDesc>
+         <settingDesc>
+            <listPlace>
+               <place xml:id="CRA"><placeName>Cracovia</placeName></place>
+            </listPlace>
+         </settingDesc>
+         <correspDesc>
+            <correspAction type="sending">
+               <persName ref="#BS"/>
+               <placeName ref="#CRA"/>
+               <date when="1524-04-29"/>
+            </correspAction>
+            <correspAction type="receiving">
+               <persName ref="#ID"/>
+               <placeName ref="#NAP"/>
+               <date when="1524-06-26"/>
+            </correspAction>
+         </correspDesc>
+      </profileDesc>
+   </teiHeader>
+
+   <text>
+
+      <front>
+
+         <div type="address">
+            <p>
+               <pb facs="F16040_000_BCz_1601p538.jpg"/>
+            </p>
+            <p>
+               <supplied reason="damaged">Magnifico</supplied> viro <name type="person" ref="#ID"
+                  >Ioanni Dantisco</name>, <supplied reason="paper damaged">secretario</supplied>
+               nostro dilecto </p>
+            <p> Bari </p>
+         </div>
+
+      </front>
+      <body>
+
+         <div type="salutation">
+            <p>
+               <pb facs="F16040_000_BCz_1601p537.jpg"/>
+            </p>
+            <p> Magnifice noster carissime etc. </p>
+         </div>
+
+         <div type="main">
+            <p>
+               <span type="incipit"> Nonnulla tibi conferenda magnifico secretario nostro
+                  scripsimus</span>, quae ut intellexeris, habito invicem consilio, perficienda
+               perficies eaque negotia, quae severitate indigebunt, severa exsequeris manu, quae
+               vero placida et mit<choice>
+                  <corr type="lemma"/>
+                  <sic>t</sic>
+               </choice>i <supplied reason="stain">indige</supplied>bunt fronte, illa benigne
+               suscipies citiusque quam poteris <gap reason="stain"/> animum expedias negotiis, ut
+               eo celerius Hispani<supplied reason="stain">iis</supplied>
+               <supplied reason="stain">re</supplied>dire possis, quod maxime cupimus. Teque opera<choice>
+                  <corr type="lemma"/>
+                  <sic>n</sic>
+               </choice>t<subst>
+                  <del>e</del>
+                  <add place="overwritten">urum</add>
+               </subst> pro <supplied reason="stain">statu</supplied>s nostri tranquillitate apud
+                  <rs type="person" ref="#CH">caesaream maiestatem</rs> diligenter audire exoptamus.
+               Vale. </p>
+         </div>
+
+         <div type="datum">
+            <p> Datum <name type="place" ref="#CRA">Cracoviae</name>, MDXXIIII die Aprilis XXIX. </p>
+         </div>
+
+         <div type="signature">
+            <p>
+               <name type="person" ref="#BS">Bona</name> regina subscripsit </p>
+         </div>
+
+      </body>
+
+   </text>
+
+
+</TEI>
