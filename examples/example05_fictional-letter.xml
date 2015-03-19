@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<?xml-model href="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -36,27 +35,27 @@
             </sourceDesc>
         </fileDesc>
         <profileDesc>
-            <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc>
-                <ct:correspAction type="sending">
+            <!-- The proposed correspDesc element starts here -->
+            <correspDesc>
+                <correspAction type="sent">
                     <persName>Werther</persName>
                     <placeName>Wahlheim</placeName>
                     <date when="1771-07-30">30 July 1771</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving">
+                </correspAction>
+                <correspAction type="received">
                     <persName>Wilhelm</persName>
                     <placeName>unknown</placeName>
                     <date>unknown</date>
-                </ct:correspAction>
-                <ct:correspContext>
+                </correspAction>
+                <correspContext>
                     <p>Previous letter: <persName>Werther</persName> to
                         <persName>Wilhelm</persName>, <date when="1771-07-26">26 July 1771</date>,
                         pp. 79-80.</p>
                     <p>Next letter: <persName>Werther</persName> to <persName>Wilhelm</persName>,
                             <date when="1771-08-08">8 August 1771</date>, pp. 83-85.</p>
-                </ct:correspContext>
-            </ct:correspDesc>
-            <!-- The proposed ct:correspDesc element ends here -->
+                </correspContext>
+            </correspDesc>
+            <!-- The proposed correspDesc element ends here -->
         </profileDesc>
     </teiHeader>
     <text>

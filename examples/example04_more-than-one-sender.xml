@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<?xml-model href="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -24,9 +23,9 @@
             </sourceDesc>
         </fileDesc>
         <profileDesc>
-            <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc xml:id="correspDesc-more-than-one-sender">
-                <ct:correspAction type="sending">
+            <!-- The proposed correspDesc element starts here -->
+            <correspDesc xml:id="correspDesc-more-than-one-sender">
+                <correspAction type="sent">
                     <persName>Adolf Hauffen</persName>
                     <persName>Hans Lambel</persName>
                     <persName>Hans Meyer</persName>
@@ -37,15 +36,15 @@
                     <persName>Spiridion Wukadinovic</persName>
                     <placeName>Prague</placeName>
                     <date>22 January 1898</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving">
+                </correspAction>
+                <correspAction type="received">
                     <persName>Bernhard Seuffert</persName>
                     <placeName>Graz</placeName>
                     <date>24 January 1898</date>
-                </ct:correspAction>
-                <!--  <ct:correspContext/> -->
-            </ct:correspDesc>
-            <!-- The proposed ct:correspDesc element ends here -->
+                </correspAction>
+                <!--  <correspContext/> -->
+            </correspDesc>
+            <!-- The proposed correspDesc element ends here -->
         </profileDesc>
     </teiHeader>
     <text>

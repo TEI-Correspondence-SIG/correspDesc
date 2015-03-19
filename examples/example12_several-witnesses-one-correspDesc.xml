@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<?xml-model href="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -47,17 +46,17 @@
         </fileDesc>
         <profileDesc>
             <!-- Yet we have only one correspDesc -->
-            <ct:correspDesc xml:id="letter1">
-                <ct:correspAction type="sending">
+            <correspDesc xml:id="letter1">
+                <correspAction type="sent">
                     <persName>Weber, Carl Maria von</persName>
                     <placeName>Dresden</placeName>
                     <date when="1824-04-12">12 April 1824</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving">
+                </correspAction>
+                <correspAction type="received">
                     <persName>Brühl, Karl Graf von</persName>
                     <placeName>Berlin</placeName>
-                </ct:correspAction>
-            </ct:correspDesc>
+                </correspAction>
+            </correspDesc>
         </profileDesc>
     </teiHeader>
     <text>

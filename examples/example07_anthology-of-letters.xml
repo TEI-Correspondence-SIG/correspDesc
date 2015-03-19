@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<?xml-model href="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -25,28 +24,28 @@
         </fileDesc>
         <profileDesc>
             <!-- Every letter gets its own correspDesc -->
-            <ct:correspDesc xml:id="letter1">
-                <ct:correspAction type="sending">
+            <correspDesc xml:id="letter1">
+                <correspAction type="sent">
                     <persName>Amalia Beer</persName>
                     <placeName>Berlin</placeName>
                     <date when="1815-02-28">28 February 1815</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving">
+                </correspAction>
+                <correspAction type="received">
                     <persName>Giacomo Meyerbeer</persName>
                     <placeName>Paris</placeName>
-                </ct:correspAction>
-            </ct:correspDesc>
-            <ct:correspDesc xml:id="letter2">
-                <ct:correspAction type="sending">
+                </correspAction>
+            </correspDesc>
+            <correspDesc xml:id="letter2">
+                <correspAction type="sent">
                     <persName>L. Schoenberger</persName>
                     <placeName>London</placeName>
                     <date when="1815-03-04">4 March 1815</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving">
+                </correspAction>
+                <correspAction type="received">
                     <persName>Giacomo Meyerbeer</persName>
                     <placeName>Paris</placeName>
-                </ct:correspAction>
-            </ct:correspDesc>
+                </correspAction>
+            </correspDesc>
         </profileDesc>
     </teiHeader>
     <text>

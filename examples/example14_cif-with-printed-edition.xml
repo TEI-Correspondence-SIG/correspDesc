@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/cif-customization.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -39,35 +38,35 @@
             <!-- Note that in case of correspDesc list retrodigitalized from print editions you have to use 
                 @key for the letter ID (instead of @ref) -->
             <correspDesc key="631">
-                <correspAction type="sending">
+                <correspAction type="sent">
                     <persName ref="http://d-nb.info/gnd/118805193">Samuel Thomas Soemmerring</persName>
                     <placeName ref="http://www.geonames.org/2874225">Mainz</placeName>
                     <date when="1792-11-22"/>
                 </correspAction>
-                <correspAction type="receiving">
+                <correspAction type="received">
                     <persName ref="http://viaf.org/viaf/59894734/">Melchior von Birkenstock</persName>
                     <placeName ref="http://www.geonames.org/2761367">Wien</placeName>
                     <date when="1792-12-26" cert="high"/>
                 </correspAction>
             </correspDesc>
             <correspDesc key="632">
-                <correspAction type="sending">
+                <correspAction type="sent">
                     <persName ref="http://d-nb.info/gnd/11855073X">Christian Gottlob Heyne</persName>
                     <placeName ref="http://www.geonames.org/2918632">Göttingen</placeName>
                     <date when="1792-11-28"/>
                 </correspAction>
-                <correspAction type="receiving">
+                <correspAction type="received">
                     <persName ref="http://d-nb.info/gnd/118805193">Samuel Thomas Soemmerring</persName>
                     <placeName ref="http://www.geonames.org/2874225">Mainz</placeName>
                 </correspAction>
             </correspDesc>
             <correspDesc key="633">
-                <correspAction type="sending">
+                <correspAction type="sent">
                     <persName ref="http://d-nb.info/gnd/11855073X">Christian Gottlob Heyne</persName>
                     <placeName ref="http://www.geonames.org/2918632">Göttingen</placeName>
                     <date when="1792-11-30"/>
                 </correspAction>
-                <correspAction type="receiving">
+                <correspAction type="received">
                     <persName ref="http://d-nb.info/gnd/118805193">Samuel Thomas Soemmerring</persName>
                     <placeName ref="http://www.geonames.org/2874225">Mainz</placeName>
                 </correspAction>
