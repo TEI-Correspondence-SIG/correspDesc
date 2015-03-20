@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/cif-customization.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/cmi-customization.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
@@ -7,12 +7,14 @@
                 <title>Example correspondence descriptions from the Soemmerring Briefwechsel</title>
                 <editor>Stefan Dumont <email>dumont@bbaw.de</email></editor>
             </titleStmt>
-            <!-- This file is an example of a list of correspondence descriptions from a whole 
+            <!-- Correspondence Metadata Interchange Format (example 2 of 2)
+                
+                This file is an example of a list of correspondence descriptions from a whole 
                 printed scholarly edition of letters. The letters are *only* in a printed 
                 book available, i.e. you have to use a "classic" reference with bibliographic information
                 (sourceDesc/bibl) and the identification number of the letter (noted in every correspDesc/@key). 
                 
-                For an example with letters from a *digital* edition see example13_cif.xml.
+                For an example with letters from a *digital* edition see example13_cmi.xml.
                 
                 If you provide such a file online for your edition, it can be retrieved by other digital 
                 scholarly editions and web services, e.g. http://correspSearch.bbaw.de.

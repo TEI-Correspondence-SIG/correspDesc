@@ -13,6 +13,6 @@ Examples
 * `example10_forwarding.xml`: yet missing
 * `example11_one-witness-two-correspDesc.xml`: yet missing
 * `example12_several-witnesses-one-correspDesc.xml`: Text preserved as draft _and_  autograph
-* `example13_cif.xml`: an example of the Correspondence Interchange format (CIF), i.e. a list of reduced correspDesc elements from a whole digital edition or repository of letters
-* `example14_cif-with-printed-edition.xml`: an example of the Correspondence Interchange format (CIF) for an *only printed* edition or anthology of letters
+* `example13_cmi.xml`: an example of the Correspondence Metdata Interchange (CMI) format, i.e. a list of reduced correspDesc elements from a whole digital edition or repository of letters
+* `example14_cmi-with-printed-edition.xml`: an example of the Correspondence Metadata Interchange (CMI) format for an *only printed* edition or anthology of letters
 * `example15_correspDesc-pointing-to-participDesc`: practical example provided by Magdalena Turska where information about persons is collected in a central &lt;particDesc&gt;
