@@ -15,7 +15,6 @@
             <date>2007</date>
          </publicationStmt>
          <sourceDesc>
-            
             <p>Letter #5823
                Bona Sforza to Ioannes DANTISCUS
                Cracow, 1524-04-29
@@ -48,7 +47,12 @@
          </particDesc>
          <settingDesc>
             <listPlace>
-               <place xml:id="CRA"><placeName>Cracovia</placeName></place>
+               <place xml:id="CRA">
+                  <placeName>Cracovia</placeName>
+               </place>
+               <place xml:id="NAP">
+                  <placeName>Naples</placeName>
+               </place>
             </listPlace>
          </settingDesc>
          <correspDesc>

@@ -11,10 +11,10 @@ Most important files
 * `schema/proposal.rng`:	The derived RelaxNG schema for testing with your TEI files 
 * `doc/proposal.html`: 	The derived documentation in HTML format for convenient reading of the prose parts of the proposal
 
-Correspondence Interchange Format (CIF)
+Correspondence Metadata Interchange Format
 ---------------------------------------
 
-The work on CIF has been postponed until the main proposal is in a more stable state.  
+The CMI format is still under development, but you can examine the two up-to-date examples (#13 and #14) for digital and printed scholarly editions.
 
 License
 -------
