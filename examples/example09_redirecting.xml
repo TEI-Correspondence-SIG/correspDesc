@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<?xml-model href="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -32,33 +31,33 @@
             </sourceDesc>
         </fileDesc>
         <profileDesc>
-            <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc xml:id="correspDesc-redirection">
-                <ct:correspAction type="sending" sortKey="1">
+            <!-- The proposed correspDesc element starts here -->
+            <correspDesc xml:id="correspDesc-redirection">
+                <correspAction type="sent" sortKey="1">
                     <persName>John Gneisenau Neihardt</persName>
                     <placeName>Branson (Montgomery)</placeName>
                     <date>17 December 1932</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving" subtype="redirecting" sortKey="2">
+                </correspAction>
+                <correspAction type="received" subtype="redirecting" sortKey="2">
                      <persName>unknown</persName>
                      <placeName>New River State College, Montgomery (West Virginia)</placeName>
                      <date>20 December 1932</date>
                      <!-- postmark as evidence for date of redirection -->
-                </ct:correspAction>
-                <ct:correspAction type="sending" subtype="redirecting" sortKey="3">
+                </correspAction>
+                <correspAction type="sent" subtype="redirecting" sortKey="3">
                     <persName>unknown</persName>
                     <placeName>New River State College, Montgomery (West Virginia)</placeName>
                     <date>20 December 1932</date>
                     <!-- postmark as evidence for date of redirection -->
-                </ct:correspAction>
-                <ct:correspAction type="receiving" sortKey="4">
+                </correspAction>
+                <correspAction type="received" sortKey="4">
                     <persName>Julius Temple House</persName>
                     <placeName>New York</placeName>
                     <date notBefore="1932-12-20"/>
-                </ct:correspAction> 
-                <!--  <ct:correspContext/> -->
-            </ct:correspDesc>
-            <!-- The proposed ct:correspDesc element ends here -->
+                </correspAction> 
+                <!--  <correspContext/> -->
+            </correspDesc>
+            <!-- The proposed correspDesc element ends here -->
         </profileDesc>
     </teiHeader>
     <text>

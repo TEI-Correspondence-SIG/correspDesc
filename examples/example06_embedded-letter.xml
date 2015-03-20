@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/TEI-Correspondence-SIG/correspDesc/master/schema/proposal.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:ct="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
+<?xml-model href="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -25,21 +24,21 @@
             </sourceDesc>
         </fileDesc>
         <profileDesc>
-            <!-- The proposed ct:correspDesc element starts here -->
-            <ct:correspDesc xml:id="letter1">
-                <ct:correspAction type="sending">
+            <!-- The proposed correspDesc element starts here -->
+            <correspDesc xml:id="letter1">
+                <correspAction type="sent">
                     <persName>Adelbert von Chamisso</persName>
                     <placeName>unknown</placeName>
                     <date when="1805-01-20">20 January 1805</date>
-                </ct:correspAction>
-                <ct:correspAction type="receiving">
+                </correspAction>
+                <correspAction type="received">
                     <persName>Louis de La Foye</persName>
                     <!-- for an unknown date and place the respective elements can be skipped, or used like this:
                     <placeName>unkown</placeName>
                     <date>unknown</date> -->
-                </ct:correspAction>
-            </ct:correspDesc>
-            <!-- The proposed ct:correspDesc element ends here -->
+                </correspAction>
+            </correspDesc>
+            <!-- The proposed correspDesc element ends here -->
         </profileDesc>
     </teiHeader>
     <text>

@@ -20,6 +20,10 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2015-02-18">
+                <persName>Peter Stadler</persName>
+                <desc>Updated CIF to build on the latest Jenkins P5 build. Proposal namespaces are gone.</desc>
+            </change>
             <change when="2015-02-11">
                 <persName>Stefan Dumont</persName>
                 <desc>Updated CIF to current state of proposal and correspSearch. teiHeader//titleStmt/respStmt replaces editor.</desc>
@@ -41,19 +45,18 @@
             <div>
                 <head>Formal Specification</head>
                 <schemaSpec ident="cif" start="TEI" status="unstable"
-                    source="/Users/dumont/Desktop/proposal.xml.compiled">
+                    source="http://teijenkins.hcmc.uvic.ca/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/odd/p5subset.xml">
                     <moduleRef key="tei"/>
                     <moduleRef key="textstructure" include="body TEI text"/>
-                    <moduleRef key="core" include="bibl date respStmt resp name email listBibl ref title publisher"/>
-                    <moduleRef key="header" include="availability teiHeader fileDesc licence publicationStmt sourceDesc titleStmt"/>
-                    <moduleRef key="namesdates" include="persName placeName" />
-                    <moduleRef key="derived-module-correspondence" />
+                    <moduleRef key="core" include="bibl date editor email name note p ref title publisher"/>
+                    <moduleRef key="header" include="availability correspDesc correspAction correspContext fileDesc licence profileDesc publicationStmt sourceDesc teiHeader titleStmt"/>
+                    <moduleRef key="namesdates" include="persName orgName placeName" />
                     
                     <elementSpec ident="titleStmt" mode="change" module="header">
                         <content>
                             <rng:ref name="title"/>
                             <rng:oneOrMore>
-                                <rng:ref name="respStmt"/>
+                                <rng:ref name="editor"/>
                             </rng:oneOrMore>
                         </content>
                     </elementSpec>
@@ -83,33 +86,36 @@
                             <rng:ref name="bibl"/>
                         </content>
                     </elementSpec>
-
-                    <elementSpec ident="body" mode="change" module="textstructure">
+                    
+                    <elementSpec ident="bibl" module="core" mode="change">
+                        <attList>
+                            <attDef ident="type" mode="change" usage="req">
+                                <valList mode="replace" type="closed">
+                                    <valItem ident="online">
+                                        <desc>The described edition is an online only publication</desc>
+                                    </valItem>
+                                    <valItem ident="print">
+                                        <desc>The described edition is a print only publication</desc>
+                                    </valItem>
+                                    <valItem ident="hybrid">
+                                        <desc>The described edition is both available online and printed</desc>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
+                    
+                    <elementSpec ident="date" mode="change" module="core">
+                        <classes mode="replace">
+                            <memberOf key="att.datable.w3c"/>
+                            <memberOf key="att.global.responsibility"/>
+                            <memberOf key="model.correspActionPart"/>
+                        </classes>
                         <content>
-                            <rng:ref name="listBibl"/>
+                            <rng:empty/>
                         </content>
                     </elementSpec>
-                    
-                    <elementSpec ident="listBibl" mode="change" module="core">
-                        <content>
-                            <rng:oneOrMore>
-                                <rng:ref name="correspDesc"/>
-                            </rng:oneOrMore>
-                        </content>
-                    </elementSpec>
 
-                    <elementSpec ident="correspDesc" module="derived-module-correspondence" mode="change" ns="http://wiki.tei-c.org/index.php/SIG:Correspondence/task-force-correspDesc">
-                        <classes mode="change">
-                            <memberOf key="model.biblLike" />
-                        </classes>
-                    </elementSpec>
-                    
-                    <classSpec type="model" ident="model.addressLike" module="tei" mode="change">
-                        <classes mode="change">
-                            <memberOf key="model.correspActionPart" mode="delete"/>
-                        </classes>
-                    </classSpec>
-                    
                 </schemaSpec>
             </div>
         </back>
