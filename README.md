@@ -1,22 +1,21 @@
-correspDesc
-===========
+# correspDesc (correspondence description)
 
-A proposal for a correspondence module and a correspDesc element.
+A proposal for a correspondence module and a `correspDesc` element in the Guidelines of the Text Encoding Initiative (TEI) by the TEI Correspondence SIG. The proposal was accepted by the TEI Council in 2014 and the elements [`correspDesc`](http://www.tei-c.org/release/doc/tei-p5-doc/de/html/ref-correspDesc.html), `correspAction` and `correspContext` were introduced in the version 2.8.0 of the TEI Guidelines in April 2015. For further information see the [Guidelines](http://www.tei-c.org/release/doc/tei-p5-doc/de/html/HD.html#HD44CD) or the [jTEI article from Stadler, Illetschko and Seifert](http://journals.openedition.org/jtei/1433). 
 
-Starting point is the "[second draft](http://wiki.tei-c.org/index.php/SIG:Correspondence/ODD_work#Second_draft)" as it was begun at the SIG face-to-face meeting at College Station on November 9, 2012. This draft has been initially commited here as [ffc4899](https://github.com/TEI-Correspondence-SIG/correspDesc/commit/ffc4899833e14eab536062fd1730aa04e7f52949).
+## Examples
 
-Most important files
---------------------
-* `odd/proposal.xml`: 	The current proposal as ODD file. This is the source of (almost) everything!
-* `schema/proposal.rng`:	The derived RelaxNG schema for testing with your TEI files 
-* `doc/proposal.html`: 	The derived documentation in HTML format for convenient reading of the prose parts of the proposal
+In the directory ["examples"](./examples), the TEI Correspondence SIG provides multiple use cases of the `correspDesc` element. This section is still maintained. 
 
-Correspondence Metadata Interchange Format
----------------------------------------
+## Correspondence Metadata Interchange Format
 
-The CMI format is still under development, but you can examine the two up-to-date examples (#13 and #14) for digital and printed scholarly editions.
+On the basis of `corresDesc` the TEI Correspondence SIG has been developed the "Correspondence Metadata Interchange Format", which makes a standardized comparison of letter metadata possible. See the GitHub-Repository ["TEI-Corrspondence-SIG/CMIF"](https://github.com/TEI-Correspondence-SIG/CMIF) for further information.
 
-License
--------
+## Literature
+
+- Peter Stadler, Marcel Illetschko, and Sabine Seifert, « Towards a Model for Encoding Correspondence in the TEI: Developing and Implementing <correspDesc> », Journal of the Text Encoding Initiative \[Online\], Issue 9 | September 2016 - December 2017, Online since 24 September 2016. URL : http://journals.openedition.org/jtei/1433; DOI: 10.4000/jtei.1433
+
+## License
+
+© TEI Correspondence SIG 2012-2015
 
 This work is available under dual license: [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause) and [Creative Commons Attribution 3.0 Unported License (CC BY 3.0)](http://creativecommons.org/licenses/by/3.0/)
